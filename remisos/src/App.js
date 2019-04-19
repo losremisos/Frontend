@@ -49,9 +49,6 @@ class App extends Component {
           
         </div>
 
-        
-
-
         <div className="footer" >
         
         <hr></hr>
@@ -59,8 +56,6 @@ class App extends Component {
         </div>
         
         </header>
-        
-      
 
       </div>
     );
