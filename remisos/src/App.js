@@ -50,6 +50,8 @@ class App extends Component {
         </div>
 
         
+
+        
         <div className="footer" >
         <hr></hr>
         <label >Nombre empresa © 2019 Todos los derechos reservados | Este es un sitio seguro </label>  
