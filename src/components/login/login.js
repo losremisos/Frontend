@@ -5,10 +5,9 @@ import './login.css';
 class Login extends Component {
   render() {
     return (
-      <div className="App">
-        <header >
+      <div>
         
-        <div>
+        <div className="row">
           <div className="style-institucional"></div>
           
           <div className="container-h row">
@@ -19,8 +18,8 @@ class Login extends Component {
 
             <div className="col-md-5 col-sm-5 padding-h">
             <div className="row">
-              <div className="img-header3 col-md-8 col-sm-8" ><img src="https://www.libretamilitar.mil.co/Resources/img/logo.png" className="img-fluid" alt="logo" /> </div>
-              <div className="img-header2 col-md-4 col-sm-4" ><img src="https://www.libretamilitar.mil.co/Resources/img/escudo.png" className="img-fluid" alt="logo" /> </div>
+              <div className="img-p col-md-8 col-sm-9 col-9" ><img src="https://www.libretamilitar.mil.co/Resources/img/logo.png" className="img-fluid responsiveimg" alt="logo" /> </div>
+              <div className="col-md-4 col-sm-3 img-p col-3"><img src="https://www.libretamilitar.mil.co/Resources/img/escudo.png" className="img-fluid responsiveimg" alt="logo" /> </div>
             </div>  
               <div className="background2 hidden-sm hidden-xs"></div>
             </div> 
@@ -28,7 +27,7 @@ class Login extends Component {
            
         </div> 
           
-        <div className="App-header">
+        <div className="App-header App">
 
         <div>
           <label className="title">Iniciar Sesión</label>
@@ -58,7 +57,6 @@ class Login extends Component {
         <label >Nombre empresa © 2019 Todos los derechos reservados | Este es un sitio seguro </label>  
         </div>
         
-        </header>
 
       </div>
     );
