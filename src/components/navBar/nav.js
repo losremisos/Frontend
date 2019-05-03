@@ -4,36 +4,25 @@ class Navigation extends Component {
 
     render(){
         return(
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark navspace">
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" 
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a className="navbar-brand" href="#">Inicio</a>
-                    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="">Información Requerida<span className="sr-only"></span></a>
-                    </li>
-                    <li className="nav-item active">
-                        <a className="nav-link" href="">Consulta<span className="sr-only">(current)</span></a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active" href="">Certificado<span className="sr-only"></span></a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active" href="">Contacto<span className="sr-only"></span></a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active" href="">FAQ<span className="sr-only"></span></a>
-                    </li>
-                    </ul>
-                    <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="buscar" placeholder="Buscar" aria-label="Buscar"/>
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                    </form>
-                </div>
-            </nav>
+            <div className="row">
+          <div className="style-institucional"></div>
+          
+          <div className="container-h row">
+            <div className="col-md-7 col-sm-7 padding-h">
+              <div className="img-header1" ><img src="https://www.ejercito.mil.co/_templates/DEFAULT2018/recursos/images//cabezote/logo.png" className="img-fluid" alt="logo" /></div>
+              <div className="background1 hidden-sm hidden-xs"></div>
+            </div>
+
+            <div className="col-md-5 col-sm-5 padding-h">
+            <div className="row">
+              <div className="img-p col-md-8 col-sm-9 col-9" ><img src="https://www.libretamilitar.mil.co/Resources/img/logo.png" className="img-fluid responsiveimg" alt="logo" /> </div>
+              <div className="col-md-4 col-sm-3 img-p col-3"><img src="https://www.libretamilitar.mil.co/Resources/img/escudo.png" className="img-fluid responsiveimg" alt="logo" /> </div>
+            </div>  
+              <div className="background2 hidden-sm hidden-xs"></div>
+            </div> 
+          </div>
+           
+        </div> 
 
 
 
