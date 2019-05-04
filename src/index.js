@@ -13,11 +13,11 @@ ReactDOM.render(
   <div>
     <App/>
     <Login/>
-<<<<<<< HEAD
+
     <Pagina/>
-=======
+
     <Regist/>
->>>>>>> 26507248cdfae96afc333fc0a320207a9ff097ce
+
     
-  </div>,document.getElementById('root')
+  </div>
 );
