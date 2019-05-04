@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import '../App.css'
-import foto from '../img/pesona.png'
+
+import foto from './../../assets/pesona.png'
 
 class InfoPerfil extends Component{
 
