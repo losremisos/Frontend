@@ -19,5 +19,5 @@ ReactDOM.render(
     <Regist/>
 
     
-  </div>
+  </div>,document.getElementById('root')
 );
