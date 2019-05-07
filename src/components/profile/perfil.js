@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 
 class Perfil extends Component{
-
+    constructor(props){
+        super(props);
+        this.state = {
+          users: []
+        };
+      }
+    
+      componentDidMount(){
+        console.log("Aqui esta la peticion");
+        console.log(axios.get('http://localhost:4200/districts/1'));
+      }
 
     render(){
         return(

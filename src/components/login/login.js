@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import Navigation  from '../navBar/nav'
 import './login.css';
+import axios from 'axios';
 
 class Login extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      users: []
+    };
+  }
+
+  componentDidMount(){
+    console.log("Aqui esta la peticion");
+    console.log(axios.get('http://localhost:4200/districts/1'));
+  }
+
   render() {
     return (
       <div>
