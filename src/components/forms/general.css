@@ -51,7 +51,7 @@
     position:relative;    
     width: 90%;
     height: 30px;
-    background-color: blue;    
+    /*background-color: blue; */   
   }
   
   input.btn_enviar_1{
