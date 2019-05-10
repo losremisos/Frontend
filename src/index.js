@@ -12,14 +12,10 @@ import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
 ReactDOM.render(
   <div>
-    {/*
     <App/>
     <Login/>
-
     <Pagina/>
- */}
     <Regist/>
-   
     <Familiar/>
     
     
