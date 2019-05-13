@@ -6,6 +6,10 @@ import  Login  from './components/login/login';
 import Pagina from './components/profile/pagina';
 import  Regist  from './components/regist/Regist';
 import General from './components/forms/general';
+
+import Academico from './components/Formularios/academico';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/src/collapse';
@@ -16,11 +20,17 @@ ReactDOM.render(
   <div>
     <App/>
     <Login/>
-
+    
     <Pagina/>
 
     <Regist/>
-    <General/>
+
+  <General/>
+
+
+
+    <Academico/>
+
 
     
     
