@@ -7,7 +7,7 @@ import  Pagina from './components/profile/pagina';
 import  Regist  from './components/regist/Regist';
 import  Familiar  from './components/formulario/Familiar';
 import  General from './components/forms/general';
-import  Academico from './components/Formularios/academico';
+import FormTrabajo from './components/formulario/infoTrabajo'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/src/collapse';
@@ -20,10 +20,7 @@ ReactDOM.render(
     <Login/>
     <Pagina/>
     <Regist/>
-    <Familiar/>
-    <General/>
-    <Academico/>
-    
+    <General/>    
     
   </div>,document.getElementById('root')
 );
