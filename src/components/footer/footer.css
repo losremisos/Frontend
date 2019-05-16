@@ -1,0 +1,29 @@
+
+
+.line{
+    height: 5px;
+    background: #394b1a;
+    margin: 10px 0;
+  }
+
+.cFoot {
+    max-width: 1170px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.propiedades{
+    text-align: center;
+    color: #394b1a;
+}
+span.painted {
+    font-weight: bold;
+  } 
+
+  .spacer {
+    height: 150px;
+    clear: both;
+  }
+
