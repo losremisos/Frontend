@@ -17,13 +17,6 @@ import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 ReactDOM.render(
   <div>
     <App/>
-    <Login/>
     <Pagina/>
-    <Regist/>
-    <Familiar/>
-    <General/>
-    <Academico/>
-    
-    
   </div>,document.getElementById('root')
 );
