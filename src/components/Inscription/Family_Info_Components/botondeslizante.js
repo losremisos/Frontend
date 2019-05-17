@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav';
-import  Login  from '../login/login';
-import  InfoPadre  from './infoPadre';
-import InfoHermano from './infoHermanos';
-import InfoDependencia from './infoDependencia';
+import Navigation  from '../../navBar/nav';
+import  Login  from '../../login/login';
+import  InfoPadre  from '../Father_Info/infoPadre';
+import SiblingInfo from '../Sibling_Info/infoHermanos';
+import DependenceInfo from '../Dependence_info/infoDependencia';
 import './Familiar.css';
-import foto from './../../assets/drop-down-arrow.png'
+import foto from '../../../assets/drop-down-arrow.png'
 
 class Boton extends Component {
   state = {

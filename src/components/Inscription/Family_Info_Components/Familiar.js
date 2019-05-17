@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav';
-import  Login  from '../login/login';
-import  InfoPadre  from './infoPadre';
+import Navigation  from '../../navBar/nav';
+import  Login  from '../../login/login';
+import  InfoPadre  from '../Father_Info/infoPadre';
 import  Boton  from './botondeslizante';
-import InfoHermano from './infoHermanos';
-import InfoDependencia from './infoDependencia';
+import SiblingInfo from '../Sibling_Info/infoHermanos';
+import DependenceInfo from '../Dependence_info/infoDependencia';
 import './Familiar.css';
 
 
@@ -21,8 +21,8 @@ class Formulario extends Component {
         <div className="App-header1 App">
         <Boton title="Información del Padre" pantalla = {InfoPadre} value="Guardar Información del Padre"/>
         <Boton title="Información de la Madre" pantalla = {InfoPadre} value="Guardar Información del Madre"/>
-        <Boton title="Información de los Hermanos" pantalla = {InfoHermano} value="Guardar Información de los Hermanos"/>
-        <Boton title="Dependencia Economica" pantalla = {InfoDependencia} value="Guardar Información de Dependencia Enconómica"/>
+        <Boton title="Información de los Hermanos" pantalla = {SiblingInfo} value="Guardar Información de los Hermanos"/>
+        <Boton title="Dependencia Economica" pantalla = {DependenceInfo} value="Guardar Información de Dependencia Enconómica"/>
         <div class="row"> 
         <div class="col-md-9" >  
         </div>

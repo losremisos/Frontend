@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import Navigation from '../navBar/nav'
+{/*import Navigation from '../../navBar/nav'*/} 
 
-class Academico extends Component {
+class AcademicInfo extends Component {
 
     render(){
         return(
           <div>
-              <Navigation/>
+             {/* <Navigation/>*/} 
               <div className="container">
-                    <form>
+                    {/*<form>*/} 
                         <div className="row">
                             <div className="col-md-4 form-check">
                                     <label>¿Está cursando actualmente?</label>
@@ -59,10 +59,13 @@ class Academico extends Component {
                                     </div>
                             </div>
                         
-                    </div>    
-                    <br/>
+                    </div> 
+                    {/*
+                        <br/>
                     <button type="submit" className="btn btn-style">Guardar Información Académica</button>
                     </form>
+                    */}   
+                    
                 </div>
             </div>
         )
@@ -70,4 +73,4 @@ class Academico extends Component {
 
     }
     
-    export default Academico;
+    export default AcademicInfo;

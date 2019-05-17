@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Familiar';
-import  InfoTrabajo  from './infoTrabajo';
+import '../Family_Info_Components/Familiar';
+import  InfoTrabajo  from '../Family_Info_Components/infoTrabajo';
 
-class Formulario extends Component {
+class DependenceInfo extends Component {
   render() {
     return (
       <div>
@@ -31,9 +31,13 @@ class Formulario extends Component {
                               </div>
                       </div>
                   </div>
+
+                {/* 
                 <div class="col-md-12">      
 						    <input type="button" value= {this.props.value}  class="btn btn2-style" />
                 </div>
+                */}
+                
                 </div>
                 </div>
 
@@ -48,4 +52,4 @@ class Formulario extends Component {
 
 
 
-export default Formulario;
+export default DependenceInfo;
