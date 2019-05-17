@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Navigation from './nav'
+import Footer from '../footer/footer'
 import InfoPerfil from './infoperfil'
 import Perfil from './perfil'
 import './perfil.css';
@@ -23,7 +24,7 @@ class Pagina extends Component {
                 </div>
                 
               </div>
-
+              <Footer/>
             </div>
         )
       }
