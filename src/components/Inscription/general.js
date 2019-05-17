@@ -6,6 +6,7 @@ import AdditionalInfo from './Additional_Info/perAditional';
 import FatherInfo from './Father_Info/infoPadre';
 import SiblingInfo from './Sibling_Info/infoHermanos';
 import DependenceInfo from './Dependence_info/infoDependencia';
+import Working_Info from './Working_Info/Working_info';
 import './general.css';
 
 class Inscription extends Component {
@@ -74,12 +75,15 @@ class Inscription extends Component {
                     </div>
 
                     <a className="btn mb-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_30" role="button" aria-expanded="false" aria-controls="collapse_30">Información Laboral</a>
-                    <div class="collapse" id="collapse_30">
-                        <div class="card card-body">               
-                            <BasicInfo/>                   
-                            <button type="submit" className="btn btn-style-submit mt-5">Guardar</button>
-                        </div>                        
-                    </div>
+
+                    <form>
+                        <div class="collapse" id="collapse_30">
+                            <div class="card card-body">               
+                                <Working_Info/>                   
+                                <button type="submit" className="btn btn-style-submit mt-5">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
 
                     <a className="btn mb-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_40" role="button" aria-expanded="false" aria-controls="collapse_40">Información Familiar</a>
                     <div class="collapse" id="collapse_40">

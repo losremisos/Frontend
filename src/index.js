@@ -15,8 +15,7 @@ import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 ReactDOM.render(
   <div>
     <App/>
-    <Pagina/>  
-    <Regist/>  
+    <Pagina/>     
     <Inscription/>
   </div>,document.getElementById('root')
 );
