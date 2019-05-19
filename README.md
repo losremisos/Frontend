@@ -2,7 +2,7 @@
 [Documentacion](https://jspaeza.github.io/Ingesoft-2/)
 
 Todos los cambios que se hagan, deben estar en su rama personal, por lo tanto antes de comenzar a trabajar cambiarse a su rama personal. `git checkout nombre_usuario_unal`.
->Nota: Para crear su rama personal, si todavia no la han creado, utilicen el comando `git checkout -b nombre_usuario_unal`. Para crear la rama personal(que se creo localmente) en GitHub deben hacer el siguiente push(solo la primera vez) `git push --set-upstream origin nombre_usuario_unal`.
+>Nota: Para crear su rama personal.
 
 ## Comandos
 Los siguientes comandos deben ser ejecutados dentro de la carpeta del proyecto.

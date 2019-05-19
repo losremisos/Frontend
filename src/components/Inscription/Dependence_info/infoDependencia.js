@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Familiar';
-import  InfoTrabajo  from './infoTrabajo';
+import '../Family_Info_Components/Familiar';
+import  InfoTrabajo  from '../Family_Info_Components/infoTrabajo';
 
-class FormDependencia extends Component {
+class DependenceInfo extends Component {
   render() {
     return (
       <div>
@@ -37,7 +37,7 @@ class FormDependencia extends Component {
 						    <input type="button" value= {this.props.value}  class="btn btn2-style" />
                 </div>
                 */}
-
+                
                 </div>
                 </div>
 
@@ -52,4 +52,4 @@ class FormDependencia extends Component {
 
 
 
-export default FormDependencia;
+export default DependenceInfo;

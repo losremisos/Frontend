@@ -1,9 +1,40 @@
 import React, { Component } from 'react';
-import Users from './../../assets/defaultUser.png';
+import Users from '../../../assets/defaultUser.png';
+import axios from 'axios';
 
 
-class Person extends Component {
+class BasicInfo extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+        users: []
+    }
+  }
+
+componentDidMount(){
+    console.log("Aqui esta la peticion");
+    console.log(axios({
+        method: "GET",
+        url: "http://localhost:4200/users/1"
+    }));
+    axios({
+        method: "GET",
+        url: "http://localhost:4200/users/1"
+    }).then((res) => {
+        this.setState({
+            users: res.data
+        })
+    });
+  }
+
+
   render() {
+
+    const {users} = this.state;
+        console.log("Lo que hay en user del state");
+        console.log(users);
+
     return (
       <div>
 
@@ -43,19 +74,20 @@ class Person extends Component {
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="inputState">Tipo de identificación (*):</label>
-                <select id="inputState" class="form-control">
-                  <option selected>Seleccione...</option>
+                <select id="inputState" class="form-control" disabled>
+                  <option disable selected>{users.tipoDocumento}</option>
+                  <option disabled>Seleccione...</option>
                   <option>Cedula de Ciudadania</option>
                   <option>Tarjeta de Identidad</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom01">Numero de identificación (*):</label>
-                <input type="number" class="form-control" id="validationCustom01"  required/>
+                <input type="number" class="form-control" id="validationCustom01" disabled placeholder={users.documento} required/>
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom02">Numero de tarjeta de Identidad:</label>
-                <input type="number" class="form-control" id="validationCustom02"/>
+                <input type="number" class="form-control" id="validationCustom02" />
               </div>
             </div>
 
@@ -63,7 +95,7 @@ class Person extends Component {
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="validationCustom03">Primer nombre (*):</label>
-                <input type="text" class="form-control" id="validationCustom03"  required/>
+                <input type="text" class="form-control" id="validationCustom03" placeholder={users.nombre}    disabled/>
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom04">Segundo nombre (*):</label>
@@ -71,7 +103,7 @@ class Person extends Component {
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom05">Primer apellido (*):</label>
-                <input type="text" class="form-control" id="validationCustom05"  required/>
+                <input type="text" class="form-control" id="validationCustom05"  placeholder={users.primerApellido} disabled/>
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom06">Segundo apellido:</label>
@@ -123,7 +155,7 @@ class Person extends Component {
               <div class="form-group col-md-3">
                 <label for="inputState01">Genero (*):</label>
                 <select id="inputState01" class="form-control" required>
-                  <option selected>Seleccione...</option>
+                  <option disabled selected>Seleccione...</option>
                   <option>Masculino</option>
                   <option>Femenino</option>
                   <option>Transgenero</option>
@@ -132,7 +164,7 @@ class Person extends Component {
               <div class="form-group col-md-3">
                 <label for="inputState02">Nacionalidad (*):</label>
                 <select id="inputState02" class="form-control" required>
-                  <option selected>Seleccione...</option>
+                  <option disabled selected>Seleccione...</option>
                   <option>Colombiano</option>
                   <option>Doble Nacionalidad</option>
                   <option>Extranjero</option>
@@ -141,7 +173,7 @@ class Person extends Component {
               <div class="form-group col-md-3">
                 <label for="validationCustom04">Ciudadano con doble nacionalidad (*):</label>
                 <select id="inputState03" class="form-control" required>
-                  <option selected>Seleccione...</option>
+                  <option disabled selected>Seleccione...</option>
                   <option>No</option>
                   <option>Si</option>
                 </select>
@@ -149,7 +181,7 @@ class Person extends Component {
               <div class="form-group col-md-3">
                 <label for="validationCustom04">Ciudadano Colombiano retornado del exterior (*):</label>
                 <select id="inputState04" class="form-control" required>
-                  <option selected>Seleccione...</option>
+                  <option disabled selected>Seleccione...</option>
                   <option>No</option>
                   <option>Si</option>
                 </select>
@@ -159,7 +191,7 @@ class Person extends Component {
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="validationCustom15">Correo electronico (*):</label>
-                <input type="email" class="form-control" id="validationCustom15"  required/>
+                <input type="email" class="form-control" id="validationCustom15" disabled placeholder={users.correo}/>
               </div>                         
             </div>
 
@@ -189,7 +221,7 @@ Una exención es un privilegio que lo exime para la prestación del servicio mil
                   <option>Quienes acrediten la existencia de union marital de hecho legalmente declarada</option>
                   <option>Las personas en situacion de discapacidadfísic, psiquica, o sensorial permanente</option>
                   <option>Los varones colombianos que después de si inscripcion hayan dejado de tener el componente de sexo masculino en su registro civil</option>
-                  <option>Los ciudadanos incluidos en el programa de proteccion a victimas y testigos de Fiscalia General de la Nacion</option>
+                  <option>Los ciudadanos incluidos en el programa de proteccion a victimas y testigos de Fiscalia General de la Nación</option>
                   <option>Los ciudadanos objetores de conciencia</option>
                 </select>
               </div>                         
@@ -200,4 +232,4 @@ Una exención es un privilegio que lo exime para la prestación del servicio mil
   }
 }
 
-export default Person;
+export default BasicInfo;

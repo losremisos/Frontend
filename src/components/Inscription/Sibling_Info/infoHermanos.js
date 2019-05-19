@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import './Familiar';
-import  InfoTrabajo  from './infoTrabajo';
 
-class FormHermanos extends Component {
+import '../Family_Info_Components/Familiar';
+
+import  InfoTrabajo  from '../Family_Info_Components/infoTrabajo';
+
+class SiblingInfo extends Component {
   state = {
     display: 'none',
     checked: false
@@ -305,7 +307,7 @@ class FormHermanos extends Component {
                     </div>
                 
                 </div>
-                {/* 
+                {/*
                 <div class="col-md-12">      
 						    <input type="button" value= {this.props.value}  class="btn btn2-style" />
                 </div>
@@ -324,4 +326,4 @@ class FormHermanos extends Component {
 
 
 
-export default FormHermanos;
+export default SiblingInfo;
