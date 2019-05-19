@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class PersonalAdd extends Component {
+class AdditionalInfo extends Component {
   render() {
     return (
       <div>
@@ -294,4 +294,4 @@ class PersonalAdd extends Component {
   }
 }
 
-export default PersonalAdd;
+export default AdditionalInfo;
