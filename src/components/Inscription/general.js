@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navigation  from '../navBar/nav';
 import BasicInfo from './Basic_Info/perBasic';
 import AcademicInfo from './Academic_Info/academico';
+import HigherEducationInfo from './HigherEducation_Info/HigEducationInfo';
 import AdditionalInfo from './Additional_Info/perAditional';
 import FatherInfo from './Father_Info/infoPadre';
 import SiblingInfo from './Sibling_Info/infoHermanos';
@@ -64,7 +65,7 @@ class Inscription extends Component {
                                 <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_22" role="button" aria-expanded="false" aria-controls="collapse_22">Educación Superior</a>
                                 <div class="collapse" id="collapse_22">
                                     <div class="card card-body">                                  
-                                        <BasicInfo/>
+                                        <HigherEducationInfo/>
                                     </div>
                                 </div> 
                                 <button type="submit" className="btn btn-style-submit mt-5">Guardar</button>
