@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import Navigation  from '../navBar/nav'
 import './login.css';
+import Axios from 'axios';
 
 class Login extends Component {
+
+constructor(props){
+  super(props);
+  this.state={
+    users: []
+  };
+}
+
+
+
   render() {
     return (
       <div>
@@ -12,7 +23,7 @@ class Login extends Component {
         <div className="App-header App">
 
         <div>
-          <label className="title">Iniciar Sesión</label>
+         
           <label className="paragraph">Bienvenido al sistema mediante el cual podrá realizar la solicitud de su libreta militar. Si ya se encuentra registrado por favor ingrese su Usuario y Contraseña para acceder al sistema. Si aún no tiene clave de acceso <a className="links" href="">Regístrese aquí</a>.</label>
         </div>
         
