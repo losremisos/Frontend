@@ -11,6 +11,7 @@
     "gh-pages": "^2.0.1",
     "jquery": "^3.4.0",
     "jslint": "^0.12.1",
+    "jwt-decode": "^2.2.0",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
     "react-bootstrap-date-picker": "^5.1.0",

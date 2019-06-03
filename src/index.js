@@ -11,7 +11,6 @@ import 'bootstrap/js/src/collapse';
 import 'font-awesome/css/font-awesome.min.css';
 
 
-
 ReactDOM.render(
 
   <Provider store={store}>
