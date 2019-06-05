@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav'
 import './home.css';
 import SourceImg from './tabPic.png'
 import SourceImg2 from './tabPic6.png'
@@ -9,75 +8,32 @@ import SourceImg4 from './escudo.png'
 
 
 
-class Home extends Component {
+export class Home extends Component {
 
   render() {
+      console.log(localStorage)
     return (
       <div>
-        
-        <Navigation/>
-        
-        <div className="row2">
-            <div className="navbar ournav">
-                <div className="container ourcontainer">
-                    <div className= "collapse navbar-collapse ourcollapse">
-                        <ul className= "nav navbar-nav2">
-                            <li id="Inicio">
-                                <a href="/Default">
-                                    <span id="inicioHome" >Inicio</span>
-                                </a>
-                            </li>
-                            <li id="Consultas">
-                                <a href="/Default">
-                                    <span id="consultasHome" >Consultas</span>
-                                </a>
-                            </li>
-                            <li id="Liquidacion">
-                                <a href="/Default">
-                                    <span id="liquidacionHome" >Soporte Liquidacion</span>
-                                </a>
-                            </li>
-                            <li id="Perfil">
-                                <a href="/Default">
-                                    <span id="perfilHome" >Mi Perfil</span>
-                                </a>
-                            </li>
-
-                            <li id="Nombre">
-                                    <span id="nombreHome" ><span class="glyphicon glyphicon-user"></span> BIENVENIDO XDev</span>
-                            </li>
-                            <li id="Salir">
-                                <a href="/Default">
-                                    <span id="salirHome" >Salida</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>  
-                </div>
-            </div> 
-        </div>
-
         <div className="container">
-
-            <div class="col-md-12a">
+            <div className="col-md-12a">
             </div>
-            <div class="row">
-                <div class="col-md-12 services">
-                    <div class="row">
-                        <div class="col-md-12 ourservices">
-                            <span id="TitleOurServices" class="control-label">Nuestros Servicios Tarjeta Militar</span>
+            <div className="row">
+                <div className="col-md-12 services">
+                    <div className="row">
+                        <div className="col-md-12 ourservices">
+                            <span id="TitleOurServices" className="control-label">Nuestros Servicios Tarjeta Militar</span>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12 services-main-box">
-                            <div class="row">
+                    <div className="row">
+                        <div className="col-md-12 services-main-box">
+                            <div className="row">
                             
-                                <div class="col-md-4 services-box boxN1">
+                                <div className="col-md-4 services-box boxN1">
                                     <h4>
-                                        <a id="TilteSeeMilitarySituation" class="services-link" href="/default">Consulte el estado de su situación militar</a>
+                                        <a id="TilteSeeMilitarySituation" className="services-link" href="/default">Consulte el estado de su situación militar</a>
                                     </h4>
-                                    <p class="styleImg">
+                                    <p className="styleImg">
                                         <a href="/defalut"><img src={SourceImg} alt="Consulta_Estado"/></a>
                                     </p>
                                     <ul>
@@ -88,15 +44,15 @@ class Home extends Component {
                                     </p>  
                                 </div>
 
-                                <div class="col-md-4 styleImg2">
+                                <div className="col-md-4 styleImg2">
                                     <img src={SourceImg4} alt="Escudo_Ejercito"/>
                                 </div>
 
-                                <div class="col-md-4 services-box boxN6">
+                                <div className="col-md-4 services-box boxN6">
                                     <h4>
-                                        <a id="ContactUs" class="services-link" href="/defalut">Necesita ayuda: Contáctenos</a>
+                                        <a id="ContactUs" className="services-link" href="/defalut">Necesita ayuda: Contáctenos</a>
                                     </h4>
-                                    <p class="styleImg">
+                                    <p className="styleImg">
                                         <a href="/defalut"><img src={SourceImg2} alt="Ayuda"/></a>
                                     </p>
                                     <ul>
@@ -113,26 +69,26 @@ class Home extends Component {
                     </div> 
 
                 </div>
-                <div class="col-md-12 faq">
-                    <div class="row">
-                        <div class="col-md-3 style">
+                <div className="col-md-12 faq">
+                    <div className="row">
+                        <div className="col-md-3 style">
                                 <img src={SourceImg3} alt="Question"/>
                             </div>
-                            <div class="col-md-6">
-                                <div class="spacer"></div>
-                                <p class="style">
+                            <div className="col-md-6">
+                                <div className="spacer"></div>
+                                <p className="style">
                                     <b>
-                                        <span id="MainContent_lblFaqs" class="control-label">Preguntas Frecuentes</span>
+                                        <span id="MainContent_lblFaqs" className="control-label">Preguntas Frecuentes</span>
                                     </b>
                                 </p>
-                                <p class="style">
-                                    <span id="MainContent_lblFaqsAnswers" class="control-label">Encuentre respuestas a las preguntas más comunes de nuestros usuarios.</span>
+                                <p className="style">
+                                    <span id="MainContent_lblFaqsAnswers" className="control-label">Encuentre respuestas a las preguntas más comunes de nuestros usuarios.</span>
                                 </p>
                             </div>
-                            <div class="col-md-2 style">
-                                <div class="spacer"></div>
-                                <div class="half-spacer"></div>
-                                <a href="/defalut" class="btn send">Ir a preguntas</a>
+                            <div className="col-md-2 style">
+                                <div className="spacer"></div>
+                                <div className="half-spacer"></div>
+                                <a href="/defalut" className="btn send">Ir a preguntas</a>
                             </div>
                         </div>
                 </div>
@@ -155,7 +111,3 @@ class Home extends Component {
     );
   }
 }
-
-
-
-export default Home;

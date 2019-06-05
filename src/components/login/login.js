@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav'
 import './login.css';
 
 class Login extends Component {
@@ -7,7 +6,6 @@ class Login extends Component {
     return (
       <div>
         
-        <Navigation/>
           
         <div className="App-header App">
 

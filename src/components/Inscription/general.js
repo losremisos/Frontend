@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav';
 import BasicInfo from './Basic_Info/perBasic';
 import AcademicInfo from './Academic_Info/academico';
 import HigherEducationInfo from './HigherEducation_Info/HigEducationInfo';
@@ -13,9 +12,7 @@ import './general.css';
 class Inscription extends Component {
   render() {
     return (
-      <div>        
-        <Navigation/>
-
+      <div>
         <div className="App-header App">
             <div class="container">                    
                 <div class="col-md-12">   

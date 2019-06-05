@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navigation  from '../../navBar/nav';
 import  Login  from '../../login/login';
 import  InfoPadre  from '../Father_Info/infoPadre';
 import SiblingInfo from '../Sibling_Info/infoHermanos';

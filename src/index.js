@@ -14,18 +14,4 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
 
-ReactDOM.render(
-  <div>
-    <Router>
-    <App/>
-    <div><Link to="/login/">Login</Link></div>
-    <div><Link to="/profile/">Profile</Link></div>
-    <div><Link to="/regist/">Regist</Link></div>
-    <div><Link to="/inscription/">Inscription</Link></div>
-    <Route path="/login/" component={Login}/>
-    <Route path="/profile/" component={Pagina}/>
-    <Route path="/regist/" component={Regist}/>
-    <Route path="/inscription/" component={Inscription}/>
-    </Router>
-  </div>,document.getElementById('root')
-);
+ReactDOM.render(<App/>,document.getElementById('root'));
