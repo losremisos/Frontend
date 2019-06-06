@@ -2,6 +2,9 @@ import React from 'react';
 import { Navbar } from './../navBar/navBar';
 import { Login } from './login/login';
 import { Home } from './../home/home';
+import { Inscription } from './../Inscription/general';
+import { Profile } from './../profile/pagina';
+import { Registry } from './../regist/Regist';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 export class App extends React.Component {
@@ -26,7 +29,10 @@ export class App extends React.Component {
         <div>
           <Navbar />
           <Route path='/login' component={Login} />
-          <Route path="" component={Home} />
+          <Route path='/inscription' component={Inscription} />
+          <Route path='/registry' component={Registry}/>
+          <Route path='/profile' component={Profile}/>
+          <Route path="" component={Home} />              
         </div>
       </BrowserRouter>
     )

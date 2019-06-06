@@ -9,8 +9,8 @@ import DependenceInfo from './Dependence_info/infoDependencia';
 import Working_Info from './Working_Info/Working_info';
 import './general.css';
 
-class Inscription extends Component {
-  render() {
+export class Inscription extends Component {
+  render() {   
     return (
       <div>
         <div className="App-header App">
@@ -133,5 +133,4 @@ class Inscription extends Component {
     );
   }
 }
-
-export default Inscription;
+/*export default Inscription;*/
