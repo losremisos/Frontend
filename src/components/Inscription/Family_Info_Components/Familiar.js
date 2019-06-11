@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navigation  from '../../navBar/nav';
 import  Login  from '../../login/login';
 import  InfoPadre  from '../Father_Info/infoPadre';
 import  Boton  from './botondeslizante';
@@ -12,7 +11,6 @@ class Formulario extends Component {
   render() {
     return (
       <div>
-        <Navigation/>
         <div className="App-header1 App">
         <div className="col-md-12 page-title">
         <h3>Información Familiar</h3>

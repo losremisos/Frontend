@@ -4,7 +4,7 @@ import './index.css';
 import { App } from './components/app/App';
 import  Login  from './components/login/login';
 import  Pagina from './components/profile/pagina';
-import  Regist  from './components/regist/Regist';
+import  Registry  from './components/regist/Regist';
 import  Inscription from './components/Inscription/general';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/js/dist/collapse';
@@ -31,3 +31,7 @@ ReactDOM.render(
     </Router>
   </div>,document.getElementById('root')
 );
+
+
+ReactDOM.render(<App/>,document.getElementById('root'));
+
