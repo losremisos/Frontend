@@ -6,7 +6,6 @@ import  Login  from './components/login/login';
 import  Pagina from './components/profile/pagina';
 import  Regist  from './components/regist/Regist';
 import  Inscription from './components/Inscription/general';
-import  Inscription1 from './components/Inscription.1/general';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/src/collapse';
