@@ -46,6 +46,11 @@
     width: 45%;
     margin-left: 55%;        
   }
+  .btn-style-submit2
+  {
+    background-color: #587328 !important;
+    color: white !important;                
+  }
   
   div.div_file{
     position:relative;    

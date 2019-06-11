@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav';
 import BasicInfo from './Basic_Info/perBasic';
 import AcademicInfo from './Academic_Info/academico';
+import HigherEducationInfo from './HigherEducation_Info/HigEducationInfo';
 import AdditionalInfo from './Additional_Info/perAditional';
 import FatherInfo from './Father_Info/infoPadre';
 import SiblingInfo from './Sibling_Info/infoHermanos';
@@ -10,6 +10,7 @@ import Working_Info from './Working_Info/Working_info';
 import Admin_Review from './Review_Admin/AdminReview';
 import './general.css';
 
+<<<<<<< HEAD
 
 class Inscription extends Component {
     render() {
@@ -23,10 +24,12 @@ class Inscription extends Component {
             Admin = "none";
         }
     
+=======
+export class Inscription extends Component {
+  render() {   
+>>>>>>> 770f76c1536d679d6b9648678b85f830bdb62487
     return (
-      <div>        
-        <Navigation/>
-
+      <div>
         <div className="App-header App">
         <div class="container">                    
                 <div class="col-md-12">   
@@ -89,7 +92,7 @@ class Inscription extends Component {
                                 <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_22" role="button" aria-expanded="false" aria-controls="collapse_22">Educación Superior</a>
                                 <div class="collapse" id="collapse_22">
                                     <div class="card card-body">                                  
-                                        <BasicInfo/>
+                                        <HigherEducationInfo/>
                                     </div>
                                 </div> 
                                 <div style={{display:Admin}}>
@@ -184,5 +187,4 @@ class Inscription extends Component {
     );
   }
 }
-
-export default Inscription;
+/*export default Inscription;*/

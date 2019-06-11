@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navigation  from '../../navBar/nav'
 import './../Family_Info_Components/Familiar';
 
 class Working_Info extends Component {

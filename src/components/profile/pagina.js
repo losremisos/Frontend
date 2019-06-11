@@ -5,7 +5,7 @@ import InfoPerfil from './infoperfil'
 import Perfil from './perfil'
 import './perfil.css';
 
-class Pagina extends Component {
+export class Profile extends Component {
 
     render(){
         return(
@@ -31,4 +31,4 @@ class Pagina extends Component {
 
     }
     
-    export default Pagina;
+   /* export default Pagina;*/

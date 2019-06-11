@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav'
 import './Regist.css';
 
 
 
-class Formulario extends Component {
+export class Registry extends Component {
 
   render() {
     return (
       <div>
-        
-        <Navigation/>
-        
         <div className="App-header App">
         <div class="col-md-12 page-title">
         <h3>Formulario de Registro</h3>
@@ -154,4 +150,4 @@ class Formulario extends Component {
 
 
 
-export default Formulario;
+/*export default Formulario;*/
