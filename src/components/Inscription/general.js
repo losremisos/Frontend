@@ -9,12 +9,7 @@ import DependenceInfo from './Dependence_info/infoDependencia';
 import Working_Info from './Working_Info/Working_info';
 import Admin_Review from './Review_Admin/AdminReview';
 import './general.css';
-
-
-
-
 class Inscription extends Component {
-
     render() {
         var Admin;
         var User;
