@@ -13,7 +13,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
-<<<<<<< HEAD
 ReactDOM.render(
   
   <div>
@@ -32,7 +31,7 @@ ReactDOM.render(
     </Router>
   </div>,document.getElementById('root')
 );
-=======
+
 
 ReactDOM.render(<App/>,document.getElementById('root'));
->>>>>>> 770f76c1536d679d6b9648678b85f830bdb62487
+

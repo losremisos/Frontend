@@ -10,7 +10,6 @@ import Working_Info from './Working_Info/Working_info';
 import Admin_Review from './Review_Admin/AdminReview';
 import './general.css';
 
-<<<<<<< HEAD
 
 class Inscription extends Component {
     render() {
@@ -24,10 +23,6 @@ class Inscription extends Component {
             Admin = "none";
         }
     
-=======
-export class Inscription extends Component {
-  render() {   
->>>>>>> 770f76c1536d679d6b9648678b85f830bdb62487
     return (
       <div>
         <div className="App-header App">
