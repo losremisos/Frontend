@@ -22,7 +22,6 @@ class Inscription extends Component {
             User = "block";
             Admin = "none";
         }
-            
     return (
       <div>        
         <Navigation/>
