@@ -29,7 +29,8 @@ export class App extends React.Component {
         <div>
           <Navbar />
           <Route path='/login' component={Login} />
-          <Route path='/inscription' component={Inscription} />
+          <Route path="/inscription/" component={() => <Inscription admin ={false} />} />
+          <Route path="/admininscription/" component={() => <Inscription admin ={true} />} />
           <Route path='/registry' component={Registry}/>
           <Route path='/profile' component={Profile}/>
           <Route path="" component={Home} />              
