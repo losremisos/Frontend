@@ -4,7 +4,32 @@ import Person from './perBasic';
 import PersonalAdd from './perAditional';
 import './general.css';
 
+const ProgressBar = (props) => {
+    return (
+        <div className="progress-bar">
+          <Filler percentage={props.percentage} />
+        </div>
+      )
+  }
+  
+  const Filler = (props) => {
+    return <div className="filler" style={{ width: `${props.percentage}%` }} />
+  }
+
 class General extends Component {
+    constructor(props) {
+        super(props)
+        
+        this.state = {
+          percentage: 0
+        }
+        this.nextStep = this.nextStep.bind(this)
+      }
+      
+      nextStep() {
+        if(this.state.percentage === 100) return 
+        this.setState({ percentage: this.state.percentage + 25 })
+      }  
   render() {
     return (
       <div>        
@@ -14,13 +39,16 @@ class General extends Component {
             <div class="container">                    
                 <div class="col-md-12">   
 
+                    <ProgressBar percentage={this.state.percentage} />
+                        <div style={{ marginTop: '20px' }}>
+                    </div>
 
                     <a className="btn  mb-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_10" role="button" aria-expanded="false" aria-controls="collapse_10">Información Personal</a>
                     <div class="collapse" id="collapse_10">
 
                         <form>
                             <div class="card card-body">
-                                <a className="btn text-left btn-style btn-block" data-toggle="collapse" href="#collapse_11" role="button" aria-expanded="false" aria-controls="collapse_11">Información Basíca</a>
+                                <a className="btn text-left btn-style btn-block" data-toggle="collapse" href="#collapse_11" role="button" aria-expanded="false" aria-controls="collapse_11">Información Básica</a>
                                 <div class="collapse" id="collapse_11">
                                     <div class="card card-body">                                  
                                         <Person/>
@@ -34,7 +62,7 @@ class General extends Component {
                                     </div>
                                 </div>                  
 
-                                <button type="submit" className="btn btn-style-submit mt-5">Guardar</button>
+                                <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5">Guardar</button>
                             </div>        
                         </form>
 
@@ -60,7 +88,7 @@ class General extends Component {
                                     <Person/>
                                 </div>
                             </div> 
-                            <button type="submit" className="btn btn-style-submit mt-5">Guardar</button>
+                            <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5">Guardar</button>
 
                         </div>                        
                     </div>
@@ -69,7 +97,7 @@ class General extends Component {
                     <div class="collapse" id="collapse_30">
                         <div class="card card-body">               
                             <Person/>                   
-                            <button type="submit" className="btn btn-style-submit mt-5">Guardar</button>
+                            <button type="submit" onClick={this.nextStep}  className="btn btn-style-submit mt-5">Guardar</button>
                         </div>                        
                     </div>
 
@@ -96,7 +124,7 @@ class General extends Component {
                                     <Person/>
                                 </div>
                             </div> 
-                            <button type="submit" className="btn btn-style-submit mt-5">Guardar</button>
+                            <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5">Guardar</button>
                         </div>                        
                     </div>
 
