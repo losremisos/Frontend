@@ -10,7 +10,32 @@ import Working_Info from './Working_Info/Working_info';
 import Admin_Review from './Review_Admin/AdminReview';
 import './general.css';
 
+const ProgressBar = (props) => {
+    return (
+        <div className="progress-bar">
+          <Filler percentage={props.percentage} />
+        </div>
+      )
+  }
+  
+  const Filler = (props) => {
+    return <div className="filler" style={{ width: `${props.percentage}%` }} />
+  }
+
 export class Inscription extends Component {
+    constructor(props) {
+        super(props)
+        
+        this.state = {
+          percentage: 0
+        }
+        this.nextStep = this.nextStep.bind(this)
+      }
+      
+      nextStep() {
+        if(this.state.percentage === 100) return 
+        this.setState({ percentage: this.state.percentage + 25 })
+      }
   render() {
     var Admin;
         var User;
@@ -25,8 +50,11 @@ export class Inscription extends Component {
             <div>        
               <div className="App-header App">
               <div class="container">                    
-                      <div class="col-md-12">   
-      
+                      <div class="col-md-12"> 
+                      <div style={{display:User}} ><ProgressBar percentage={this.state.percentage} />
+                        <div style={{ marginTop: '20px' }}></div>  
+                      
+                        </div> 
       
                           <a className="btn  mb-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_10" role="button" aria-expanded="false" aria-controls="collapse_10">Información Personal</a>
                           <div class="collapse" id="collapse_10">
@@ -53,7 +81,7 @@ export class Inscription extends Component {
                                           <Admin_Review/>
                                       </div>                  
                                       
-                                      <button type="submit" className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
+                                      <button type="submit" onClick={this.nextStep}  className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
                                       
                                       
                                       
@@ -91,7 +119,7 @@ export class Inscription extends Component {
                                       <div style={{display:Admin}}>
                                           <Admin_Review/>
                                       </div> 
-                                      <button type="submit" className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
+                                      <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
       
                                   </div>  
                               </form>
@@ -107,7 +135,7 @@ export class Inscription extends Component {
                                       <div style={{display:Admin}}>
                                           <Admin_Review/>
                                       </div>                  
-                                      <button type="submit" className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
+                                      <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
                                   </div>
                                   
                               </div>
@@ -164,7 +192,7 @@ export class Inscription extends Component {
       
       
       
-                                      <button type="submit" className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
+                                      <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
                                   </div> 
       
                               </form> 
