@@ -44,7 +44,7 @@ export function RM_SESION() {
 export function ADD_SESION(token) {
   localStorage.setItem("jwt", token);
   localStorage.setItem("IsLogged", true);
-  GET("/users/current", true).then( (res)=> {
+  GET("/users/463", true).then( (res)=> {
     localStorage.setItem("UsrID", res.data.id);
     localStorage.setItem("UsrName", res.data.nombre);
     localStorage.setItem("UsrLastName", res.data.primerApellido);

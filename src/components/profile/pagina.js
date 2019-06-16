@@ -10,7 +10,7 @@ export class Profile extends Component {
     render(){
         return(
           <div>
-              <Navigation/>
+              
               
               <div className="container-fluid">
                 <div className="row">
@@ -24,7 +24,7 @@ export class Profile extends Component {
                 </div>
                 
               </div>
-              <Footer/>
+              
             </div>
         )
       }

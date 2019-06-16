@@ -8,10 +8,15 @@ export class Navbar extends Component {
   }
 
   render() {
+    let Nombre = " "+localStorage.getItem("UsrName");
     let IsLogged = localStorage.getItem("IsLogged");
     let login = (<Link style={{ textDecoration: 'none' }} className="option" to="/login" >Iniciar sesión</Link>);
-    let logout = (<Link style={{ textDecoration: 'none' }} className="option" to="/">
+    let logout = (<Link style={{ textDecoration: 'none' }} className="option" to="/home">
       <div onClick={() => { RM_SESION() }}>Cerrar sesión</div>
+    </Link>);
+    let welcome = (<Link style={{ textDecoration: 'none' }} className="option" to="/home" >Bienvenido: {Nombre}</Link>);
+    let registrar = (<Link style={{ textDecoration: 'none' }} className="option" to="/registry">
+      <div onClick={() => { RM_SESION() }}>Registrar</div>
     </Link>);
     let window = "";
     console.log(IsLogged)
@@ -41,7 +46,7 @@ export class Navbar extends Component {
           </li>
 
           <li id="Nombre">
-            <span id="nombreHome" ><span className="glyphicon glyphicon-user"></span> BIENVENIDO XDev</span>
+            {welcome}
           </li>
           <li id="Salir">
               {logout}
@@ -67,7 +72,7 @@ export class Navbar extends Component {
           </li>
 
           <li id="Nombre">
-            <span id="nombreHome" ><span className="glyphicon glyphicon-user"></span> BIENVENIDO XDev</span>
+            {registrar}
           </li>
           <li id="Salir">
               {login}
