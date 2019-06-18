@@ -28,7 +28,40 @@ export class Registry extends Component {
     })
   }
   handleSubmit(event){
-    axios.post("http://localhost:4200/users")
+    const{
+      tipo_documento,
+      numero_documento,
+      verifica_contrasena,
+      primer_nombre,
+      primer_apellido,
+      segundo_apellido,
+      correo,
+      contrasena,
+    } = this.state;
+    axios
+    .post("http://localhost:4200/users",
+    {
+      user: {
+        nombre: primer_nombre,
+        primerApellido: primer_apellido,
+        segundoApellido: segundo_apellido,
+        email: correo,
+        password: contrasena,
+        password_confirmation: verifica_contrasena,
+        tipoDocumento: tipo_documento,
+        documento: numero_documento,
+        tipoUsuario: '1' ,
+        district_id: '1'
+      }
+    }, { withCredentials: true}
+    )
+    .then(response => {
+      console.log("registration res", response);
+
+    }).catch(error => {
+      console.log("registration error", error);
+    });
+
     event.preventDefault();
 
   }
@@ -59,9 +92,9 @@ export class Registry extends Component {
                   <div className="row">
                       <div className="col-md-6">
                               <div className="control-group">
-                                    <label for="TipoDocumento">Tipo de documento (<span className="field-required">*</span>):</label>
-                                    <select name="TipoDocumento" title="Tipo de documento de identidad" className="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
+                                    <label>Tipo de documento (<span className="field-required">*</span>):</label>
+                                    <select name="tipo_documento"  className="form-control" tabIndex="1">
+                                      <option value={this.state.tipo_documento}>Seleccione...</option>
                                       <option value="100000001">C&#233;dula de Ciudadan&#237;a</option>
                                       <option value="100000000">Tarjeta de Identidad</option>
                                       <option value="100000002">NUIP</option>
@@ -71,7 +104,7 @@ export class Registry extends Component {
                       </div>
                       <div className="col-md-6">
                               <div className="control-group">
-                                <label for="numero_documento">Número de documento (<span className="field-required">*</span>):</label>
+                                <label >Número de documento (<span className="field-required">*</span>):</label>
                                 <input type="text" 
                                   name="numero_documento" 
                                   placeholder="Documento Identidad" 
@@ -87,7 +120,7 @@ export class Registry extends Component {
                   <div className="row">
                     <div className="col-md-6">
                             <div className="control-group">
-                              <label for="primer_nombre" >Nombre 1(<span className="field-required">*</span>):</label>
+                              <label>Nombre 1(<span className="field-required">*</span>):</label>
                               <input type="text" 
                               name="primer_nombre" 
                               placeholder="Primer Nombre" 
@@ -96,23 +129,13 @@ export class Registry extends Component {
                               className="form-control" />
                             </div>
                     </div>
-                    <div className="col-md-6">
-                            <div className="control-group">
-                              <label for="segundo_nombre" > Nombre 2 (<span className="field-required">*</span>):</label>
-                              <input type="text" 
-                              name="segundo_nombre" 
-                              placeholder="Segundo Nombre" 
-                              value={this.state.segundo_nombre}
-                              onChange={this.handleChange} 
-                              className="form-control" />
-                            </div>
-                    </div>
+                  
                   
                   </div>
                   <div className="row">
                     <div className="col-md-6">
                             <div className="control-group">
-                             <label for="primer_apellido" >Apellido 1(<span className="field-required">*</span>):</label>
+                             <label>Apellido 1(<span className="field-required">*</span>):</label>
                              <input type="text" 
                              name="primer_apellido" 
                              placeholder="Primer apellido" 
@@ -123,7 +146,7 @@ export class Registry extends Component {
                     </div>  
                     <div className="col-md-6">
                             <div className="control-group">
-                             <label for="segundo_apellido" >Apellido 2(<span className="field-required">*</span>):</label>
+                             <label>Apellido 2(<span className="field-required">*</span>):</label>
                              <input type="text" 
                              name="segundo_apellido" 
                              placeholder="segundo apellido" 
@@ -137,7 +160,7 @@ export class Registry extends Component {
                   <div className="row">
                     <div className="col-md-6">
                         <div className="control-group">
-                             <label for="correo" >Correo (<span className="field-required">*</span>):</label>
+                             <label>Correo (<span className="field-required">*</span>):</label>
                              <input type="text" 
                              name="correo" 
                              placeholder="correo" 
@@ -147,14 +170,21 @@ export class Registry extends Component {
                         </div>
                     </div>
                     <div className="col-md-6">
-                    <label for="contrasena" >Contrasena (<span className="field-required">*</span>):</label>
+                    <label >Contrasena (<span className="field-required">*</span>):</label>
                              <input type="password" 
                              name="contrasena" 
                              placeholder="contrasena" 
-                             value={this.state.contrasena}
                              onChange={this.handleChange} 
                              className="form-control" />
-                    </div>           
+                    </div>  
+                    <div className="col-md-6">
+                    <label>Verifica Contrasena (<span className="field-required">*</span>):</label>
+                             <input type="password" 
+                             name="verifica_contrasena" 
+                             placeholder="verifica_contrasena" 
+                             onChange={this.handleChange} 
+                             className="form-control" />
+                    </div>              
                   </div>
                   <div className="row">
                         <div className="col-md-6">                                                           

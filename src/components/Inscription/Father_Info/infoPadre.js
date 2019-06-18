@@ -8,7 +8,7 @@ class FatherInfo extends Component {
     checked: false
   }
   onChange = () => {
-    if(this.state.display=='none' ){
+    if(this.state.display==='none' ){
       this.setState({ display: 'block' });
     }else{
     this.setState({ display: 'none' });

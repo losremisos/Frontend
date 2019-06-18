@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import { RM_SESION } from './../../JS/api';
 
 export class Navbar extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let IsLogged = localStorage.getItem("IsLogged");

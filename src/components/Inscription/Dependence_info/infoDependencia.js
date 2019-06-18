@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../Family_Info_Components/Familiar';
-import  InfoTrabajo  from '../Family_Info_Components/infoTrabajo';
 
 class DependenceInfo extends Component {
   render() {

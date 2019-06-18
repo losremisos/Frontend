@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import  Login  from '../../login/login';
 import  InfoPadre  from '../Father_Info/infoPadre';
 import  Boton  from './botondeslizante';
 import SiblingInfo from '../Sibling_Info/infoHermanos';

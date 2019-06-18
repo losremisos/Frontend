@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 
 import '../Family_Info_Components/Familiar';
 
-import  InfoTrabajo  from '../Family_Info_Components/infoTrabajo';
-
 class SiblingInfo extends Component {
   state = {
     display: 'none',
     checked: false
   }
   onChange = () => {
-    if(this.state.display=='none' ){
+    if(this.state.display==='none' ){
       this.setState({ display: 'block' });
     }else{
     this.setState({ display: 'none' });

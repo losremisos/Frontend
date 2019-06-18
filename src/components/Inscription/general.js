@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import BasicInfo from './Basic_Info/perBasic';
 import AcademicInfo from './Academic_Info/academico';
-import HigherEducationInfo from './HigherEducation_Info/HigEducationInfo';
 import AdditionalInfo from './Additional_Info/perAditional';
 import FatherInfo from './Father_Info/infoPadre';
 import SiblingInfo from './Sibling_Info/infoHermanos';
 import DependenceInfo from './Dependence_info/infoDependencia';
-import Working_Info from './Working_Info/Working_info';
-import Admin_Review from './Review_Admin/AdminReview';
+import WorkingInfo from './Working_Info/Working_info';
+import AdminReview from './Review_Admin/AdminReview';
 import './general.css';
 
 const ProgressBar = (props) => {
@@ -68,7 +67,7 @@ export class Inscription extends Component {
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <Admin_Review/>
+                                          <AdminReview/>
                                       </div> 
       
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_12" role="button" aria-expanded="false" aria-controls="collapse_12">Información Adicional</a>
@@ -78,7 +77,7 @@ export class Inscription extends Component {
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <Admin_Review/>
+                                          <AdminReview/>
                                       </div>                  
                                       
                                       <button type="submit" onClick={this.nextStep}  className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
@@ -107,7 +106,7 @@ export class Inscription extends Component {
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <Admin_Review/>
+                                          <AdminReview/>
                                       </div> 
       
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_22" role="button" aria-expanded="false" aria-controls="collapse_22">Educación Superior</a>
@@ -117,7 +116,7 @@ export class Inscription extends Component {
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <Admin_Review/>
+                                          <AdminReview/>
                                       </div> 
                                       <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
       
@@ -131,9 +130,9 @@ export class Inscription extends Component {
                           <form>
                               <div class="collapse" id="collapse_30">
                                   <div class="card card-body">               
-                                      <Working_Info/>  
+                                      <WorkingInfo/>  
                                       <div style={{display:Admin}}>
-                                          <Admin_Review/>
+                                          <AdminReview/>
                                       </div>                  
                                       <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
                                   </div>
@@ -152,7 +151,7 @@ export class Inscription extends Component {
                                               <FatherInfo/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <Admin_Review/>
+                                              <AdminReview/>
                                           </div>  
                                       </div>
                                       
@@ -163,7 +162,7 @@ export class Inscription extends Component {
                                               <FatherInfo/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <Admin_Review/>
+                                              <AdminReview/>
                                           </div> 
                                       </div>
                                        
@@ -174,7 +173,7 @@ export class Inscription extends Component {
                                               <SiblingInfo/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <Admin_Review/>
+                                              <AdminReview/>
                                           </div> 
                                       </div>
                                        
@@ -185,7 +184,7 @@ export class Inscription extends Component {
                                               <DependenceInfo/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <Admin_Review/>
+                                              <AdminReview/>
                                           </div> 
                                       </div>
                                       

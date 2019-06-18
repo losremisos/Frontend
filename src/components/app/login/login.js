@@ -76,20 +76,20 @@ export class Login extends Component {
           <div className="App-header App">
             <div>
               <h1 className="title">Iniciar Sesión</h1>
-              <label className="paragraph">Bienvenido al sistema mediante el cual podrá realizar la solicitud de su libreta militar. Si ya se encuentra registrado por favor ingrese su Usuario y Contraseña para acceder al sistema. Si aún no tiene clave de acceso <a className="links" href="">Regístrese aquí</a>.</label>
+              <label className="paragraph">Bienvenido al sistema mediante el cual podrá realizar la solicitud de su libreta militar. Si ya se encuentra registrado por favor ingrese su Usuario y Contraseña para acceder al sistema. Si aún no tiene clave de acceso <a className="links" href="/">Regístrese aquí</a>.</label>
             </div>
 
             <div className="form-group">
-              <label htmlFor="formGroupExampleInput">Usuario</label>
+              <label >Usuario</label>
               <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Correo" onChange={this.handleUser} value={this.state.user} />
               <h5 className="alerta">{this.state.userError}</h5>
             </div>
 
             <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Clave de acceso</label>
+              <label >Clave de acceso</label>
               <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Contraseña" onChange={this.handlePassword} value={this.state.password} />
               <h5 className="alerta">{this.state.passwordError}</h5>
-              <label><a className="links" href="">¿Olvidó su clave de acceso?</a></label>
+              <label><a className="links" href="/">¿Olvidó su clave de acceso?</a></label>
             </div>
 
             <button type="submit" className="btn btn-style" onClick={this.submitLogIn}>Entrar al sistema</button>

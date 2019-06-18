@@ -11,7 +11,7 @@ class Login extends Component {
 
         <div>
           <label className="title">Iniciar Sesión</label>
-          <label className="paragraph">Bienvenido al sistema mediante el cual podrá realizar la solicitud de su libreta militar. Si ya se encuentra registrado por favor ingrese su Usuario y Contraseña para acceder al sistema. Si aún no tiene clave de acceso <a className="links" href="">Regístrese aquí</a>.</label>
+          <label className="paragraph">Bienvenido al sistema mediante el cual podrá realizar la solicitud de su libreta militar. Si ya se encuentra registrado por favor ingrese su Usuario y Contraseña para acceder al sistema. Si aún no tiene clave de acceso <a className="links" href="/">Regístrese aquí</a>.</label>
         </div>
         
           <div className="form-group">
@@ -22,7 +22,7 @@ class Login extends Component {
           <div className="form-group">
             <label htmlFor="exampleInputPassword1">Clave de acceso</label>
             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Contraseña"></input>
-            <label><a className="links" href="">¿Olvidó su clave de acceso?</a></label>
+            <label><a className="links" href="/">¿Olvidó su clave de acceso?</a></label>
           </div>
 
           

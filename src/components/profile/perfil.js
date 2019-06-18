@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 
 
 class Perfil extends Component{
@@ -16,7 +15,7 @@ class Perfil extends Component{
                 <hr className="my-4"/>
                 <p>Defina su situación militar completando la información requerida</p>
                 <p className="lead">
-                    <a className="btn btn-style tn-lg" href="#" role="button">Comenzar</a>
+                    <a className="btn btn-style tn-lg" href="/" role="button">Comenzar</a>
                 </p>
             </div>
             
