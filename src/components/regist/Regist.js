@@ -3,7 +3,7 @@ import './Regist.css';
 
 
 
-class Formulario extends Component {
+export class Registry extends Component {
 
   render() {
     return (
@@ -150,4 +150,4 @@ class Formulario extends Component {
 
 
 
-export default Formulario;
+/*export default Formulario;*/
