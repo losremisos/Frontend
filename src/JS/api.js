@@ -38,6 +38,7 @@ export function RM_SESION() {
 	localStorage.setItem("UsrName", "");
 	localStorage.setItem("UsrLastName", "");
 	localStorage.setItem("UsrProfile", false);
+	localStorage.setItem("admin", false);
 	return "Sesion eliminada";
 }
 
@@ -47,7 +48,12 @@ export function ADD_SESION(token) {
   GET("/users/current", true).then( (res)=> {
     localStorage.setItem("UsrID", res.data.id);
     localStorage.setItem("UsrName", res.data.nombre);
-    localStorage.setItem("UsrLastName", res.data.primerApellido);
+	localStorage.setItem("UsrLastName", res.data.primerApellido);
+	if(res.data.tipoUsuario === 0){
+		localStorage.setItem("admin", false);
+	}else{
+		localStorage.setItem("admin", true);
+	}
 	});
 	return "Sesion creada"
 }
