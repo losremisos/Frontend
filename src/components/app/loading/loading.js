@@ -5,7 +5,7 @@ export class Loading extends React.Component {
   render() {
     return(
       <div className="loading">
-        <img src={require("./../../../assets/loading.gif")}/>
+        <img src={require("./../../../assets/loading/loading.gif")}/>
         <h2>Cargando...</h2>
       </div>
     );

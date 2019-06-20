@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navbar } from './../navBar/navBar';
 import { Login } from './login/login';
-import { Home } from './../home/home';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Home } from './../app/home/home';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 export class App extends React.Component {
   constructor() {
@@ -16,17 +16,18 @@ export class App extends React.Component {
       localStorage.setItem("UsrName", "");
       localStorage.setItem("UsrLastName", "");
       localStorage.setItem("UsrProfile", false);
+      localStorage.setItem("admin", false);
     }
   }
 
   render() {
-    console.log(localStorage);
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
-          <Route path='/login' component={Login} />
-          <Route path="" component={Home} />
+          <Navbar/>
+          <Route path="/home" component={Home}/>
+          <Route path="/login" component={Login} exact/>
+          <Redirect from="/*" to="/home"/>
         </div>
       </BrowserRouter>
     )

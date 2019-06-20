@@ -3,39 +3,34 @@ import { Link } from 'react-router-dom';
 import { RM_SESION } from './../../JS/api';
 
 export class Navbar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let IsLogged = localStorage.getItem("IsLogged");
     let login = (<Link style={{ textDecoration: 'none' }} className="option" to="/login" >Iniciar sesión</Link>);
-    let logout = (<Link style={{ textDecoration: 'none' }} className="option" to="/">
+    let logout = (<Link style={{ textDecoration: 'none' }} className="option" to="/home">
       <div onClick={() => { RM_SESION() }}>Cerrar sesión</div>
     </Link>);
     let window = "";
-    console.log(IsLogged)
 
     if (IsLogged === "true") {
       window =
         <ul className="nav navbar-nav2">
           <li id="Inicio">
-            <a href="/Default">
+            <a href="/home">
               <span id="inicioHome" >Inicio</span>
             </a>
           </li>
           <li id="Consultas">
-            <a href="/Default">
+            <a href="/home">
               <span id="consultasHome" >Consultas</span>
             </a>
           </li>
           <li id="Liquidacion">
-            <a href="/Default">
+            <a href="/home">
               <span id="liquidacionHome" >Soporte Liquidacion</span>
             </a>
           </li>
           <li id="Perfil">
-            <a href="/Default">
+            <a href="/home">
               <span id="perfilHome" >Mi Perfil</span>
             </a>
           </li>
@@ -51,17 +46,17 @@ export class Navbar extends Component {
       window =
         <ul className="nav navbar-nav2">
           <li id="Inicio">
-            <a href="/Default">
+            <a href="/home">
               <span id="inicioHome" >Inicio</span>
             </a>
           </li>
           <li id="Consultas">
-            <a href="/Default">
+            <a href="/home">
               <span id="consultasHome" >Consultas</span>
             </a>
           </li>
           <li id="Liquidacion">
-            <a href="/Default">
+            <a href="/home">
               <span id="liquidacionHome" >Soporte Liquidacion</span>
             </a>
           </li>
