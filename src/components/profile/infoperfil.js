@@ -36,7 +36,7 @@ class InfoPerfil extends Component{
         return(
            
             <div className="card ">
-                <img className="card-img-top" src={foto} alt="Card image cap"/>
+                <img className="card-img-top" src={foto} alt="algo"/>
                 <div className="card-body">
                     <h5 className="card-title">{users.nombre} {users.primerApellido} {users.segundoApellido}</h5>
                     <p className="card-text">{users.correo}</p>
@@ -47,7 +47,7 @@ class InfoPerfil extends Component{
                     <li className="list-group-item">CC. {users.documento}</li>
                 </ul>
                 <div className="card-body">
-                    <a href="#" className="card-link">Editar</a>
+                    <a href="/" className="card-link">Editar</a>
                 </div>
             </div>
             

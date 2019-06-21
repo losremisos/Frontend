@@ -7,7 +7,7 @@ class Formulario extends Component {
         checked: false
       }
     handleCheckboxChange = event =>{
-        if(this.state.display=='none'){
+        if(this.state.display==='none'){
             this.setState({ display: 'block' });
           }else{
           this.setState({ display: 'none' });

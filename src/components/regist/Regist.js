@@ -1,131 +1,202 @@
 import React, { Component } from 'react';
 import './Regist.css';
-
-
+import axios from 'axios';
 
 export class Registry extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state={
+      tipo_documento: "",
+      numero_documento: "",
+      primer_nombre: "",
+      segundo_nombre: "",
+      primer_apellido:"",
+      segundo_apellido: "",
+      correo:"",
+      contrasena:"",
+      errors:""
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange=this.handleChange.bind(this);
+  }
+  handleChange(event){
+    this.setState({
+      [event.target.name]:event.target.value
+    })
+  }
+  handleSubmit(event){
+    const{
+      tipo_documento,
+      numero_documento,
+      verifica_contrasena,
+      primer_nombre,
+      primer_apellido,
+      segundo_apellido,
+      correo,
+      contrasena,
+    } = this.state;
+    axios
+    .post("http://localhost:4200/users",
+    {
+      user: {
+        nombre: primer_nombre,
+        primerApellido: primer_apellido,
+        segundoApellido: segundo_apellido,
+        email: correo,
+        password: contrasena,
+        tipoDocumento: 1,
+        telefono: "234234432",
+        documento: numero_documento,
+        tipoUsuario: 1 ,
+        district_id: 1
+      }
+    }, { withCredentials: true}
+    )
+    .then(response => {
+      console.log("registration res", response);
+
+    }).catch(error => {
+      console.log("registration error", error);
+    });
+
+    event.preventDefault();
+
+  }
+
 
   render() {
     return (
       <div>
         <div className="App-header App">
-        <div class="col-md-12 page-title">
-        <h3>Formulario de Registro</h3>
+          <div className="col-md-12 page-title">
+            <h3>Formulario de Registro</h3>
         </div>
         
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-3 Informacion">
-              <div class="spacer"></div>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-3 Informacion">
+              <div className="spacer"></div>
               <h4>Señor ciudadano</h4>
               <p>El primer paso para definir su situación militar es diligenciar este formulario, con el fin de crear un registro en nuestro portal. Introduzca su información personal completando <b>TODOS</b> los campos. Registre su <b>correo electrónico personal y cree una contraseña</b> que recuerde fácilmente, tenga en cuenta que con estos datos ingresará al portal para completar los demás pasos para definir su situación militar.</p><p>Si no cuenta con un correo electrónico, debe crearlo previamente para registrarse y recibir notificaciones de la Dirección de Reclutamiento.</p>
               <p>Sus datos personales serán protegidos y son requeridos para que usted pueda consultarlos o actualizarlos cuando lo requiera.</p><p>Al hacer click en el botón REGISTRARSE le será enviado un mensaje al correo electrónico que usted registró, verifíquelo y lea las instrucciones que allí se le indican para activar su cuenta y entrar a su perfil.  Si el mensaje no se encuentra en la bandeja de entrada por favor revise la bandeja de Spam o correo no deseado.</p>
-              <div class="spacer"></div>
+              <div className="spacer"></div>
             </div>
+
+            <form onSubmit={this.handleSubmit}>
             <div className="col-md-9">
-              <div class="row"> 
-                <div class="col-md-11 Informacion2 col-md-offset-1"> 
+              <div className="row"> 
+                <div className="col-md-11 Informacion2 col-md-offset-1"> 
                   <div className="row">
-                      <div class="col-md-6">
-                              <div class="control-group">
-                                    <label for="TipoDocumento">Tipo de documento (<span class="field-required">*</span>):</label>
-                                    <select name="TipoDocumento" title="Tipo de documento de identidad" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
+                      <div className="col-md-6">
+                              <div className="control-group">
+                                    <label>Tipo de documento (<span className="field-required">*</span>):</label>
+                                    <select name="tipo_documento"  className="form-control" tabIndex="1">
+                                      <option value={this.state.tipo_documento}>Seleccione...</option>
                                       <option value="100000001">C&#233;dula de Ciudadan&#237;a</option>
                                       <option value="100000000">Tarjeta de Identidad</option>
                                       <option value="100000002">NUIP</option>
                                     </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
+                                    <span  className="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
                               </div>
                       </div>
-                      <div class="col-md-6">
-                              <div class="control-group">
-                                <label for="NumeroDocumento">Número de documento (<span class="field-required">*</span>):</label>
-                                <input name="NumeroDocumento" type="text" maxlength="11" id="DocumentNumber" title="Número de documento de identidad" class="form-control" tabIndex="2" />  
-                                <span id="ctl00_MainContent_reqDocumentNumber" class="field-validation-error" >&nbsp;&nbsp;&nbsp;</span>
+                      <div className="col-md-6">
+                              <div className="control-group">
+                                <label >Número de documento (<span className="field-required">*</span>):</label>
+                                <input type="text" 
+                                  name="numero_documento" 
+                                  placeholder="Documento Identidad" 
+                                  className="form-control" 
+                                  value={this.state.numero_documento} 
+                                  onChange={this.handleChange} 
+                                  tabIndex="2" />  
+                             
                               </div>
                       </div>
                   </div>
 
                   <div className="row">
-                    <div class="col-md-6">
-                            <div class="control-group">
-                             <label for="Nombre" >Nombre (<span class="field-required">*</span>):</label>
-                             <input name="Nombre" type="text" maxlength="50" id="txtName" title="Primer nombre" class="form-control" />
-                             <span >&nbsp;&nbsp;&nbsp;</span>
+                    <div className="col-md-6">
+                            <div className="control-group">
+                              <label>Nombre 1(<span className="field-required">*</span>):</label>
+                              <input type="text" 
+                              name="primer_nombre" 
+                              placeholder="Primer Nombre" 
+                              value={this.state.primer_nombre}
+                              onChange={this.handleChange} 
+                              className="form-control" />
                             </div>
                     </div>
-                    <div class="col-md-6">
-                            <div class="control-group">
-                             <label for="NombreSeg" >Segundo Nombre:</label>
-                             <input name="NombreSeg" type="text" maxlength="50" id="secTxtName" title="Segundo nombre" class="form-control" />
-                             <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
-                    </div>
+                  
+                  
                   </div>
-
                   <div className="row">
-                    <div class="col-md-6">
-                            <div class="control-group">
-                              <label for="Apellido">Apellidos (<span class="field-required">*</span>):</label>
-                              <input name="Apellido" type="text" maxlength="50" id="txtLastName" title="Primer apellido" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                    <div className="col-md-6">
+                            <div className="control-group">
+                             <label>Apellido 1(<span className="field-required">*</span>):</label>
+                             <input type="text" 
+                             name="primer_apellido" 
+                             placeholder="Primer apellido" 
+                             value={this.state.primer_apellido}
+                             onChange={this.handleChange} 
+                             className="form-control" />
                             </div>
                     </div>  
-                    <div class="col-md-6">
-                            <div class="control-group">
-                              <label for="ApellidoSeg">Segundo Apellido:</label>
-                              <input name="ApellidoSeg" type="text" maxlength="50" id="SecTxtLastName" title="Segundo apellido" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                    <div className="col-md-6">
+                            <div className="control-group">
+                             <label>Apellido 2(<span className="field-required">*</span>):</label>
+                             <input type="text" 
+                             name="segundo_apellido" 
+                             placeholder="segundo apellido" 
+                             value={this.state.segundo_apellido}
+                             onChange={this.handleChange} 
+                             className="form-control" />
                             </div>
-                    </div>             
+                    </div>
                   </div>
 
                   <div className="row">
-                    <div class="col-md-6">
-                            <div class="control-group">
-                              <label for="Correo">Correo (<span class="field-required">*</span>):</label>
-                              <input name="Correo" type="text" maxlength="80" id="email" title="Correo" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
+                    <div className="col-md-6">
+                        <div className="control-group">
+                             <label>Correo (<span className="field-required">*</span>):</label>
+                             <input type="text" 
+                             name="correo" 
+                             placeholder="correo" 
+                             value={this.state.correo}
+                             onChange={this.handleChange} 
+                             className="form-control" />
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                            <div class="control-group">
-                              <label for="Contraseña">Contraseña (<span class="field-required">*</span>):</label>
-                              <input name="Contraseña" type="text" maxlength="80" id="password" title="Contraseña" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
-                    </div>           
+                    <div className="col-md-6">
+                    <label >Contrasena (<span className="field-required">*</span>):</label>
+                             <input type="password" 
+                             name="contrasena" 
+                             placeholder="contrasena" 
+                             onChange={this.handleChange} 
+                             className="form-control" />
+                    </div>  
+                    <div className="col-md-6">
+                    <label>Verifica Contrasena (<span className="field-required">*</span>):</label>
+                             <input type="password" 
+                             name="verifica_contrasena" 
+                             placeholder="verifica_contrasena" 
+                             onChange={this.handleChange} 
+                             className="form-control" />
+                    </div>              
                   </div>
-
-                  <div class="row">
-                        <div class="col-md-6">
-                            <input type="button"  class="btn btn-style" value="Cancelar" />
-                            &nbsp;        
-						                <input type="button"  value="Consultar"  class="btn btn-style" />
+                  <div className="row">
+                        <div className="col-md-6">                                                           
+						                <input type="submit"  value="Enviar"  className="btn btn-style" />
                         </div>
-                    </div>
-                    
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div>
-                                <div class="bar"></div>
-                                <div class="label"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="row">
-                        &nbsp;
-                    </div>
-
+                  </div>
                 </div>
               </div>
             </div>
+          </form>
+
+            
           </div>
         </div>
         
