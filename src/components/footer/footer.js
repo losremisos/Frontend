@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 import './footer.css';
 import logo from './logoXDev.png';
 
-class Footer extends Component{
+export class Footer extends Component{
 
 
     render(){
         return(
-          
-            
-        <footer>
         <div className="footer" >
         <hr></hr>
             <label className="painted">DIRECCIÓN DE RECLUTAMIENTO</label>
@@ -23,12 +20,6 @@ class Footer extends Component{
                     <div id="cright" className="col-md-8"> <p>© 2019 Todos los derechos reservados | Este es un sitio seguro </p></div>
                 </div>
         </div>
-
-        </footer>
-        
-            
         )
     }
 }
-
-export default Footer;

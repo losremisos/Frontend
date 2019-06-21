@@ -1,6 +1,6 @@
 import React from 'react';
 import './home.css';
-import { GET } from './../../../../JS/api';
+import { GET } from './../../../JS/api';
 import { Link } from "react-router-dom";
 import { Loading } from "./../../loading/loading";
 

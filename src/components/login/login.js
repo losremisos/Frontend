@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
-import { ADD_SESION, serverLink } from './../../../JS/api';
+import { ADD_SESION, serverLink } from '../../JS/api';
 import axios from 'axios';
 
 export class Login extends Component {
@@ -74,7 +74,7 @@ export class Login extends Component {
           <div className="App-header App">
             <div>
               <h1 className="title">Iniciar Sesión</h1>
-              <label className="paragraph">Bienvenido al sistema mediante el cual podrá realizar la solicitud de su libreta militar. Si ya se encuentra registrado por favor ingrese su Usuario y Contraseña para acceder al sistema. Si aún no tiene clave de acceso <a className="links" href="">Regístrese aquí</a>.</label>
+              <label className="paragraph">Bienvenido al sistema mediante el cual podrá realizar la solicitud de su libreta militar. Si ya se encuentra registrado por favor ingrese su Usuario y Contraseña para acceder al sistema. Si aún no tiene clave de acceso <a className="links" href="/registry">Regístrese aquí</a>.</label>
             </div>
 
             <div className="form-group">
@@ -90,13 +90,9 @@ export class Login extends Component {
               <label><a className="links" href="">¿Olvidó su clave de acceso?</a></label>
             </div>
 
-            <button type="submit" className="btn btn-style" onClick={this.submitLogIn}>Entrar al sistema</button>
+            <button type="submit" className="btn btn-style" onClick={this.submitLogIn}>Iniciar Sesión</button>
           </div>
 
-          <div className="footer" >
-            <hr></hr>
-            <label >Nombre empresa © 2019 Todos los derechos reservados | Este es un sitio seguro </label>
-          </div>
         </div>
       );
     }

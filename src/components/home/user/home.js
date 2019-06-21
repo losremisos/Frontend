@@ -1,10 +1,10 @@
 import React from 'react';
 import './home.css';
 
-import SourceImg from './../../../../assets/home/tabPic.png'
-import SourceImg2 from './../../../../assets/home/tabPic6.png'
-import SourceImg3 from './../../../../assets/home/faq.jpg'
-import SourceImg4 from './../../../../assets/home/escudo.png'
+import SourceImg from './../../../assets/home/tabPic.png'
+import SourceImg2 from './../../../assets/home/tabPic6.png'
+import SourceImg3 from './../../../assets/home/faq.jpg'
+import SourceImg4 from './../../../assets/home/escudo.png'
 
 
 
@@ -93,19 +93,6 @@ export class Home extends React.Component {
             </div>
           </div>
         </div>
-
-        <div className="footer" >
-
-          <hr></hr>
-          <label className="painted">DIRECCIÓN DE RECLUTAMIENTO</label>
-          <br />
-          <label>Av. Caracas No. 9-51 - Bogotá-Colombia</label>
-          <br />
-          <label>PBX: +57 (1) 3362211 Ext: 302 - 303 - 304 - 305 - 306 - 307 </label>
-        </div>
-
-
-
       </div>
     );
   }
