@@ -11,14 +11,15 @@ class InfoPerfil extends Component{
     }
 
     componentDidMount(){
+        let id = localStorage.getItem("UsrID");
         console.log("Aqui esta la peticion");
         console.log(axios({
             method: "GET",
-            url: "http://localhost:4200/users/1"
+            url: "http://localhost:4200/users/"+id
         }));
         axios({
             method: "GET",
-            url: "http://localhost:4200/users/1"
+            url: "http://localhost:4200/users/"+id
         }).then((res) => {
             this.setState({
                 users: res.data
