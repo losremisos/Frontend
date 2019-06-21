@@ -10,7 +10,7 @@ export class Home extends Component {
   render() {
     let admin = localStorage.getItem("admin");
     let window = "";
-
+    console.log(localStorage);
     if(admin === "true"){
       window=<Admin/>
     }else{

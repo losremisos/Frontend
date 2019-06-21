@@ -3,13 +3,28 @@ import { Link } from 'react-router-dom';
 import { RM_SESION } from './../../JS/api';
 
 export class Navbar extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    let Nombre = " "+localStorage.getItem("UsrName");
+    console.log(Nombre)
+    console.log(localStorage)
     let IsLogged = localStorage.getItem("IsLogged");
+    if(IsLogged === "true") {
+      console.log(localStorage)
+    }
     let login = (<Link style={{ textDecoration: 'none' }} className="option" to="/login" >Iniciar sesión</Link>);
     let logout = (<Link style={{ textDecoration: 'none' }} className="option" to="/home">
       <div onClick={() => { RM_SESION() }}>Cerrar sesión</div>
     </Link>);
+    let welcome = (<Link style={{ textDecoration: 'none' }} className="option" to="/home" >Bienvenido {Nombre}</Link>);
+    let registrar = (<Link style={{ textDecoration: 'none' }} className="option" to="/registry">
+      <div onClick={() => { RM_SESION() }}>Registrarse</div>
+    </Link>);
     let window = "";
+    console.log(IsLogged)
 
     if (IsLogged === "true") {
       window =
@@ -20,23 +35,23 @@ export class Navbar extends Component {
             </a>
           </li>
           <li id="Consultas">
-            <a href="/home">
+            <a href="/Default">
               <span id="consultasHome" >Consultas</span>
             </a>
           </li>
           <li id="Liquidacion">
-            <a href="/home">
+            <a href="/Default">
               <span id="liquidacionHome" >Soporte Liquidacion</span>
             </a>
           </li>
           <li id="Perfil">
-            <a href="/home">
+            <a href="/profile">
               <span id="perfilHome" >Mi Perfil</span>
             </a>
           </li>
 
           <li id="Nombre">
-            <span id="nombreHome" ><span className="glyphicon glyphicon-user"></span> BIENVENIDO XDev</span>
+            {welcome}
           </li>
           <li id="Salir">
               {logout}
@@ -46,23 +61,23 @@ export class Navbar extends Component {
       window =
         <ul className="nav navbar-nav2">
           <li id="Inicio">
-            <a href="/home">
+            <a href="/Default">
               <span id="inicioHome" >Inicio</span>
             </a>
           </li>
           <li id="Consultas">
-            <a href="/home">
+            <a href="/Default">
               <span id="consultasHome" >Consultas</span>
             </a>
           </li>
           <li id="Liquidacion">
-            <a href="/home">
+            <a href="/Default">
               <span id="liquidacionHome" >Soporte Liquidacion</span>
             </a>
           </li>
 
           <li id="Nombre">
-            <span id="nombreHome" ><span className="glyphicon glyphicon-user"></span> BIENVENIDO XDev</span>
+            {registrar}
           </li>
           <li id="Salir">
               {login}

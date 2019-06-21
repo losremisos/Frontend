@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
 import { ADD_SESION, serverLink } from './../../../JS/api';
-import { Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 export class Login extends Component {
@@ -56,7 +55,7 @@ export class Login extends Component {
           if (res.status === 201) {
             token = res.data.jwt;
             ADD_SESION(token);
-            this.setState({ redirect: true });
+            this.setState({redirect: true});            
           } else {
             this.setState({ userError: "Usuario o Contraseña incorrectos" })
           }
@@ -68,7 +67,7 @@ export class Login extends Component {
 
   render() {
     if (this.state.redirect) {
-      return (<Redirect to="/home" />);
+      window.location.href = '/home';      
     } else {
       return (
         <div>

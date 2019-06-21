@@ -13,21 +13,21 @@ class BasicInfo extends Component {
   }
 
 componentDidMount(){
+    let id = localStorage.getItem("UsrID");
     console.log("Aqui esta la peticion");
     console.log(axios({
         method: "GET",
-        url: "http://localhost:4200/users/1"
+        url: "http://localhost:4200/users/"+id
     }));
     axios({
         method: "GET",
-        url: "http://localhost:4200/users/1"
+        url: "http://localhost:4200/users/"+id
     }).then((res) => {
         this.setState({
             users: res.data
         })
     });
-  }
-
+}
 
   render() {
 
@@ -74,11 +74,10 @@ componentDidMount(){
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="inputState">Tipo de identificación (*):</label>
-                <select id="inputState" class="form-control" disabled>
-                  <option disable selected>{users.tipoDocumento}</option>
+                <select id="inputState" class="form-control" disabled value={users.tipoDocumento}>
                   <option disabled>Seleccione...</option>
-                  <option>Cedula de Ciudadania</option>
-                  <option>Tarjeta de Identidad</option>
+                  <option value="1">Cedula de Ciudadania</option>
+                  <option value="2">Tarjeta de Identidad</option>
                 </select>
               </div>
               <div class="form-group col-md-3">

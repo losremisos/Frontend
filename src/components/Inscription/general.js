@@ -37,9 +37,10 @@ export class Inscription extends Component {
         this.setState({ percentage: this.state.percentage + 25 })
       }
   render() {
-    var Admin;
+        var Admin;
         var User;
-        if(this.props.admin){
+        let admin = localStorage.getItem("admin");
+        if(admin === "true"){
             User = "none";
             Admin = "block";
         }else{
