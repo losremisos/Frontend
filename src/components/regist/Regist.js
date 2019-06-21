@@ -47,11 +47,11 @@ export class Registry extends Component {
         segundoApellido: segundo_apellido,
         email: correo,
         password: contrasena,
-        password_confirmation: verifica_contrasena,
-        tipoDocumento: tipo_documento,
+        tipoDocumento: 1,
+        telefono: "234234432",
         documento: numero_documento,
-        tipoUsuario: '1' ,
-        district_id: '1'
+        tipoUsuario: 1 ,
+        district_id: 1
       }
     }, { withCredentials: true}
     )
