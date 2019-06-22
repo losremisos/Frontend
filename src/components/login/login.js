@@ -29,7 +29,7 @@ export class Login extends Component {
   submitLogIn(e) {
     let isValid = true;
     if (this.state.user === '') {
-      this.setState({ userError: 'Ingrese un usario' });
+      this.setState({ userError: 'Ingrese un usuario' });
       isValid = false;
     } else {
       this.setState({ userError: '' });
@@ -55,7 +55,7 @@ export class Login extends Component {
           if (res.status === 201) {
             token = res.data.jwt;
             ADD_SESION(token);
-            this.setState({redirect: true});            
+            this.setState({redirect: true});           
           } else {
             this.setState({ userError: "Usuario o Contraseña incorrectos" })
           }
