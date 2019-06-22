@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Users from '../../../assets/defaultUser.png';
 import axios from 'axios';
+import ReactDropzone from 'react-dropzone';
 
 
 class BasicInfo extends Component {
@@ -29,15 +30,45 @@ componentDidMount(){
     });
 }
 
-  render() {
+readFile(files) {
+  // logic validation for existence of file(s);
+  // we index at 0 here since the JSX could give us multiple files or single
+  // file; either way, we get an array and we only need the first element
+  // in the case of single file upload
 
+  if (files && files[0]) {
+    let data = new FormData();
+    data.append('avatar', files[0]);
+    this.sendImageToController(data)
+  }
+}
+
+sendImageToController(data) {
+
+  fetch(`${process.env.REACT_APP_API_ENDPOINT}app/controllers/users`, {
+    credentials: 'same-origin',
+    headers: {},
+    method: 'POST',
+    body: data
+  })
+
+  // might be a good idea to put error handling here
+
+  .then(response => response.json())
+  .then(imageFromController => {
+    // optionally, you can set the state of the component to contain the image
+    // object itself that was returned from the rails controller, completing
+    // the post cycle
+    this.setState({uploads: this.state.uploads.concat(imageFromController)})
+  })
+}
+
+  render() {
     const {users} = this.state;
         console.log("Lo que hay en user del state");
         console.log(users);
-
     return (
       <div>
-
             <div class="form-row">
 
               <div class=" mt-5  form-group col-md-3">                         
@@ -56,21 +87,30 @@ componentDidMount(){
                   </div>                
               </div>
               
-              <div class=" mt-5 form-group col-md-3">                         
+              {/* <div class=" mt-5 form-group col-md-3">                         
                 <label>Adjunte fotografia (*):</label>
                   <div type="button" class="btn div_file">
                     <p class="text">Agregar archivo</p>
                     <input type="file" class="btn_enviar_1" id="btn_enviar_03" accept=".jpg,.jpeg,.png" required></input>
                   </div>                
+              </div> */}
+
+              <div>
+                <ReactDropzone onDrop={this.handleFileDrop} style={{position: "relative", width: 200, height: 100, border:"1px dashed grey"}}>
+                  <center>Drop your profile photo here</center>
+                </ReactDropzone>
+              {this.state.avatar ?
+                <div>
+                  <h2>Uploading {this.state.avatar.length} files...</h2>
+                  <img width="100px" src={this.state.avatar.preview} alt="profile"/>
+                </div>
+                : null}              
               </div>
 
+            <div class="form-group col-md-3">
+              <img src={Users} className="img-fluid" alt="logo" />  
+            </div>           
 
-              <div class="form-group col-md-3">
-                <img src={Users} className="img-fluid" alt="logo" />  
-              </div>                         
-            </div>
-
-          
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="inputState">Tipo de identificación (*):</label>
@@ -114,8 +154,6 @@ componentDidMount(){
               <div class="form-group col-md-3">
                 <label for="validationCustom07">Fecha de nacimiento (*):</label>
                 <input type="text" class="form-control" id="validationCustom07"  required/>                
-
-
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom08">Pais de nacimiento (*):</label>
@@ -224,8 +262,8 @@ Una exención es un privilegio que lo exime para la prestación del servicio mil
                   <option>Los ciudadanos objetores de conciencia</option>
                 </select>
               </div>                         
-            </div>           
-          
+            </div>  
+        </div>        
       </div>
     );
   }
