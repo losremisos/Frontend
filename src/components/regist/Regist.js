@@ -47,7 +47,7 @@ export class Registry extends Component {
         segundoApellido: segundo_apellido,
         email: correo,
         password: contrasena,
-        tipoDocumento: 1,
+        tipoDocumento: 0,
         telefono: "234234432",
         documento: numero_documento,
         tipoUsuario: 1 ,
@@ -57,6 +57,7 @@ export class Registry extends Component {
     )
     .then(response => {
       console.log("registration res", response);
+      window.location.href = '/login';  
 
     }).catch(error => {
       console.log("registration error", error);
