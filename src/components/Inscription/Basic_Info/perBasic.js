@@ -77,7 +77,8 @@ componentDidMount(){
                 <select id="inputState" class="form-control" disabled value={users.tipoDocumento}>
                   <option disabled>Seleccione...</option>
                   <option value="1">Cedula de Ciudadania</option>
-                  <option value="2">Tarjeta de Identidad</option>
+                  <option value="0">Tarjeta de Identidad</option>
+                  <option value="2">NUIP</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
