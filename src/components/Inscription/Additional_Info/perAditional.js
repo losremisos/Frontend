@@ -6,126 +6,12 @@ class AdditionalInfo extends Component {
     return (
       <div>
           
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label><strong>Datos de la Residencia</strong> (Diligencie los siguientes campos para formar la dirección de la residencia) </label>                                
-              </div>              
-            </div>
-
-
-            <div class="form-row">
-              <div class="form-group col-md-3">
-              <label for="inputState06">Tipo de vía (*)</label>
-              <select id="inputState06" class="form-control" required>
-                  <option selected>Seleccione...</option>
-                  <option>Autopista</option>
-                  <option>Avenida</option>
-                  <option>Av. Calle</option>
-                  <option>Av. Carrera</option>
-                  <option>Barrio</option>
-                  <option>Calle</option>
-                  <option>Callejón</option>
-                  <option>Carrera</option>
-                  <option>Circular</option>
-                  <option>Diagonal</option>
-                  <option>Kilómetro</option>
-                  <option>Pasaje</option>
-                  <option>Paso</option>
-                  <option>Ramal</option>
-                  <option>SubRamal</option>
-                  <option>Tramo</option>
-                  <option>Transversal</option>
-                  <option>Vereda</option>
-                </select>
-
-              </div>
-              <div class="form-group col-md-3">
-                <label for="validationCustom16">Nombre o número de via (*):</label>
-                <input type="text" class="form-control" id="validationCustom16" required/>
-              </div>
-              <div class="form-group col-md-3">
-               <label for="inputState07">Complemento vía principal:</label>
-               <select id="inputState07" class="form-control">
-                    <option selected>Seleccione...</option>
-                    <option>Este</option>
-                    <option>Manzana</option>
-                    <option>Noreste</option>
-                    <option>Noroccidente</option>
-                    <option>Noroeste</option>
-                    <option>Norte</option>
-                    <option>Occidente</option>
-                    <option>Oeste</option>
-                    <option>Oriente</option>
-                    <option>Sur</option>
-                    <option>Sureste</option>
-                    <option>Suroccidente</option>
-                    <option>Suroeste</option>
-                    <option>Suroriente</option>                  
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="validationCustom17">Numero de vía secundaria: </label>
-                <input type="text" class="form-control" id="validationCustom17" />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-3">
-                <label for="inputState08">Complemento vía secundaria:</label>
-                <select id="inputState08" class="form-control">
-                        <option selected>Seleccione...</option>
-                        <option>Este</option>
-                        <option>Manzana</option>
-                        <option>Noreste</option>
-                        <option>Noroccidente</option>
-                        <option>Noroeste</option>
-                        <option>Norte</option>
-                        <option>Occidente</option>
-                        <option>Oeste</option>
-                        <option>Oriente</option>
-                        <option>Sur</option>
-                        <option>Sureste</option>
-                        <option>Suroccidente</option>
-                        <option>Suroeste</option>
-                        <option>Suroriente</option>                  
-                    </select>
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="validationCustom18">Número de casa:</label>
-                <input type="text" class="form-control" id="validationCustom18" />
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="inputState09">Complemento:</label>
-                <select id="inputState09" class="form-control">
-                        <option selected>Seleccione...</option>
-                        <option>Este</option>
-                        <option>Manzana</option>
-                        <option>Noreste</option>
-                        <option>Noroccidente</option>
-                        <option>Noroeste</option>
-                        <option>Norte</option>
-                        <option>Occidente</option>
-                        <option>Oeste</option>
-                        <option>Oriente</option>
-                        <option>Sur</option>
-                        <option>Sureste</option>
-                        <option>Suroccidente</option>
-                        <option>Suroeste</option>
-                        <option>Suroriente</option>                  
-                    </select>
-              </div>
+                     
               
-              <div class="form-group col-md-3">
-                <label for="validationCustom19">Barrio o Vereda (*):</label>
-                <input type="text" class="form-control" id="validationCustom19"  required/>
-              </div>
-            </div>
 
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="validationCustom20">Direccion de residencia:</label>
+                <label for="validationCustom20">Direccion de residencia (*):</label>
                 <input type="text" class="form-control" id="validationCustom20"  required/>
               </div>              
             </div>

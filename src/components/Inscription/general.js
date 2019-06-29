@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BasicInfo from './Basic_Info/perBasic';
+import HigherEducationInfo from './HigherEducation_Info/HigEducationInfo';
 import AcademicInfo from './Academic_Info/academico';
 import AdditionalInfo from './Additional_Info/perAditional';
 import FatherInfo from './Father_Info/infoPadre';
@@ -61,7 +62,7 @@ export class Inscription extends Component {
       
                               <form>
                                   <div class="card card-body">
-                                      <a className="btn text-left btn-style btn-block" data-toggle="collapse" href="#collapse_11" role="button" aria-expanded="false" aria-controls="collapse_11">Información Basíca</a>
+                                      <a className="btn text-left btn-style btn-block" data-toggle="collapse" href="#collapse_11" role="button" aria-expanded="false" aria-controls="collapse_11">Información Básica</a>
                                       <div class="collapse" id="collapse_11">
                                           <div class="card card-body">                                  
                                               <BasicInfo/>
@@ -113,7 +114,7 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_22" role="button" aria-expanded="false" aria-controls="collapse_22">Educación Superior</a>
                                       <div class="collapse" id="collapse_22">
                                           <div class="card card-body">                                  
-                                              <BasicInfo/>
+                                              <HigherEducationInfo/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
