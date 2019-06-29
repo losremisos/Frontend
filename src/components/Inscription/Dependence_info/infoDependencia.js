@@ -22,9 +22,9 @@ class DependenceInfo extends Component {
                                     <label for="DependenciaEconómica">Dependencia Económica (<span class="field-required">*</span>):</label>
                                     <select name="DependenciaEconómica" title="Dependencia Económica" class="form-control" tabIndex="1">
                                       <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Depende del Grupo familiar (Padre y/o Madre)</option>
-                                      <option value="100000000">Depende de un Tercero</option>
-                                      <option value="100000002">Independiente Económicamente</option>
+                                      <option value="1">Depende del Grupo familiar (Padre y/o Madre)</option>
+                                      <option value="2">Depende de un Tercero</option>
+                                      <option value="3">Independiente Económicamente</option>
                                     </select>
                                     <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
                               </div>

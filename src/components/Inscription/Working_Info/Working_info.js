@@ -60,8 +60,8 @@ class Working_Info extends Component {
                                     <label for="PTipoTrabajador">Tipo de trabajador (<span class="field-required">*</span>):</label>
                                     <select name="PTipoTrabajador" title="Tipo de trabajador Padre" class="form-control" tabIndex="1"required>
                                       <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Empleado</option>
-                                      <option value="100000002">Independiente</option>
+                                      <option value="1">Empleado</option>
+                                      <option value="2">Independiente</option>
                                     </select>
                                     <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
                               </div>
@@ -74,141 +74,12 @@ class Working_Info extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row" >
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PTipoVia">Tipo de vía (<span class="field-required">*</span>):</label>
-                                    <select name="PTipoVia" title="Tipo de Via Residencia Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Autopista</option>
-                                      <option value="100000002">Avenida</option>
-                                      <option value="100000003">Av. Calle</option>
-                                      <option value="100000004">Av.Carrera</option>
-                                      <option value="100000005">Barrio</option>
-                                      <option value="100000006">Calle</option>
-                                      <option value="100000007">Callejón</option>
-                                      <option value="100000008">Carrera</option>
-                                      <option value="100000009">Circular</option>
-                                      <option value="100000010">Diagonal</option>
-                                      <option value="100000011">Kilómetro</option>
-                                      <option value="100000012">Pasaje</option>
-                                      <option value="100000013">Paso</option>
-                                      <option value="100000014">Ramal</option>
-                                      <option value="100000015">Subramal</option>
-                                      <option value="100000016">Tramo</option>
-                                      <option value="100000017">Transversal</option>
-                                      <option value="100000018">Vereda</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                <label for="PNombreVia1">Nombre o número de vía (<span class="field-required">*</span>):</label>
-                                <input name="PNombreVia1" type="text" maxlength="50" id="PNombreVia1" title="Nombre o número de vía1 Padre" class="form-control" tabIndex="2" />  
-                                <span id="ctl00_MainContent_reqDocumentNumber" class="field-validation-error" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PComplementoVia1">Complemento vía principal:</label>
-                                    <select name="PComplementoVia1" title="Complemento vía principal Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Este</option>
-                                      <option value="100000002">Manzana</option>
-                                      <option value="100000003">Noreste</option>
-                                      <option value="100000004">Noroccidente</option>
-                                      <option value="100000005">Noroeste</option>
-                                      <option value="100000006">Norte</option>
-                                      <option value="100000007">Occidente</option>
-                                      <option value="100000008">Oeste</option>
-                                      <option value="100000009">Oriente</option>
-                                      <option value="100000010">Sur</option>
-                                      <option value="100000011">Sureste</option>
-                                      <option value="100000012">Suroccidente</option>
-                                      <option value="100000013">Suroeste</option>
-                                      <option value="100000014">Suroriente</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                <label for="PNombreVia2">Número de vía (<span class="field-required">*</span>):</label>
-                                <input name="PNombreVia2" type="text" maxlength="50" id="PNombreVia2" title="Nombre o número de vía2 Padre" class="form-control" tabIndex="2" />  
-                                <span id="ctl00_MainContent_reqDocumentNumber" class="field-validation-error" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                  </div>
-                  
-                  <div className="row">
-                  <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PComplementoVia2">Complemento vía secundaria:</label>
-                                    <select name="PComplementoVia2" title="Complemento vía secundaria Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Este</option>
-                                      <option value="100000002">Manzana</option>
-                                      <option value="100000003">Noreste</option>
-                                      <option value="100000004">Noroccidente</option>
-                                      <option value="100000005">Noroeste</option>
-                                      <option value="100000006">Norte</option>
-                                      <option value="100000007">Occidente</option>
-                                      <option value="100000008">Oeste</option>
-                                      <option value="100000009">Oriente</option>
-                                      <option value="100000010">Sur</option>
-                                      <option value="100000011">Sureste</option>
-                                      <option value="100000012">Suroccidente</option>
-                                      <option value="100000013">Suroeste</option>
-                                      <option value="100000014">Suroriente</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                    <div class="col-md-3">
-                            <div class="control-group">
-                             <label for="PNumeroCasa" >Número de casa:</label>
-                             <input name="PNumeroCasa" type="text" maxlength="50" id="secTxtName" title="Numero de casa Padre" class="form-control" />
-                             <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
-                    </div>
-                    <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PComplemento">Complemento:</label>
-                                    <select name="PComplemento" title="Complemento Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Este</option>
-                                      <option value="100000002">Manzana</option>
-                                      <option value="100000003">Noreste</option>
-                                      <option value="100000004">Noroccidente</option>
-                                      <option value="100000005">Noroeste</option>
-                                      <option value="100000006">Norte</option>
-                                      <option value="100000007">Occidente</option>
-                                      <option value="100000008">Oeste</option>
-                                      <option value="100000009">Oriente</option>
-                                      <option value="100000010">Sur</option>
-                                      <option value="100000011">Sureste</option>
-                                      <option value="100000012">Suroccidente</option>
-                                      <option value="100000013">Suroeste</option>
-                                      <option value="100000014">Suroriente</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div> 
-                    <div class="col-md-3">
-                            <div class="control-group">
-                              <label for="PBarrio">Barrio o Vereda (<span class="field-required">*</span>):</label>
-                              <input name="PBarrio" type="text" maxlength="50" id="PBarrio" title="Barrio o vereda Padre" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
-                    </div>
-                  </div>
+                                  
                   <div className="row">
                     <div class="col-md-12">
                             <div class="control-group">
                               <label for="PDirecciónR">Dirección de Empresa:</label>
-                              <input name="PDirecciónR" readonly="readonly" type="text" maxlength="50" id="txtPDateN" title="Dirección de Residencia Padre" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                              <input type="text" class="form-control" id="validationCustom20"  required/>
                             </div>
                     </div> 
                   </div>

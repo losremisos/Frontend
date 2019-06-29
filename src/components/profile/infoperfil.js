@@ -47,9 +47,9 @@ class InfoPerfil extends Component{
         let window = "";
         console.log(edit);
         var {Tipe_Doc} = "";
-        if(users.tipoDocumento==="1"){
+        if(users.tipoDocumento=== 1){
             Tipe_Doc = "CC: ";
-        }else if(users.tipoDocumento==="0"){
+        }else if(users.tipoDocumento=== 0){
             Tipe_Doc = "TI: ";
         }else{
             Tipe_Doc = "NUIP: ";

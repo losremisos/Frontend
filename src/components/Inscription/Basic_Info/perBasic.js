@@ -107,14 +107,15 @@ componentDidMount(){
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom06">Segundo apellido:</label>
-                <input type="text" class="form-control" id="validationCustom06" />
+                <input type="text" class="form-control" id="validationCustom06" 
+                placeholder={users.segundoApellido} disabled/>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="validationCustom07">Fecha de nacimiento (*):</label>
-                <input type="text" class="form-control" id="validationCustom07"  required/>                
+                <input type="date" class="form-control" id="validationCustom07"  required/>                
 
 
               </div>
@@ -124,18 +125,18 @@ componentDidMount(){
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom09">Departamento de nacimiento (*):</label>
-                <input type="text" class="form-control" id="validationCustom09"  required/>
+                <input type="text" class="form-control" id="validationCustom09"  required placeholder={users.departamento} disabled/>
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom10">Municipio de nacimiento (*):</label>
-                <input type="text" class="form-control" id="validationCustom10"  required/>
+                <input type="text" class="form-control" id="validationCustom10"  required placeholder={users.ciudad} disabled/>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="validationCustom11">Fecha de expedicion del documento de identidad (*):</label>
-                <input type="text" class="form-control" id="validationCustom11"  required/>
+                <input type="date" class="form-control" id="validationCustom11"  required/>
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom12">Pais del expedición del documento de identidad (*):</label>
@@ -156,34 +157,34 @@ componentDidMount(){
                 <label for="inputState01">Genero (*):</label>
                 <select id="inputState01" class="form-control" required>
                   <option disabled selected>Seleccione...</option>
-                  <option>Masculino</option>
-                  <option>Femenino</option>
-                  <option>Transgenero</option>
+                  <option value="1">Masculino</option>
+                  <option value="2">Femenino</option>
+                  <option value="3">Transgénero</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
                 <label for="inputState02">Nacionalidad (*):</label>
                 <select id="inputState02" class="form-control" required>
                   <option disabled selected>Seleccione...</option>
-                  <option>Colombiano</option>
-                  <option>Doble Nacionalidad</option>
-                  <option>Extranjero</option>
+                  <option value="1">Colombiano</option>
+                  <option value="2">Doble Nacionalidad</option>
+                  <option value="3">Extranjero</option>
                 </select>
               </div> 
               <div class="form-group col-md-3">
                 <label for="validationCustom04">Ciudadano con doble nacionalidad (*):</label>
                 <select id="inputState03" class="form-control" required>
                   <option disabled selected>Seleccione...</option>
-                  <option>No</option>
-                  <option>Si</option>
+                  <option value="1">No</option>
+                  <option value="2">Si</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
                 <label for="validationCustom04">Ciudadano Colombiano retornado del exterior (*):</label>
                 <select id="inputState04" class="form-control" required>
                   <option disabled selected>Seleccione...</option>
-                  <option>No</option>
-                  <option>Si</option>
+                  <option value="1">No</option>
+                  <option value="2">Si</option>
                 </select>
               </div>
             </div>
@@ -191,7 +192,7 @@ componentDidMount(){
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="validationCustom15">Correo electronico (*):</label>
-                <input type="email" class="form-control" id="validationCustom15" disabled placeholder={users.correo}/>
+                <input type="email" class="form-control" id="validationCustom15" disabled placeholder={users.email}/>
               </div>                         
             </div>
 
@@ -204,25 +205,25 @@ Una exención es un privilegio que lo exime para la prestación del servicio mil
                 </p>
                 <select id="inputState05" class="form-control">
                   <option selected>Seleccione...</option>
-                  <option>Ninguna</option>
-                  <option>Beneficiario de la ley 1448 Junio 10 del 2011 (Ley de victimas)</option>
-                  <option>condenados a penas que tengan como asesorias la pérdida de los derechos políticos mientras no obtenga su rehabilitacion</option>
-                  <option>El hijo único, hombre o mujer</option>
-                  <option>Los hijos de oficiales, suboficiales, soldados e infantes de marina profesionales, agentes, nivel ejecutivo y de la Fuerza Publica que hallan fallecido o que los organismos y autoridades medico-militar o de la policia hayan declarado su invalidez en combate o en actos del servicio....</option>
-                  <option>Hermano o hijo de quien haya muerto o adquirido una inhabilidad absoluta y permanente en combate, en actos del servicio o como consecuencia del mismo durante la presentacion del servicio militar obligatorio, a menos, que siendo apto, voluntariamente quiera prestarlo</option>
-                  <option>Hijo de padres incapacitados para trabajar o mayores de 60 años, cuando estos carezcan de renta, pension o medios de subsistencia, siempre que dicho hijo vele por ellos</option>
-                  <option>Huérfano de padre o madre que atienda con su trabajo a la subsistencia de sus hermanos incapaces de ganarse el sustento</option>
-                  <option>Los casados que hagan vida conyugal</option>
-                  <option>Es clerigo o Religioso</option>
-                  <option>Los indigenas que acrediten su identidad cultural, social y ecónomica</option>
-                  <option>Es desmovilizado</option>
-                  <option>Ciudadano es aspirante a ingresar a las escuelas de formacion de Oficiales, Suboficiales y Agentes</option>
-                  <option>Ciudadano con hermanos prestando servicio militar</option>
-                  <option>Quienes acrediten la existencia de union marital de hecho legalmente declarada</option>
-                  <option>Las personas en situacion de discapacidadfísic, psiquica, o sensorial permanente</option>
-                  <option>Los varones colombianos que después de si inscripcion hayan dejado de tener el componente de sexo masculino en su registro civil</option>
-                  <option>Los ciudadanos incluidos en el programa de proteccion a victimas y testigos de Fiscalia General de la Nación</option>
-                  <option>Los ciudadanos objetores de conciencia</option>
+                  <option value="0">Ninguna</option>
+                  <option value="1">Beneficiario de la ley 1448 Junio 10 del 2011 (Ley de victimas)</option>
+                  <option value="2">Condenados a penas que tengan como asesorias la pérdida de los derechos políticos mientras no obtenga su rehabilitacion</option>
+                  <option value="3">El hijo único, hombre o mujer</option>
+                  <option value="4">Los hijos de oficiales, suboficiales, soldados e infantes de marina profesionales, agentes, nivel ejecutivo y de la Fuerza Publica que hallan fallecido o que los organismos y autoridades medico-militar o de la policia hayan declarado su invalidez en combate o en actos del servicio....</option>
+                  <option value="5">Hermano o hijo de quien haya muerto o adquirido una inhabilidad absoluta y permanente en combate, en actos del servicio o como consecuencia del mismo durante la presentacion del servicio militar obligatorio, a menos, que siendo apto, voluntariamente quiera prestarlo</option>
+                  <option value="6">Hijo de padres incapacitados para trabajar o mayores de 60 años, cuando estos carezcan de renta, pension o medios de subsistencia, siempre que dicho hijo vele por ellos</option>
+                  <option value="7">Huérfano de padre o madre que atienda con su trabajo a la subsistencia de sus hermanos incapaces de ganarse el sustento</option>
+                  <option value="8">Los casados que hagan vida conyugal</option>
+                  <option value="9">Es clerigo o Religioso</option>
+                  <option value="10">Los indigenas que acrediten su identidad cultural, social y ecónomica</option>
+                  <option value="11">Es desmovilizado</option>
+                  <option value="12">Ciudadano es aspirante a ingresar a las escuelas de formacion de Oficiales, Suboficiales y Agentes</option>
+                  <option value="13">Ciudadano con hermanos prestando servicio militar</option>
+                  <option value="14">Quienes acrediten la existencia de union marital de hecho legalmente declarada</option>
+                  <option value="15">Las personas en situacion de discapacidadfísic, psiquica, o sensorial permanente</option>
+                  <option value="16">Los varones colombianos que después de si inscripcion hayan dejado de tener el componente de sexo masculino en su registro civil</option>
+                  <option value="17">Los ciudadanos incluidos en el programa de proteccion a victimas y testigos de Fiscalia General de la Nación</option>
+                  <option value="18">Los ciudadanos objetores de conciencia</option>
                 </select>
               </div>                         
             </div>           

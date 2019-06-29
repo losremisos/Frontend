@@ -2,29 +2,45 @@ import React, { Component } from 'react';
 
 
 class HigherEducationInfo extends Component {
+  state = {
+    display: 'none',
+    checked: false
+}
+handleCheckboxChange = event => {
+    if (this.state.display === 'none') {
+        this.setState({ display: 'block' });
+    } else {
+        this.setState({ display: 'none' });
+    }
+    this.setState({ checked: event.target.checked })
+}
   render() {
     return (
       <div>
           
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label>Para incluir uno o varios estudios de educación superior, usted debe ingresar la informacion solicitada en los campos que aparecen a continuación; luego de esto, oprima el botón Agregar Información y la información será agregada a la lista de estudios de educación superior. </label>                                
-              </div>              
-            </div>
+          <div className="row">
+                        <div className="row">
+                            <div class="col-md-2">
+                                <label><input type="checkbox" id="TrabajaActual"
+                                    checked={this.state.checked}
+                                    onChange={this.handleCheckboxChange} />¿Cursa o ha cursado algún estudio de educación superior?</label>
+                            </div>
+                        </div>
 
-
+                    </div>
+<div style={{display:this.state.display}}>
             <div class="form-row">
               <div class="form-group col-md-3">
               <label for="inputState55">Modalidad académica  (*)</label>
               <select id="inputState55" class="form-control" required>
                   <option selected disabled>Seleccione...</option>
-                  <option>Técnica</option>
-                  <option>Tecnólogica</option>
-                  <option>Profesional Universitario</option>
-                  <option>Especialización</option>
-                  <option>Magister</option>
-                  <option>Doctorado</option>
-                  <option>Otros Estudios</option>                  
+                  <option value = "1">Técnica</option>
+                  <option value = "2">Tecnólogica</option>
+                  <option value = "3">Profesional Universitario</option>
+                  <option value = "4">Especialización</option>
+                  <option value = "5">Magister</option>
+                  <option value = "6">Doctorado</option>
+                  <option value = "7">Otros Estudios</option>                  
                 </select>
 
               </div>
@@ -38,16 +54,16 @@ class HigherEducationInfo extends Component {
                             <label for="inputState56">Semestre (*)</label>
                             <select id="inputState56" class="form-control" required>
                                 <option selected disabled>Seleccione...</option>
-                                <option>I</option>
-                                <option>II</option>
-                                <option>III</option>
-                                <option>IV</option>
-                                <option>V</option>
-                                <option>VI</option>
-                                <option>VII</option>
-                                <option>VIII</option> 
-                                <option>IX</option> 
-                                <option>X</option>                   
+                                <option value = "1">I</option>
+                                <option value = "2">II</option>
+                                <option value = "3">III</option>
+                                <option value = "4">IV</option>
+                                <option value = "5">V</option>
+                                <option value = "6">VI</option>
+                                <option value = "7">VII</option>
+                                <option value = "8">VIII</option> 
+                                <option value = "9">IX</option> 
+                                <option value = "10">X</option>                   
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -79,29 +95,8 @@ class HigherEducationInfo extends Component {
                   </div>
               </div>
             </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-12">                
-                <input type="text" class="form-control" id="validationCustom20"  required placeholder="Lista de titulos obtenidos"/>
-              </div>              
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-7">
-
-                </div>
-                <div class="form-group col-md-5">
-                    <div class="form-row"> 
-                        <div class="form-group col-md-3">
-                            <button type="submit" className="btn btn-style-submit2 ">Cancelar</button>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <button type="submit" className="btn btn-style-submit2 ">Guardar Informacion</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+</div>
+            
             
 
 
