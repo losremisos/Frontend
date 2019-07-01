@@ -56,7 +56,7 @@ export class Registry extends Component {
         email: correo,
         password: contrasena,
         tipoDocumento: tipo_documento,
-        telefono: "234234432",
+        estadoProceso: 1,
         documento: numero_documento,
         tipoUsuario: 0 ,
         district_id: 1
