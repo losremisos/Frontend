@@ -47,12 +47,20 @@ class InfoPerfil extends Component{
         let window = "";
         console.log(edit);
         var {Tipe_Doc} = "";
+        var {State} = "";
         if(users.tipoDocumento=== 1){
             Tipe_Doc = "CC: ";
         }else if(users.tipoDocumento=== 0){
             Tipe_Doc = "TI: ";
         }else{
             Tipe_Doc = "NUIP: ";
+        }
+        if(users.estadoProceso === 1){
+            State = "Proceso";
+        }else if(users.estadoProceso=== 0){
+            State = "Revision";
+        }else{
+            State = "Citación";
         }
         console.log("Lo que hay en user del state");
         console.log(users);
@@ -66,6 +74,7 @@ class InfoPerfil extends Component{
                 </div>
                 <ul className="list-group list-group-flush">
                     <div className="list-group-item"><p>Correo Electronico</p><h6>{users.email}</h6></div>
+                    <div className="list-group-item"><p>Estado</p><h6>{State}</h6></div>
                     <div className="list-group-item"><p>Documento de Identificación</p><h6>{Tipe_Doc}{users.documento}</h6></div>
                     <div className="list-group-item"><p>Dirección</p><h6>{users.direccion}</h6></div>
                     <div className="list-group-item"><p>Lugar de Residencia</p><h6>{users.ciudad}, {users.departamento}</h6></div>
