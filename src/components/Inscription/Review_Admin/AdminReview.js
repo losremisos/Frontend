@@ -23,7 +23,7 @@ class Working_Info extends Component {
             </div>
             <div style={{display:this.state.display}}>
             <label for="AdminReview">Comentarios</label>
-                <textarea name="AdminReview" type="text" class="form-control" />
+                <textarea name="AdminReview" type="text" className="form-control" />
             </div>  
         </div>
         );

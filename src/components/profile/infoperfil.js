@@ -76,8 +76,9 @@ class InfoPerfil extends Component{
                     <div className="list-group-item"><p>Correo Electronico</p><h6>{users.email}</h6></div>
                     <div className="list-group-item"><p>Estado</p><h6>{State}</h6></div>
                     <div className="list-group-item"><p>Documento de Identificación</p><h6>{Tipe_Doc}{users.documento}</h6></div>
+                    <div className="list-group-item"><p>Departamento de Residencia</p><h6>{users.departamento}</h6></div>
+                    <div className="list-group-item"><p>Ciudad de Residencia</p><h6>{users.ciudad}</h6></div>
                     <div className="list-group-item"><p>Dirección</p><h6>{users.direccion}</h6></div>
-                    <div className="list-group-item"><p>Lugar de Residencia</p><h6>{users.ciudad}, {users.departamento}</h6></div>
                     <div className="list-group-item"><p>Teléfono</p><h6>{users.telefono}</h6></div>
                 </ul>
                 <div className="card-body">
@@ -93,11 +94,12 @@ class InfoPerfil extends Component{
                         <h5 className="card-title">{users.nombre} {users.primerApellido} {users.segundoApellido}</h5>
                     </div>
                     <div className="list-group list-group-flush">
-                        <div className="list-group-item"><p>Correo Electronico</p><input class="inputedit" type="text" value={users.email}/></div>
+                        <div className="list-group-item"><p>Correo Electronico</p><input className="inputedit" type="text" value={users.email}/></div>
                         <div className="list-group-item"><p>Documento de Identificación</p><h6>{Tipe_Doc}{users.documento}</h6></div>
-                        <div className="list-group-item"><p>Dirección</p><input class="inputedit" type="text" value={users.direccion}/></div>
-                        <div className="list-group-item"><p>Lugar de Residencia</p><input class="inputedit" type="text" value={users.ciudad}/></div>
-                        <div className="list-group-item"><p>Teléfono</p><input class="inputedit" type="text" value={users.telefono}/></div>
+                        <div className="list-group-item"><p>Departamento de Residencia</p><input className="inputedit" type="text" value={users.departamento}/></div>
+                        <div className="list-group-item"><p>Ciudad de Residencia</p><input className="inputedit" type="text" value={users.ciudad}/></div>
+                        <div className="list-group-item"><p>Dirección</p><input className="inputedit" type="text" value={users.direccion}/></div>
+                        <div className="list-group-item"><p>Teléfono</p><input className="inputedit" type="text" value={users.telefono}/></div>
                     </div>
                     <div className="card-body">
                         <p onClick={this.editProfile}><font color="blue">Guardar</font></p>

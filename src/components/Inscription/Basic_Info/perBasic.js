@@ -169,7 +169,7 @@ class BasicInfo extends Component {
         <div className="form-row">
           <div className="form-group col-md-3">
             <label for="inputState01">Genero (*):</label>
-            <select id="4" className="form-control" id="9" name="Genero" placeholder="Genero"
+            <select className="form-control" id="9" name="Genero" placeholder="Genero"
               onChange={this.handleChange}>
               <option disabled selected>Seleccione...</option>
               <option value="1">Masculino</option>
