@@ -8,9 +8,18 @@ class BasicInfo extends Component {
   constructor(props){
     super(props);
     this.state = {
-        users: []
+        users: [],
+        items:[]
     }
+    this.handleChange=this.handleChange.bind(this);
   }
+  handleChange(event){
+    let items = [...this.state.items];
+    let item = {...items[ parseInt(event.target.id,10)]};
+    item.value = event.target.value;
+    items[parseInt(event.target.id,10)] = item;
+    this.setState({items});
+ }
 
 componentDidMount(){
     let id = localStorage.getItem("UsrID");
@@ -30,7 +39,10 @@ componentDidMount(){
 }
 
   render() {
-
+    if(this.props.submit==="1"){
+      this.props.information[0] = this.state.items;
+      this.props.getDatos(this.props.information);
+    }
     const {users} = this.state;
         console.log("Lo que hay en user del state");
         console.log(users);
@@ -38,150 +50,156 @@ componentDidMount(){
     return (
       <div>
 
-            <div class="form-row">
+            <div className="form-row">
 
-              <div class=" mt-5  form-group col-md-3">                         
+              <div className=" mt-5  form-group col-md-3">                         
                 <label>Adjunte Registro civil de nacimiento (*):</label>
-                  <div type="button" class="btn div_file">
-                    <p class="text">Agregar archivo</p>
-                    <input type="file" class="btn_enviar_1" id="btn_enviar_01" accept=".pdf" required></input>
-                  </div>                
+                  <div type="button" className="btn div_file">
+                    <p className="text">Agregar archivo</p>
+                    <input type="file" className="btn_enviar_1" id="0" name="registrocivil" placeholder="Registro Civil" accept=".pdf"></input>
+                    </div>                
               </div>
 
-              <div class=" mt-5 form-group col-md-3">                         
+              <div className=" mt-5 form-group col-md-3">                         
                 <label>Adjunte documento de identidad (*):</label>
-                  <div type="button" class="btn div_file">
-                    <p class="text">Agregar archivo</p>
-                    <input type="file" class="btn_enviar_1" id="btn_enviar_02" accept=".pdf" required></input>
+                  <div type="button" className="btn div_file">
+                    <p className="text">Agregar archivo</p>
+                    <input type="file" className="btn_enviar_1" id="1" name="documentoidentidad" placeholder="Documento de Identidad" accept=".pdf"></input>
                   </div>                
               </div>
               
-              <div class=" mt-5 form-group col-md-3">                         
+              <div className=" mt-5 form-group col-md-3">                         
                 <label>Adjunte fotografia (*):</label>
-                  <div type="button" class="btn div_file">
-                    <p class="text">Agregar archivo</p>
-                    <input type="file" class="btn_enviar_1" id="btn_enviar_03" accept=".jpg,.jpeg,.png" required></input>
+                  <div type="button" className="btn div_file">
+                    <p className="text">Agregar archivo</p>
+                    <input type="file" className="btn_enviar_1" id="btn_enviar_03" accept=".jpg,.jpeg,.png"></input>
                   </div>                
               </div>
 
 
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <img src={Users} className="img-fluid" alt="logo" />  
               </div>                         
             </div>
 
           
-            <div class="form-row">
-              <div class="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-3">
                 <label for="inputState">Tipo de identificación (*):</label>
-                <select id="inputState" class="form-control" disabled value={users.tipoDocumento}>
+                <select id="inputState" className="form-control" disabled value={users.tipoDocumento}>
                   <option disabled>Seleccione...</option>
                   <option value="1">Cedula de Ciudadania</option>
                   <option value="0">Tarjeta de Identidad</option>
                   <option value="2">NUIP</option>
                 </select>
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom01">Numero de identificación (*):</label>
-                <input type="number" class="form-control" id="validationCustom01" disabled placeholder={users.documento} required/>
+                <input type="number" className="form-control" id="validationCustom01" disabled placeholder={users.documento}/>
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom02">Numero de tarjeta de Identidad:</label>
-                <input type="number" class="form-control" id="validationCustom02" />
+                <input type="number" className="form-control" id="2" name="numberTI" placeholder="Tarjeta Identidad" 
+                onChange={this.handleChange} />
               </div>
             </div>
 
 
-            <div class="form-row">
-              <div class="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-3">
                 <label for="validationCustom03">Primer nombre (*):</label>
-                <input type="text" class="form-control" id="validationCustom03" placeholder={users.nombre}    disabled/>
+                <input type="text" className="form-control" id="validationCustom03" placeholder={users.nombre}    disabled/>
               </div>
-              <div class="form-group col-md-3">
-                <label for="validationCustom04">Segundo nombre (*):</label>
-                <input type="text" class="form-control" id="validationCustom04" required/>
-              </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom05">Primer apellido (*):</label>
-                <input type="text" class="form-control" id="validationCustom05"  placeholder={users.primerApellido} disabled/>
+                <input type="text" className="form-control" id="validationCustom05"  placeholder={users.primerApellido} disabled/>
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom06">Segundo apellido:</label>
-                <input type="text" class="form-control" id="validationCustom06" 
+                <input type="text" className="form-control" id="validationCustom06" 
                 placeholder={users.segundoApellido} disabled/>
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-3">
                 <label for="validationCustom07">Fecha de nacimiento (*):</label>
-                <input type="date" class="form-control" id="validationCustom07"  required/>                
-
+                <input type="date" className="form-control" id="3" name="fechanacimiento" placeholder="Fecha de Nacimiento" 
+                onChange={this.handleChange} />
 
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom08">Pais de nacimiento (*):</label>
-                <input type="text" class="form-control" id="validationCustom08"  required/>
+                <input type="text" className="form-control" id="4" name="paisnacimiento" placeholder="Pais de Nacimiento" 
+                onChange={this.handleChange} />
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom09">Departamento de nacimiento (*):</label>
-                <input type="text" class="form-control" id="validationCustom09"  required placeholder={users.departamento} disabled/>
+                <input type="text" className="form-control" id="validationCustom09" placeholder={users.departamento} disabled/>
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom10">Municipio de nacimiento (*):</label>
-                <input type="text" class="form-control" id="validationCustom10"  required placeholder={users.ciudad} disabled/>
+                <input type="text" className="form-control" id="validationCustom10" placeholder={users.ciudad} disabled/>
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-3">
                 <label for="validationCustom11">Fecha de expedicion del documento de identidad (*):</label>
-                <input type="date" class="form-control" id="validationCustom11"  required/>
+                <input type="date" className="form-control" id="5" name="fechexdoc" placeholder="Fecha de Expedicion del Documento" 
+                onChange={this.handleChange} />
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom12">Pais del expedición del documento de identidad (*):</label>
-                <input type="text" class="form-control" id="validationCustom12"  required/>
+                <input type="text" className="form-control" id="6" name="paisexdoc" placeholder="Pais de Expedicion del Documento" 
+                onChange={this.handleChange} />
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom13">Departamento de expedición del documento de identidad (*):</label>
-                <input type="text" class="form-control" id="validationCustom13"  required/>
+                <input type="text" className="form-control" id="7" name="depexdoc" placeholder="Departamento de Expedicion del Documento" 
+                onChange={this.handleChange} />
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom14">Municipio de expedición del documento de identidad (*):</label>
-                <input type="text" class="form-control" id="validationCustom14"  required/>
+                <input type="text" className="form-control" id="8" name="munexdoc" placeholder="Municipio de Expedicion del Documento" 
+                onChange={this.handleChange} />
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-3">
                 <label for="inputState01">Genero (*):</label>
-                <select id="inputState01" class="form-control" required>
+                <select id="4" className="form-control" id="9" name="Genero" placeholder="Genero" 
+                onChange={this.handleChange}>
                   <option disabled selected>Seleccione...</option>
                   <option value="1">Masculino</option>
                   <option value="2">Femenino</option>
                   <option value="3">Transgénero</option>
                 </select>
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="inputState02">Nacionalidad (*):</label>
-                <select id="inputState02" class="form-control" required>
+                <select className="form-control" id="10" name="Nacionalidad" placeholder="Nacionalidad" 
+                onChange={this.handleChange}>
                   <option disabled selected>Seleccione...</option>
                   <option value="1">Colombiano</option>
                   <option value="2">Doble Nacionalidad</option>
                   <option value="3">Extranjero</option>
                 </select>
               </div> 
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom04">Ciudadano con doble nacionalidad (*):</label>
-                <select id="inputState03" class="form-control" required>
+                <select className="form-control" id="11" name="2Nacionalidad" placeholder="Doble Nacionalidad" 
+                onChange={this.handleChange}>
                   <option disabled selected>Seleccione...</option>
                   <option value="1">No</option>
                   <option value="2">Si</option>
                 </select>
               </div>
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                 <label for="validationCustom04">Ciudadano Colombiano retornado del exterior (*):</label>
-                <select id="inputState04" class="form-control" required>
+                <select className="form-control" id="12" name="retornadoExterior" placeholder="Retornado del Exterior" 
+                onChange={this.handleChange}>
                   <option disabled selected>Seleccione...</option>
                   <option value="1">No</option>
                   <option value="2">Si</option>
@@ -189,21 +207,22 @@ componentDidMount(){
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
+            <div className="form-row">
+              <div className="form-group col-md-6">
                 <label for="validationCustom15">Correo electronico (*):</label>
-                <input type="email" class="form-control" id="validationCustom15" disabled placeholder={users.email}/>
+                <input type="email" className="form-control" id="validationCustom15" disabled placeholder={users.email}/>
               </div>                         
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-12">
+            <div className="form-row">
+              <div className="form-group col-md-12">
                 <label for="inputState05"><strong>Exenciones de ley y causales de aplazamiento (*):</strong></label>
                 <p>
                 (En este listado además de las exenciones que aparecen en la Ley 48, aparecen unas causales de aplazamiento, como ser hermano de quien esté prestando servicio militar) Privilegio que lo exime para la prestación del servicio militar, previa verificación por las autoridades competentes.
 Una exención es un privilegio que lo exime para la prestación del servicio militar, además debe revisar el siguiente listado si cumple con alguno de los casos de aplazamiento de su proceso de definición de la situación militar, previa verificación por las autoridades competentes.
                 </p>
-                <select id="inputState05" class="form-control">
+                <select className="form-control" id="13" name="exenciones" placeholder="Exenciones de ley y causales de aplazamiento" 
+                onChange={this.handleChange}>
                   <option selected>Seleccione...</option>
                   <option value="0">Ninguna</option>
                   <option value="1">Beneficiario de la ley 1448 Junio 10 del 2011 (Ley de victimas)</option>
