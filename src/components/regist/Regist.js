@@ -33,7 +33,7 @@ export class Registry extends Component {
       [event.target.name]:event.target.value
     })
     console.log(this.tipo_documento);
-    console.log(this.primer_nombre);
+    console.log(this.state.primer_nombre);
   }
   handleSubmit(event){
     const{

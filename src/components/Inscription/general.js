@@ -27,16 +27,28 @@ export class Inscription extends Component {
         super(props)
         
         this.state = {
-          percentage: 0
+          percentage: 0,
+          information :[],
+          submit: "0"
         }
         this.nextStep = this.nextStep.bind(this)
+        this.getData = this.getData.bind(this)
       }
       
       nextStep() {
+        this.setState({ submit: "1" })
         if(this.state.percentage === 100) return 
         this.setState({ percentage: this.state.percentage + 25 })
       }
+      
+      getData(value){
+        this.setState({ 
+            submit : "0",
+            information: value })
+        
+    }
   render() {
+        console.log(this.state.information)
         var Admin;
         var User;
         let admin = localStorage.getItem("admin");
@@ -65,21 +77,21 @@ export class Inscription extends Component {
                                       <a className="btn text-left btn-style btn-block" data-toggle="collapse" href="#collapse_11" role="button" aria-expanded="false" aria-controls="collapse_11">Información Básica</a>
                                       <div class="collapse" id="collapse_11">
                                           <div class="card card-body">                                  
-                                              <BasicInfo/>
+                                            <BasicInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit}/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <AdminReview/>
+                                            <AdminReview/>
                                       </div> 
       
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_12" role="button" aria-expanded="false" aria-controls="collapse_12">Información Adicional</a>
                                       <div class="collapse" id="collapse_12">
                                           <div class="card card-body">                                  
-                                              <AdditionalInfo/>
+                                            <AdditionalInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit}/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <AdminReview/>
+                                            <AdminReview/>
                                       </div>                  
                                       
                                       <button type="submit" onClick={this.nextStep}  className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
