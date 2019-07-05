@@ -8,32 +8,32 @@ class DependenceInfo extends Component {
         
         
         <div className="App-head App">
-        <div class="container">
-        <div class="Informacion2"> 
-        <div class="Pantalla">
-            <div class="Informacion2"> 
-            <div class="Pantalla">
+        <div className="container">
+        <div className="Informacion2"> 
+        <div className="Pantalla">
+            <div className="Informacion2"> 
+            <div className="Pantalla">
             <div style={{textAlign: "left" }}>
               <h4>Por favor indique, en la actualidad su dependencia económica. Recuerde que esta información será validada.</h4>
              </div>
                  <div className="row">
-                 <div class="col-md-12">
-                              <div class="control-group">
-                                    <label for="DependenciaEconómica">Dependencia Económica (<span class="field-required">*</span>):</label>
-                                    <select name="DependenciaEconómica" title="Dependencia Económica" class="form-control" tabIndex="1">
+                 <div className="col-md-12">
+                              <div className="control-group">
+                                    <label for="DependenciaEconómica">Dependencia Económica (<span className="field-required">*</span>):</label>
+                                    <select name="DependenciaEconómica" title="Dependencia Económica" className="form-control" tabIndex="1">
                                       <option selected="selected" value="-1">Seleccione...</option>
                                       <option value="1">Depende del Grupo familiar (Padre y/o Madre)</option>
                                       <option value="2">Depende de un Tercero</option>
                                       <option value="3">Independiente Económicamente</option>
                                     </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
+                                    <span  className="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
                               </div>
                       </div>
                   </div>
 
                 {/* 
-                <div class="col-md-12">      
-						    <input type="button" value= {this.props.value}  class="btn btn2-style" />
+                <div className="col-md-12">      
+						    <input type="button" value= {this.props.value}  className="btn btn2-style" />
                 </div>
                 */}
                 

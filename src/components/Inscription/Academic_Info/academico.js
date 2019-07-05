@@ -22,7 +22,7 @@ class AcademicInfo extends Component {
                     {/*<form>*/}
                     <div className="row">
                         <div className="row">
-                            <div class="col-md-2">
+                            <div className="col-md-2">
                                 <label><input type="checkbox" id="TrabajaActual"
                                     checked={this.state.checked}
                                     onChange={this.handleCheckboxChange} />¿Está cursando actualmente?</label>
