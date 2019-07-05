@@ -102,11 +102,10 @@
       min-height: 50px;
       margin-bottom: 20px;
       border: 1px solid transparent;
-      min-width: 2000px;
   }
-  
-  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-      border-color: #e6e6e6;
+
+  .row2 {
+    width: 100%;
   }
   
   .container {
@@ -115,33 +114,6 @@
       padding-left: 15px;
       margin-right: auto;
       margin-left: auto;
-  }
-  
-  .navbar-collapse.collapse {
-      display: block !important;
-      height: auto !important;
-      padding-bottom: 0;
-      overflow: visible !important;
-  }
-  
-  
-  .ournav .container .nav li a {
-      color: #fff;
-  }
-  
-  
-  
-  .ourcollapse ul li:first-child {
-      border-left: none;
-  }
-  .ourcollapse ul li {
-      border-right: 1px solid #798f54;
-      border-left: 1px solid #394b1a;
-  }
-  .navbar-nav2 {
-      display: inline;
-      padding-left: 0;
-      list-style: none;
   }
   
   #Inicio {
@@ -313,6 +285,10 @@
   .painted {
     font-weight: bold;
   } 
+
+  .navbar a {
+    color: white !important;
+  }
   
   @media only screen and (max-width: 575px) {
   .background1{

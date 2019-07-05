@@ -25,59 +25,59 @@ export class Navbar extends Component {
 
     if (IsLogged === "true") {
       window =
-        <ul className="nav navbar-nav2">
-          <li id="Inicio">
-            <a href="/home">
-              <span id="inicioHome" >Inicio</span>
-            </a>
-          </li>
-          <li id="Consultas">
-            <a href="/Default">
-              <span id="consultasHome" >Consultas</span>
-            </a>
-          </li>
-          <li id="Liquidacion">
-            <a href="/Default">
-              <span id="liquidacionHome" >Soporte Liquidacion</span>
-            </a>
-          </li>
-          <li id="Perfil">
-            <a href="/profile">
-              <span id="perfilHome" >Mi Perfil</span>
-            </a>
-          </li>
+        <ul className="navbar-nav">
+        <li className="nav-item" id="Inicio">
+          <a className="nav-link" href="/home">
+            <span id="inicioHome" >Inicio</span>
+          </a>
+        </li>
+        <li className="nav-item" id="Consultas">
+          <a className="nav-link" href="/Default">
+            <span id="consultasHome" >Consultas</span>
+          </a>
+        </li>
+        <li className="nav-item" id="Liquidacion">
+          <a className="nav-link" href="/Default">
+            <span id="liquidacionHome" >Soporte Liquidacion</span>
+          </a>
+        </li>
+        <li className="nav-item" id="Perfil">
+          <a className="nav-link" href="/profile">
+            <span id="perfilHome" >Mi Perfil</span>
+          </a>
+        </li>
 
-          <li id="Nombre">
-            {welcome}
-          </li>
-          <li id="Salir">
-              {logout}
-          </li>
-        </ul>
+        <li className="nav-item" id="Nombre">
+          {welcome}
+        </li>
+        <li className="nav-item" id="Salir">
+          {logout}
+        </li>
+      </ul>
     } else {
       window =
-        <ul className="nav navbar-nav2">
-          <li id="Inicio">
-            <a href="/Default">
+        <ul className="navbar-nav">
+          <li className="nav-item" id="Inicio">
+            <a className="nav-link" href="/Default">
               <span id="inicioHome" >Inicio</span>
             </a>
           </li>
-          <li id="Consultas">
-            <a href="/Default">
+          <li className="nav-item" id="Consultas">
+            <a className="nav-link" href="/Default">
               <span id="consultasHome" >Consultas</span>
             </a>
           </li>
-          <li id="Liquidacion">
-            <a href="/Default">
+          <li className="nav-item" id="Liquidacion">
+            <a className="nav-link" href="/Default">
               <span id="liquidacionHome" >Soporte Liquidacion</span>
             </a>
           </li>
 
-          <li id="Nombre">
+          <li className="nav-item" id="Nombre">
             {registrar}
           </li>
-          <li id="Salir">
-              {login}
+          <li className="nav-item" id="Salir">
+            {login}
           </li>
         </ul>
     }
@@ -100,12 +100,16 @@ export class Navbar extends Component {
         </div>
 
         <div className="row2">
-          <div className="navbar ournav">
-            <div className="container ourcontainer">
-              <div className="collapse navbar-collapse ourcollapse">
+          <div className="navbar navbar-expand-lg navbar-dark ournav">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+              <div className="collapse navbar-collapse ourcollapse" id="navbarNav">
                 {window}
               </div>
-            </div>
+            
           </div>
         </div>
       </div>
