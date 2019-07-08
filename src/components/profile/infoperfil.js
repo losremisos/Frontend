@@ -36,10 +36,10 @@ class InfoPerfil extends Component{
         if (this.props.user) {
             avatarUrl = this.props.user.avatar.url
         }
-
+        console.log(avatarUrl);
         return(
             <div className="card ">
-                <img className="card-img-top" src={foto`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} alt="algo"/>
+                <img className="card-img-top" src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} alt="algo"/>
                 <div className="card-body">
                     <h5 className="card-title">{users.nombre} {users.primerApellido} {users.segundoApellido}</h5>
                     <p className="card-text">{users.correo}</p>
