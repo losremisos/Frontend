@@ -1,5 +1,6 @@
 import React from 'react';
 import './home.css';
+import axios from 'axios';
 
 import SourceImg from './../../../assets/home/tabPic.png'
 import SourceImg2 from './../../../assets/home/tabPic6.png'
@@ -10,7 +11,148 @@ import SourceImg4 from './../../../assets/home/escudo.png'
 
 
 export class Home extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        users: [],
+        id_user: ""
+    }
+    this.createinscriptioninfo = this.createinscriptioninfo.bind(this);
+    this.createextrainfo = this.createextrainfo.bind(this);
+    this.createrelativefather = this.createrelativefather.bind(this);
+    this.createrelativemother = this.createrelativemother.bind(this);
+}
+  componentDidMount(){
+    let id = localStorage.getItem("UsrID");
+    console.log("Aqui esta la peticion");
+    console.log(axios({
+        method: "GET",
+        url: "http://localhost:4200/users/"+id
+    }));
+    axios({
+        method: "GET",
+        url: "http://localhost:4200/users/"+id
+    }).then((res) => {
+        this.setState({
+            users: res.data,
+            id_user: id
+        })
+    });
+}
+notfirstsession(){
+  let id = localStorage.getItem("UsrID");
+        const{
+          
+        } = this.state;
+        axios
+        .put("http://localhost:4200/users/"+id,
+        {
+          user: {
+            first_session: false
+        }
+        }, { withCredentials: true}
+        )
+        .then(response => {     
+          console.log("registration res", response);
+          this.createinscriptioninfo();
+  
+        }).catch(error => {
+          console.log("registration error", error);
+        });
+    
+}
+createextrainfo(){
+  console.log("Extra");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/user_extra_info",
+  {
+    infoextra: {
+      user_id: id_user
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    this.createrelativefather();
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+}
+createrelativefather(){
+  console.log("Father");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/relative",
+  {
+    relative: {
+      user_id: id_user,
+      tipo_familiar: "0"
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    this.createrelativemother();
+
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+  
+}
+createrelativemother(){
+  console.log("Mother");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/relative",
+  {
+    relative: {
+      user_id: id_user,
+      tipo_familiar: "1"
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+  
+}
+createinscriptioninfo(){
+  console.log("Inscription");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/inscription_information",
+  {
+    information: {
+      user_id: id_user
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    this.createextrainfo();
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+
+}
   render() {
+    const {users} = this.state;
+    console.log(users);
+    if(users.first_session === true){
+      this.notfirstsession();
+    }
     return (
       <div>
         <div className="container">
@@ -53,7 +195,7 @@ export class Home extends React.Component {
                 <div className="col-md-2 style">
                   <div className="spacer"></div>
                   <div className="half-spacer"></div>
-                  <a href="/defalut" className="btn send">Ir a preguntas</a>
+                  <a className="btn send">Ir a preguntas</a>
                 </div>
               </div>
             </div>
