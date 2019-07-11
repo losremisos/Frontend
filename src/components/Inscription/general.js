@@ -9,6 +9,7 @@ import DependenceInfo from './Dependence_info/infoDependencia';
 import WorkingInfo from './Working_Info/Working_info';
 import AdminReview from './Review_Admin/AdminReview';
 import './general.css';
+import axios from 'axios';
 
 const ProgressBar = (props) => {
     return (
@@ -28,14 +29,19 @@ export class Inscription extends Component {
         
         this.state = {
           percentage: 0,
-          information :[[],[]],
-          submit: "0"
+          information :[[],[],[],[],[]],
+          extrausers:[],
+          users:[],
+          inscriptioninfo: [],
+          submit: "0",
+          load: false
         }
         this.nextStep = this.nextStep.bind(this)
         this.getData = this.getData.bind(this)
       }
       
       nextStep() {
+
         this.setState({ submit: "1" })
         if(this.state.percentage === 100) return 
         this.setState({ percentage: this.state.percentage + 25 })
@@ -43,12 +49,110 @@ export class Inscription extends Component {
       
       getData(value){
         this.setState({ 
-            submit : "0",
-            information: value })
+            information: value, submit:"0", load:false
+        })   
+        this.userbasica();   
+
+    }
+    userextra(){
+        let id = localStorage.getItem("UsrID");
+        const{
+            information,
+        } = this.state;
+        axios
+        .put("http://localhost:4200/user_extra_info/"+id,
+        {
+          params: {
+            fecha_exp: information[0][12],
+            pais_exp: information[0][13],
+            dpto_exp: information[0][14],
+            ciudad_exp: information[0][15],
+            genero: information[0][16],
+            nacionalidad: information[0][17],
+            doble_nacionalidad: information[0][18],
+            retornado_de_exterior: information[0][19],
+            excepciones_de_ley: information[0][21]
+        }
+        }, { withCredentials: true}
+        )
+        .then(response => {     
+          console.log("registration res", response);
+          console.log("SI HUJISAISAASS");
+          this.componentDidMount();
+        }).catch(error => {
+          console.log("registration error", error);
+        });
+  
+      }
+    userbasica(){
+        let id = localStorage.getItem("UsrID");
+        const{
+            information,
+        } = this.state;
+        axios
+        .put("http://localhost:4200/users/"+id,
+        {
+          user: {
+            fechaNacimiento: information[0][8],
+            departamento: information[0][10],
+            ciudad: information[0][11]
+        }
+        }, { withCredentials: true}
+        )
+        .then(response => {     
+          console.log("registration res", response);
+          this.userextra();
+        }).catch(error => {
+          console.log("registration error", error);
+        });
+  
+      }
+
+
+    componentDidMount(){
+        let id = localStorage.getItem("UsrID");
+        axios({
+            method: "GET",
+            url: "http://localhost:4200/users/"+id
+        }).then((res) => {
+            this.setState({
+                users: res.data,
+            })
+            axios({
+                method: "GET",
+                url: "http://localhost:4200/user_extra_info/"+id
+            }).then((res) => {
+                this.setState({
+                    extrausers: res.data.data,
+                 })
+                axios({
+                    method: "GET",
+                    url: "http://localhost:4200/inscription_information/"+id
+                }).then((res) => {
+                    this.setState({
+                        inscriptioninfo: res.data.data,
+                    })
+                    const {users} = this.state;
+                    const {extrausers} = this.state;
+                    let copyinformation = this.state.information;
+                    copyinformation[0]=["","",users.tipoDocumento,users.documento,"",users.nombre,users.primerApellido,users.segundoApellido,users.fechaNacimiento,"",users.departamento,users.ciudad,extrausers.fecha_exp,extrausers.pais_exp,extrausers.dpto_exp,extrausers.ciudad_exp,extrausers.genero,extrausers.nacionalidad,extrausers.doble_nacionalidad,extrausers.retornado_de_exterior,users.email,extrausers.excepciones_de_ley];
+                    this.setState({load:true,information:copyinformation})  
+                    
+                });
+            });
+            
+            
+        });
         
     }
+
+    
   render() {
+        const {users} = this.state;
+        const {extrausers} = this.state;
+        console.log(users);
         console.log(this.state.information)
+        console.log("AAAAAAAAAA");
         var Admin;
         var User;
         let admin = localStorage.getItem("admin");
@@ -77,7 +181,7 @@ export class Inscription extends Component {
                                       <a className="btn text-left btn-style btn-block" data-toggle="collapse" href="#collapse_11" role="button" aria-expanded="false" aria-controls="collapse_11">Información Básica</a>
                                       <div className="collapse" id="collapse_11">
                                           <div className="card card-body">                                  
-                                            <BasicInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit}/>
+                                            <BasicInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit} load={this.state.load}/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>

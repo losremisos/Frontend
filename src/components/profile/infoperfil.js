@@ -47,8 +47,6 @@ class InfoPerfil extends Component{
             this.setState({
                 users: res.data,
                 correo: res.data.email,
-                profile_departamento: res.data.departamento,
-                profile_ciudad: res.data.ciudad,
             })
         });
         axios({
@@ -56,9 +54,11 @@ class InfoPerfil extends Component{
             url: "http://localhost:4200/user_extra_info/"+id
         }).then((res) => {
             this.setState({
-                extrausers: res.data,
-                profile_direccion: res.data.direccion,
-                profile_telefono: res.data.telefono
+                extrausers: res.data.data,
+                profile_direccion: res.data.data.direccion,
+                profile_departamento: res.data.data.departamento,
+                profile_ciudad: res.data.data.ciudad,
+                profile_telefono: res.data.data.telefono_movil
             })
         });
     }
@@ -73,7 +73,9 @@ class InfoPerfil extends Component{
         let id = localStorage.getItem("UsrID");
         const{
           profile_direccion,
-          profile_telefono
+          profile_telefono,
+          profile_departamento,
+          profile_ciudad
         } = this.state;
         axios
         .put("http://localhost:4200/user_extra_info/"+id,
@@ -81,6 +83,8 @@ class InfoPerfil extends Component{
           params: {
             direccion: profile_direccion,
             telefono_movil: profile_telefono,
+            dpto_residencia: profile_departamento,
+            municipio_residencia: profile_ciudad,
         }
         }, { withCredentials: true}
         )
@@ -99,16 +103,12 @@ class InfoPerfil extends Component{
         let id = localStorage.getItem("UsrID");
         const{
           correo,
-          profile_departamento,
-          profile_ciudad
         } = this.state;
         axios
         .put("http://localhost:4200/users/"+id,
         {
           user: {
             email: correo,
-            departamento: profile_departamento,
-            ciudad: profile_ciudad
         }
         }, { withCredentials: true}
         )
@@ -130,7 +130,8 @@ class InfoPerfil extends Component{
         const {extrausers} = this.state;
         let {edit} = this.state;
         let window = "";
-        console.log(this.state);
+        console.log(extrausers);
+        console.log(this.state.profile_direccion);
         var {Tipe_Doc} = "";
         var {State} = "";
         if(users.tipoDocumento=== 1){
@@ -162,10 +163,10 @@ class InfoPerfil extends Component{
                     <div className="list-group-item"><p>Correo Electronico</p><h6>{users.email}</h6></div>
                     <div className="list-group-item"><p>Estado</p><h6>{State}</h6></div>
                     <div className="list-group-item"><p>Documento de Identificación</p><h6>{Tipe_Doc}{users.documento}</h6></div>
-                    <div className="list-group-item"><p>Departamento de Residencia</p><h6>{users.departamento}</h6></div>
-                    <div className="list-group-item"><p>Ciudad de Residencia</p><h6>{users.ciudad}</h6></div>
+                    <div className="list-group-item"><p>Departamento de Residencia</p><h6>{extrausers.departamento}</h6></div>
+                    <div className="list-group-item"><p>Ciudad de Residencia</p><h6>{extrausers.ciudad}</h6></div>
                     <div className="list-group-item"><p>Dirección</p><h6>{extrausers.direccion}</h6></div>
-                    <div className="list-group-item"><p>Teléfono Movil</p><h6>{extrausers.telefono}</h6></div>
+                    <div className="list-group-item"><p>Teléfono Movil</p><h6>{extrausers.telefono_movil}</h6></div>
                 </ul>
                 <div className="card-body">
                     <p onClick={this.editProfile}><font color="blue">Editar</font></p>
