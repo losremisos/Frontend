@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
-import Navigation  from '../navBar/nav';
-import  Login  from '../login/login';
-import  InfoPadre  from './infoPadre';
-import InfoHermano from './infoHermanos';
-import InfoDependencia from './infoDependencia';
 import './Familiar.css';
-import foto from './../../assets/drop-down-arrow.png'
 
 class Boton extends Component {
   state = {
     display: 'none',
   }
   onChange = () => {
-    if(this.state.display=='none'){
+    if(this.state.display==='none'){
       this.setState({ display: 'block' });
     }else{
     this.setState({ display: 'none' });

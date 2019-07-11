@@ -46,6 +46,11 @@
     width: 45%;
     margin-left: 55%;        
   }
+  .btn-style-submit2
+  {
+    background-color: #587328 !important;
+    color: white !important;                
+  }
   
   div.div_file{
     position:relative;    
@@ -69,7 +74,19 @@
 p.text{
   text-align: center;
 }
+.progress-bar {
+  position: relative;
+  height: 10px;
+  width: inherit;
+  border-radius: 50px;
+}
 
+.filler {
+  background: #1DA598;
+  height: 100%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+}
 
   /*.padding-h{
     padding-right: 0px !important;

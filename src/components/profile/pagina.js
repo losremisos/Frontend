@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import Navigation from './nav'
+import Footer from '../footer/footer'
 import InfoPerfil from './infoperfil'
 import Perfil from './perfil'
 import './perfil.css';
 
-class Pagina extends Component {
+export class Profile extends Component {
 
     render(){
         return(
           <div>
-              <Navigation/>
               
               <div className="container-fluid">
                 <div className="row">
@@ -23,11 +23,11 @@ class Pagina extends Component {
                 </div>
                 
               </div>
-
+              
             </div>
         )
       }
 
     }
     
-    export default Pagina;
+   /* export default Pagina;*/
