@@ -7,6 +7,7 @@ class InfoPerfil extends Component{
         super(props);
         this.state = {
             users: [],
+            extrausers: [],
             edit : "false",
             correo: "",
             profile_departamento: "",
@@ -16,7 +17,8 @@ class InfoPerfil extends Component{
 
         }
         this.editProfile = this.editProfile.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.userbasica = this.userbasica.bind(this);
+        this.userextra = this.userextra.bind(this);
         this.handleChange=this.handleChange.bind(this);
     }
     editProfile(){
@@ -47,6 +49,14 @@ class InfoPerfil extends Component{
                 correo: res.data.email,
                 profile_departamento: res.data.departamento,
                 profile_ciudad: res.data.ciudad,
+            })
+        });
+        axios({
+            method: "GET",
+            url: "http://localhost:4200/user_extra_info/"+id
+        }).then((res) => {
+            this.setState({
+                extrausers: res.data,
                 profile_direccion: res.data.direccion,
                 profile_telefono: res.data.telefono
             })
@@ -59,8 +69,33 @@ class InfoPerfil extends Component{
         console.log(this.tipo_documento);
         console.log(this.state.primer_nombre);
       }
-
-    handleSubmit(event){
+    userextra(){
+        let id = localStorage.getItem("UsrID");
+        const{
+          profile_direccion,
+          profile_telefono
+        } = this.state;
+        axios
+        .put("http://localhost:4200/user_extra_info/"+id,
+        {
+          params: {
+            direccion: profile_direccion,
+            telefono_movil: profile_telefono,
+        }
+        }, { withCredentials: true}
+        )
+        .then(response => {     
+          console.log("registration res", response);
+          this.componentDidMount();
+          this.editProfile();
+        }).catch(error => {
+          console.log("registration error", error);
+        });
+    
+    
+      }
+    
+    userbasica(event){
         let id = localStorage.getItem("UsrID");
         const{
           correo,
@@ -79,8 +114,7 @@ class InfoPerfil extends Component{
         )
         .then(response => {     
           console.log("registration res", response);
-          this.componentDidMount();
-          this.editProfile();
+          this.userextra();
         }).catch(error => {
           console.log("registration error", error);
         });
@@ -93,6 +127,7 @@ class InfoPerfil extends Component{
 
     render(){
         const {users} = this.state;
+        const {extrausers} = this.state;
         let {edit} = this.state;
         let window = "";
         console.log(this.state);
@@ -129,8 +164,8 @@ class InfoPerfil extends Component{
                     <div className="list-group-item"><p>Documento de Identificación</p><h6>{Tipe_Doc}{users.documento}</h6></div>
                     <div className="list-group-item"><p>Departamento de Residencia</p><h6>{users.departamento}</h6></div>
                     <div className="list-group-item"><p>Ciudad de Residencia</p><h6>{users.ciudad}</h6></div>
-                    <div className="list-group-item"><p>Dirección</p><h6>{users.direccion}</h6></div>
-                    <div className="list-group-item"><p>Teléfono</p><h6>{users.telefono}</h6></div>
+                    <div className="list-group-item"><p>Dirección</p><h6>{extrausers.direccion}</h6></div>
+                    <div className="list-group-item"><p>Teléfono Movil</p><h6>{extrausers.telefono}</h6></div>
                 </ul>
                 <div className="card-body">
                     <p onClick={this.editProfile}><font color="blue">Editar</font></p>
@@ -150,10 +185,10 @@ class InfoPerfil extends Component{
                         <div className="list-group-item"><p>Departamento de Residencia</p><input className="inputedit" type="text" name="profile_departamento" onChange={this.handleChange} value={this.state.profile_departamento}/></div>
                         <div className="list-group-item"><p>Ciudad de Residencia</p><input className="inputedit" type="text" name="profile_ciudad" onChange={this.handleChange} value={this.state.profile_ciudad}/></div>
                         <div className="list-group-item"><p>Dirección</p><input className="inputedit" type="text" name="profile_direccion" onChange={this.handleChange} value={this.state.profile_direccion}/></div>
-                        <div className="list-group-item"><p>Teléfono</p><input className="inputedit" type="text"  name="profile_telefono" onChange={this.handleChange} value={this.state.profile_telefono}/></div>
+                        <div className="list-group-item"><p>Teléfono Movil</p><input className="inputedit" type="text"  name="profile_telefono" onChange={this.handleChange} value={this.state.profile_telefono}/></div>
                     </div>
                     <div className="card-body">
-                        <p onClick={this.handleSubmit}><font color="blue">Guardar</font></p>
+                        <p onClick={this.userbasica}><font color="blue">Guardar</font></p>
                     </div>
                 </div>
         }

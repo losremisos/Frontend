@@ -9,19 +9,19 @@ class BasicInfo extends Component {
     super(props);
     this.state = {
       users: [],
-      items: []
+      items: [],
+      firstload : true
     }
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(event) {
-    let items = [...this.state.items];
-    let item = { ...items[parseInt(event.target.id, 10)] };
-    item.value = event.target.value;
-    items[parseInt(event.target.id, 10)] = item;
-    this.setState({ items });
+    let newitem = this.state.items;
+    newitem[parseInt(event.target.id, 10)] = event.target.value;
+    this.setState({ items:newitem });
   }
 
   componentDidMount() {
+   
     let id = localStorage.getItem("UsrID");
     console.log("Aqui esta la peticion");
     console.log(axios({
@@ -39,6 +39,11 @@ class BasicInfo extends Component {
   }
 
   render() {
+    if(this.state.firstload===true){
+      this.setState({items: this.props.information[0], firstload:false})
+    }
+    
+    console.log(this.state.items)
     if (this.props.submit === "1") {
       this.props.information[0] = this.state.items;
       this.props.getDatos(this.props.information);
@@ -100,7 +105,7 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom02">Numero de tarjeta de Identidad:</label>
             <input type="number" className="form-control" id="2" name="numberTI" placeholder="Tarjeta Identidad"
-              onChange={this.handleChange} />
+              onChange={this.handleChange} value={this.state.items[2]} />
           </div>
         </div>
 
@@ -125,13 +130,13 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom07">Fecha de nacimiento (*):</label>
             <input type="date" className="form-control" id="3" name="fechanacimiento" placeholder="Fecha de Nacimiento"
-              onChange={this.handleChange} />
+              onChange={this.handleChange} value={this.state.items[3]} />
 
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom08">Pais de nacimiento (*):</label>
             <input type="text" className="form-control" id="4" name="paisnacimiento" placeholder="Pais de Nacimiento"
-              onChange={this.handleChange} />
+              onChange={this.handleChange} value={this.state.items[4]} />
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom09">Departamento de nacimiento (*):</label>

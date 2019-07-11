@@ -69,7 +69,7 @@ createextrainfo(){
   axios
   .post("http://localhost:4200/user_extra_info",
   {
-    infoextra: {
+    params: {
       user_id: id_user
     }
   }, { withCredentials: true}

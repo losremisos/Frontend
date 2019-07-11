@@ -28,7 +28,7 @@ export class Inscription extends Component {
         
         this.state = {
           percentage: 0,
-          information :[],
+          information :[[],[]],
           submit: "0"
         }
         this.nextStep = this.nextStep.bind(this)
@@ -94,8 +94,7 @@ export class Inscription extends Component {
                                             <AdminReview/>
                                       </div>                  
                                       
-                                      <button type="submit" onClick={this.nextStep}  classNameName="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
-                                      
+                                      <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
                                       
                                       
                                   </div>    
