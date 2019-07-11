@@ -17,7 +17,10 @@ export class Home extends React.Component {
         users: [],
         id_user: ""
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.createinscriptioninfo = this.createinscriptioninfo.bind(this);
+    this.createextrainfo = this.createextrainfo.bind(this);
+    this.createrelativefather = this.createrelativefather.bind(this);
+    this.createrelativemother = this.createrelativemother.bind(this);
 }
   componentDidMount(){
     let id = localStorage.getItem("UsrID");
@@ -36,8 +39,95 @@ export class Home extends React.Component {
         })
     });
 }
-handleSubmit(event){
-  console.log("SSS");
+notfirstsession(){
+  let id = localStorage.getItem("UsrID");
+        const{
+          
+        } = this.state;
+        axios
+        .put("http://localhost:4200/users/"+id,
+        {
+          user: {
+            first_session: false
+        }
+        }, { withCredentials: true}
+        )
+        .then(response => {     
+          console.log("registration res", response);
+          this.createinscriptioninfo();
+  
+        }).catch(error => {
+          console.log("registration error", error);
+        });
+    
+}
+createextrainfo(){
+  console.log("Extra");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/user_extra_info",
+  {
+    infoextra: {
+      user_id: id_user
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    this.createrelativefather();
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+}
+createrelativefather(){
+  console.log("Father");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/relative",
+  {
+    relative: {
+      user_id: id_user,
+      tipo_familiar: "0"
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    this.createrelativemother();
+
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+  
+}
+createrelativemother(){
+  console.log("Mother");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/relative",
+  {
+    relative: {
+      user_id: id_user,
+      tipo_familiar: "1"
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+  
+}
+createinscriptioninfo(){
+  console.log("Inscription");
   const{
     id_user
   } = this.state;
@@ -45,23 +135,23 @@ handleSubmit(event){
   .post("http://localhost:4200/inscription_information",
   {
     information: {
-      user_id: "120"
+      user_id: id_user
     }
   }, { withCredentials: true}
   )
   .then(response => {     
     console.log("registration res", response);
-
+    this.createextrainfo();
   }).catch(error => {
     console.log("registration error", error);
   });
-  event.preventDefault();
+
 }
   render() {
     const {users} = this.state;
     console.log(users);
     if(users.first_session === true){
-      
+      this.notfirstsession();
     }
     return (
       <div>
@@ -106,7 +196,6 @@ handleSubmit(event){
                   <div className="spacer"></div>
                   <div className="half-spacer"></div>
                   <a className="btn send">Ir a preguntas</a>
-                  <p onClick={this.handleSubmit}><font color="blue">Guardar</font></p>
                 </div>
               </div>
             </div>
