@@ -35,6 +35,7 @@ export class Registry extends Component {
     console.log(this.tipo_documento);
     console.log(this.state.primer_nombre);
   }
+  
   handleSubmit(event){
     const{
       tipo_documento,
@@ -59,14 +60,14 @@ export class Registry extends Component {
         estadoProceso: 1,
         documento: numero_documento,
         tipoUsuario: 0 ,
-        district_id: 1
+        district_id: 1,
+        first_session: "true"
       }
     }, { withCredentials: true}
     )
-    .then(response => {
+    .then(response => {     
       console.log("registration res", response);
       window.location.href = '/login';  
-
     }).catch(error => {
       console.log("registration error", error);
     });
