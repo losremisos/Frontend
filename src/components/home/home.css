@@ -139,16 +139,17 @@
   
   #Nombre{
       color: #FFFF;
-      padding-right: 35px;
-      padding-left: 350px;
-  
+      padding: 8px 0px;
+      padding-left: 10px;
   }
   
   #Salir{
-      padding-left: 25px;
+      padding: 8px 0px;
+      padding-left: 10px;      
       border-right: none;
   }
-  
+
+ 
   .services {
       border-radius: 5px;
       background: #e9e9d7;
@@ -211,7 +212,9 @@
     margin-left: 70px;}
   
   .styleImg2{
-      display: flex; }
+    display: flex;
+    margin: auto;
+  }
   
   .style{
     text-align: center;
