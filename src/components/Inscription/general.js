@@ -29,6 +29,8 @@ export class Inscription extends Component {
         super(props)
         
         this.state = {
+          text:"Enviar Correcciones",
+          aprovaciones : 0,
           percentage: 0,
           information :[[],[],[],[],[],[],[],[],[]],
           extrausers:[],
@@ -48,6 +50,7 @@ export class Inscription extends Component {
         }
         this.nextStep = this.nextStep.bind(this)
         this.getData = this.getData.bind(this)
+        this.makeaprovation = this.makeaprovation.bind(this)
       }
       
       nextStep() {
@@ -69,6 +72,20 @@ export class Inscription extends Component {
            
         } 
 
+    }
+    makeaprovation(val){
+        if(val===true){
+            this.state.aprovaciones+=1;
+        }else{
+            if(this.state.aprovaciones-1 >=0){
+                this.state.aprovaciones+= -1
+            }
+        }
+        if(this.state.aprovaciones===9){
+            this.setState({text:"Enviar Citacion"});
+        }else{
+            this.setState({text:"Enviar Correcion"});
+        }
     }
     fillbarra(){
         var j = this.state.information.length;
@@ -282,9 +299,30 @@ export class Inscription extends Component {
   
       }
 
+      changeState(){
+        let id = localStorage.getItem("UsrID");
+        axios
+        .put("http://localhost:4200/users/"+id,
+        {
+          user: {
+            estadoProceso: 0,
+        }
+        }, { withCredentials: true}
+        )
+        .then(response => {     
+          console.log("registration res", response);
+        }).catch(error => {
+          console.log("registration error", error);
+        });
+  
+      }
 
     componentDidMount(){
+        let admin = localStorage.getItem("admin");
         let id = localStorage.getItem("UsrID");
+        if(admin === "true"){
+            id = localStorage.getItem("AuxID");
+        }
         axios({
             method: "GET",
             url: "http://localhost:4200/users/"+id
@@ -349,11 +387,14 @@ export class Inscription extends Component {
         var Admin;
         var User;
         var AllData;
+        var disabled;
+          
         let admin = localStorage.getItem("admin");
         if(admin === "true"){
             User = "none";
             Admin = "block";
             AllData="none";
+            disabled = true;
         }else{
             if(this.state.percentage===100){
                 AllData="block";
@@ -362,6 +403,8 @@ export class Inscription extends Component {
             }
             User = "block";
             Admin = "none";
+            disabled = false;
+            
         }   
         return (
             <div>        
@@ -381,21 +424,21 @@ export class Inscription extends Component {
                                       <a className="btn text-left btn-style btn-block" data-toggle="collapse" href="#collapse_11" role="button" aria-expanded="false" aria-controls="collapse_11">Información Básica</a>
                                       <div className="collapse" id="collapse_11">
                                           <div className="card card-body">                                  
-                                            <BasicInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit} load={this.state.load}/>
+                                            <BasicInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit} load={this.state.load} dis={disabled}/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                            <AdminReview/>
+                                            <AdminReview review={this.makeaprovation}/>
                                       </div> 
       
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_12" role="button" aria-expanded="false" aria-controls="collapse_12">Información Adicional</a>
                                       <div className="collapse" id="collapse_12">
                                           <div className="card card-body">                                  
-                                            <AdditionalInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit1}  load={this.state.load}/>
+                                            <AdditionalInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit1}  load={this.state.load}  dis={disabled}/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                            <AdminReview/>
+                                            <AdminReview review={this.makeaprovation}/>
                                       </div>                  
                                      
                                       
@@ -417,21 +460,21 @@ export class Inscription extends Component {
                                       <a className="btn  text-left btn-style btn-block" data-toggle="collapse" href="#collapse_21" role="button" aria-expanded="false" aria-controls="collapse_21">Educación (Básica y/o Media)</a>
                                       <div className="collapse" id="collapse_21">
                                           <div className="card card-body">                                  
-                                              <AcademicInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit2} load={this.state.load}/>
+                                              <AcademicInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit2}  dis={disabled} load={this.state.load}/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <AdminReview/>
+                                      <AdminReview review={this.makeaprovation}/>
                                       </div> 
       
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_22" role="button" aria-expanded="false" aria-controls="collapse_22">Educación Superior</a>
                                       <div className="collapse" id="collapse_22">
                                           <div className="card card-body">                                  
-                                              <HigherEducationInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit3} load={this.state.load}/>
+                                              <HigherEducationInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit3} load={this.state.load}/>
                                           </div>
                                       </div> 
                                       <div style={{display:Admin}}>
-                                          <AdminReview/>
+                                      <AdminReview review={this.makeaprovation}/>
                                       </div> 
                                       
                                   </div>  
@@ -444,9 +487,9 @@ export class Inscription extends Component {
                           <form>
                               <div className="collapse" id="collapse_30">
                                   <div className="card card-body">               
-                                      <WorkingInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit4} load={this.state.load}/>  
+                                      <WorkingInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit4} load={this.state.load}/>  
                                       <div style={{display:Admin}}>
-                                          <AdminReview/>
+                                      <AdminReview review={this.makeaprovation}/>
                                       </div>                  
                                 </div>
                                   
@@ -461,10 +504,10 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_41" role="button" aria-expanded="false" aria-controls="collapse_41">Información de la Madre</a>
                                       <div className="collapse" id="collapse_41">
                                           <div className="card card-body">                                  
-                                              <FatherInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit5} load={this.state.load} form={5}/>
+                                              <FatherInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit5} load={this.state.load} form={5}/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <AdminReview/>
+                                          <AdminReview review={this.makeaprovation}/>
                                           </div>  
                                       </div>
                                       
@@ -472,10 +515,10 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_42" role="button" aria-expanded="false" aria-controls="collapse_42">Información del Padre</a>
                                       <div className="collapse" id="collapse_42">
                                           <div className="card card-body">                                  
-                                              <FatherInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit6} load={this.state.load} form={6}/>
+                                              <FatherInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit6} load={this.state.load} form={6}/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <AdminReview/>
+                                          <AdminReview review={this.makeaprovation}/>
                                           </div> 
                                       </div>
                                        
@@ -483,10 +526,10 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_43" role="button" aria-expanded="false" aria-controls="collapse_43">Información de los Hermanos</a>
                                       <div className="collapse" id="collapse_43">
                                           <div className="card card-body">                                  
-                                              <SiblingInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit7} load={this.state.load}/>
+                                              <SiblingInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit7} load={this.state.load}/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <AdminReview/>
+                                          <AdminReview review={this.makeaprovation}/>
                                           </div> 
                                       </div>
                                        
@@ -494,11 +537,10 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_44" role="button" aria-expanded="false" aria-controls="collapse_44">Dependencia</a>
                                       <div className="collapse" id="collapse_44">
                                           <div className="card card-body">                                  
-                                              <DependenceInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit8} load={this.state.load}/>
+                                              <DependenceInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit8} load={this.state.load}/>
                                           </div>
                                           <div style={{display:Admin}}>
-                                              <AdminReview/>
-                                          </div> 
+                                          <AdminReview review={this.makeaprovation}/>                                          </div> 
                                       </div>
                                       
       
@@ -511,8 +553,8 @@ export class Inscription extends Component {
       
                           </div>
                           <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
-                          <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:AllData}}>Enviar</button>
-                          <button type="submit" className="btn btn-style-submit mt-5" style={{display:Admin}}>Enviar Correo</button>
+                          <button type="submit" onClick={this.changeState} className="btn btn-style-submit mt-5" style={{display:AllData}}>Enviar</button>
+                          <button type="submit" className="btn btn-style-submit mt-5" style={{display:Admin}}>{this.state.text}</button>
       
                    </div>
                   </div>

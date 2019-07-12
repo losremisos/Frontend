@@ -51,10 +51,14 @@ class FatherInfo extends Component {
       this.setState({items:info , firstload:false, confirmar:true})
       if(info[15]===true){
           this.setState({checked1:true, display: 'block'})
+      }else{
+        info[15]=false;
       }
       if(info[9]===true){
         this.setState({checked:true})
-    }
+      }else{
+        info[9]=false;
+      }
     }
     console.log(this.props.submit);
       
@@ -83,7 +87,7 @@ class FatherInfo extends Component {
                       <div className="col-md-3">
                               <div className="control-group">
                                     <label for="TipoDocumento">Tipo de documento (<span className="field-required">*</span>):</label>
-                                    <select name="TipoDocumento" title="Tipo de documento de identidad" id="0" value={this.state.items[0]} onChange={this.handleChange} className="form-control" tabIndex="1">
+                                    <select name="TipoDocumento" title="Tipo de documento de identidad" disabled={this.props.dis} id="0" value={this.state.items[0]} onChange={this.handleChange} className="form-control" tabIndex="1">
                                       <option>Seleccione...</option>
                                       <option value="1">C&#233;dula de Ciudadan&#237;a</option>
                                       <option value="0">Tarjeta de Identidad</option>
@@ -95,7 +99,7 @@ class FatherInfo extends Component {
                       <div className="col-md-3">
                               <div className="control-group">
                                 <label for="NumeroDocumento">Número de documento (<span className="field-required">*</span>):</label>
-                                <input name="NumeroDocumento" type="text" maxlength="11" id="1" value={this.state.items[1]} onChange={this.handleChange} title="Número de documento de identidad" className="form-control" tabIndex="2" />  
+                                <input name="NumeroDocumento" type="text" disabled={this.props.dis} maxlength="11" id="1" value={this.state.items[1]} onChange={this.handleChange} title="Número de documento de identidad" className="form-control" tabIndex="2" />  
                                 
                               </div>
                       </div>
@@ -106,7 +110,7 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                             <div className="control-group">
                              <label for="Nombre" >Nombre (<span className="field-required">*</span>):</label>
-                             <input name="Nombre" type="text" maxlength="50" id="2" value={this.state.items[2]} onChange={this.handleChange}title="Primer nombre" className="form-control" />
+                             <input name="Nombre" type="text" disabled={this.props.dis} maxlength="50" id="2" value={this.state.items[2]} onChange={this.handleChange}title="Primer nombre" className="form-control" />
                              
                             </div>
                     </div>
@@ -114,14 +118,14 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="Apellido">Apellidos (<span className="field-required">*</span>):</label>
-                              <input name="Apellido" type="text" maxlength="50" id="3" value={this.state.items[3]} onChange={this.handleChange} title="Primer apellido" className="form-control" />
+                              <input name="Apellido" type="text" disabled={this.props.dis} maxlength="50" id="3" value={this.state.items[3]} onChange={this.handleChange} title="Primer apellido" className="form-control" />
                               
                             </div>
                     </div>  
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="ApellidoSeg">Segundo Apellido:</label>
-                              <input name="ApellidoSeg" type="text" maxlength="50" id="4" value={this.state.items[4]} onChange={this.handleChange} title="Segundo apellido" className="form-control" />
+                              <input name="ApellidoSeg" type="text" disabled={this.props.dis} maxlength="50" id="4" value={this.state.items[4]} onChange={this.handleChange} title="Segundo apellido" className="form-control" />
                               
                             </div>
                     </div>
@@ -131,14 +135,14 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="FechaNacimiento">Fecha de Nacimiento (<span className="field-required">*</span>):</label>
-                              <input name="FechaNacimiento" type="date" maxlength="50" id="5" value={this.state.items[5]} onChange={this.handleChange} title="Fecha Nacimiento" className="form-control" />
+                              <input name="FechaNacimiento" type="date" disabled={this.props.dis} maxlength="50" id="5" value={this.state.items[5]} onChange={this.handleChange} title="Fecha Nacimiento" className="form-control" />
                               
                             </div>
                     </div>  
                     <div className="col-md-3">
                               <div className="control-group">
                                     <label for="PadreVive">Vive (<span className="field-required">*</span>):</label>
-                                    <select name="PadreVive" title="Padre Vive" id="6" value={this.state.items[6]} onChange={this.handleChange} className="form-control" tabIndex="1">
+                                    <select name="PadreVive" title="Padre Vive" disabled={this.props.dis} id="6" value={this.state.items[6]} onChange={this.handleChange} className="form-control" tabIndex="1">
                                       <option selected="selected" value="-1">Seleccione...</option>
                                       <option value="true">Si</option>
                                       <option value="false">No</option>
@@ -149,7 +153,7 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                               <div className="control-group">
                                     <label for="PadreEstadoCivil">Estado Civil (<span className="field-required">*</span>):</label>
-                                    <select name="PadreEstadoCivil" title="Estado Civil Padre" id="7" value={this.state.items[7]} onChange={this.handleChange} className="form-control" tabIndex="1">
+                                    <select name="PadreEstadoCivil" title="Estado Civil Padre" disabled={this.props.dis} id="7" value={this.state.items[7]} onChange={this.handleChange} className="form-control" tabIndex="1">
                                       <option selected="selected" value="-1">Seleccione...</option>
                                       <option value="1">Soltero</option>
                                       <option value="2">Casado</option>
@@ -163,7 +167,7 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                               <div className="control-group">
                                     <label for="PadreArchivo">Adjunte el documento de identidad(<span className="field-required">*</span>):</label>
-                                    <input name="PadreArchivo" type="button" id="8" value={this.state.items[8]} onChange={this.handleChange} title="Padre Archivo CC" value="Seleccione un archivo" className="btn btn-style" />
+                                    <input name="PadreArchivo" type="button" id="8" disabled={this.props.dis} value={this.state.items[8]} onChange={this.handleChange} title="Padre Archivo CC" value="Seleccione un archivo" className="btn btn-style" />
                                     
                                     </div>
                     </div>             
@@ -171,7 +175,7 @@ class FatherInfo extends Component {
                   <div className="row">
                     <div className="col-md-2">
                     <label><input type="checkbox" id="CedulaMilitar" checked={this.state.checked}
-                        onChange={this.handleCheckboxChange} id="9" />¿Tiene Cédula Militar?</label>
+                        onChange={this.handleCheckboxChange} id="9" disabled={this.props.dis} />¿Tiene Cédula Militar?</label>
                     </div>
                   </div>
                 </div>
@@ -190,7 +194,7 @@ class FatherInfo extends Component {
                     <div className="col-md-12">
                             <div className="control-group">
                               <label for="PDirecciónR">Dirección de Residencia:</label>
-                              <input type="text" className="form-control" id="10" value={this.state.items[10]} onChange={this.handleChange}/>
+                              <input type="text" className="form-control" disabled={this.props.dis} id="10" value={this.state.items[10]} onChange={this.handleChange}/>
                             </div>
                     </div> 
                   </div>
@@ -198,28 +202,28 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PPaisR">País de residencia (<span className="field-required">*</span>):</label>
-                              <input name="PPaisR" type="text" maxlength="50" id="11" value={this.state.items[11]} onChange={this.handleChange} title="Pais de residencia Padre" className="form-control" />
+                              <input name="PPaisR" type="text" disabled={this.props.dis} maxlength="50" id="11" value={this.state.items[11]} onChange={this.handleChange} title="Pais de residencia Padre" className="form-control" />
                               
                             </div>
                     </div>  
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PDepartamentoR">Departamento de residencia (<span className="field-required">*</span>):</label>
-                              <input name="PDepartamentoR" type="text" maxlength="50" id="12" value={this.state.items[12]} onChange={this.handleChange} title="Departamento de residencia Padre" className="form-control" />
+                              <input name="PDepartamentoR" type="text" disabled={this.props.dis} maxlength="50" id="12" value={this.state.items[12]} onChange={this.handleChange} title="Departamento de residencia Padre" className="form-control" />
                               
                             </div>
                     </div>  
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PMunicipioR">Municipio de residencia (<span className="field-required">*</span>):</label>
-                              <input name="PMunicipioR" type="text" maxlength="50" id="13" value={this.state.items[13]} onChange={this.handleChange} title="Municipio de residencia Padre" className="form-control" />
+                              <input name="PMunicipioR" type="text" disabled={this.props.dis} maxlength="50" id="13" value={this.state.items[13]} onChange={this.handleChange} title="Municipio de residencia Padre" className="form-control" />
                               
                             </div>
                     </div> 
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PTelefono">Teléfono de contacto:</label>
-                              <input name="PTelefono" type="text" maxlength="10" id="14" value={this.state.items[14]} onChange={this.handleChange} title="Telefono de contacto: Padre" className="form-control" />
+                              <input name="PTelefono" type="text" disabled={this.props.dis} maxlength="10" id="14" value={this.state.items[14]} onChange={this.handleChange} title="Telefono de contacto: Padre" className="form-control" />
                               
                             </div>
                     </div>             
@@ -231,7 +235,7 @@ class FatherInfo extends Component {
                     <div className="col-md-2">
                     <label><input type="checkbox" id="TrabajaActual" 
                         checked={this.state.checked1}
-                        onChange={this.handleCheckboxChange1} id="15"/>¿Trabaja Actualmente?</label>
+                        onChange={this.handleCheckboxChange1} disabled={this.props.dis} id="15"/>¿Trabaja Actualmente?</label>
                     </div>
             </div>
 
@@ -245,14 +249,14 @@ class FatherInfo extends Component {
                     <div className="col-md-6"> 
                         <div className="control-group">
                                 <label for="PProfesion">Profesión, ocupación u oficio (<span className="field-required">*</span>):</label>
-                                <input name="PProfesion" type="text" maxlength="50" id="16" value={this.state.items[16]} onChange={this.handleChange} title="Profesión, ocupación u oficio Padre" className="form-control" tabIndex="2" />  
+                                <input name="PProfesion" type="text" disabled={this.props.dis} maxlength="50" id="16" value={this.state.items[16]} onChange={this.handleChange} title="Profesión, ocupación u oficio Padre" className="form-control" tabIndex="2" />  
                                 
                         </div>
                     </div>
                     <div className="col-md-6"> 
                         <div className="control-group">
                                 <label for="PEmpresa">Empresa en la que labora (<span className="field-required">*</span>):</label>
-                                <input name="PEmpresa" type="text" maxlength="50" id="17" value={this.state.items[17]} onChange={this.handleChange} title="Empresa en la que labora" className="form-control" tabIndex="2" />  
+                                <input name="PEmpresa" type="text" disabled={this.props.dis} maxlength="50" id="17" value={this.state.items[17]} onChange={this.handleChange} title="Empresa en la que labora" className="form-control" tabIndex="2" />  
                                 
                         </div>
                     </div>
@@ -261,14 +265,14 @@ class FatherInfo extends Component {
                     <div className="col-md-6"> 
                         <div className="control-group">
                                 <label for="PCargo">Cargo (<span className="field-required">*</span>):</label>
-                                <input name="PCargo" type="text" maxlength="50" id="18" value={this.state.items[18]} onChange={this.handleChange} title="Cargo Padre" className="form-control" tabIndex="2" />  
+                                <input name="PCargo" type="text" disabled={this.props.dis} maxlength="50" id="18" value={this.state.items[18]} onChange={this.handleChange} title="Cargo Padre" className="form-control" tabIndex="2" />  
                                 
                         </div>
                     </div>
                     <div className="col-md-3">
                               <div className="control-group">
                                     <label for="PTipoTrabajador">Tipo de trabajador (<span className="field-required">*</span>):</label>
-                                    <select name="PTipoTrabajador" title="Tipo de trabajador Padre" id="19" value={this.state.items[19]} onChange={this.handleChange} className="form-control" tabIndex="1">
+                                    <select name="PTipoTrabajador" disabled={this.props.dis} title="Tipo de trabajador Padre" id="19" value={this.state.items[19]} onChange={this.handleChange} className="form-control" tabIndex="1">
                                       <option selected="selected" value="-1">Seleccione...</option>
                                       <option value="1">Empleado</option>
                                       <option value="2">Independiente</option>
@@ -279,7 +283,7 @@ class FatherInfo extends Component {
                     <div className="col-md-3"> 
                         <div className="control-group">
                                 <label for="PFechaIngreso">Fecha de ingreso (<span className="field-required">*</span>):</label>
-                                <input name="PFechaIngreso" type="date" maxlength="50" id="20" value={this.state.items[20]} onChange={this.handleChange} title="Fecha de ingreso Padre" className="form-control" tabIndex="2" />  
+                                <input name="PFechaIngreso"  disabled={this.props.dis} type="date" maxlength="50" id="20" value={this.state.items[20]} onChange={this.handleChange} title="Fecha de ingreso Padre" className="form-control" tabIndex="2" />  
                                 
                         </div>
                     </div>
@@ -290,7 +294,7 @@ class FatherInfo extends Component {
                     <div className="col-md-12">
                             <div className="control-group">
                               <label for="PDirecciónR">Dirección de Empresa:</label>
-                              <input type="text" className="form-control" id="21" value={this.state.items[21]} onChange={this.handleChange}/>
+                              <input type="text" className="form-control" disabled={this.props.dis} id="21" value={this.state.items[21]} onChange={this.handleChange}/>
                             </div>
                     </div> 
                   </div>
@@ -298,28 +302,28 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PPaisR">País de empresa (<span className="field-required">*</span>):</label>
-                              <input name="PPaisR" type="text" maxlength="50" id="22" value={this.state.items[22]} onChange={this.handleChange} title="Pais de residencia Padre" className="form-control" />
+                              <input name="PPaisR" type="text" disabled={this.props.dis} maxlength="50" id="22" value={this.state.items[22]} onChange={this.handleChange} title="Pais de residencia Padre" className="form-control" />
                               
                             </div>
                     </div>  
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PDepartamentoR">Departamento de empresa (<span className="field-required">*</span>):</label>
-                              <input name="PDepartamentoR" type="text" maxlength="50" id="23" value={this.state.items[23]} onChange={this.handleChange} title="Departamento de residencia Padre" className="form-control" />
+                              <input name="PDepartamentoR" type="text" disabled={this.props.dis} maxlength="50" id="23" value={this.state.items[23]} onChange={this.handleChange} title="Departamento de residencia Padre" className="form-control" />
                               
                             </div>
                     </div>  
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PMunicipioR">Municipio de empresa (<span className="field-required">*</span>):</label>
-                              <input name="PMunicipioR" type="text" maxlength="50" id="24" value={this.state.items[24]} onChange={this.handleChange} title="Municipio de residencia Padre" className="form-control" />
+                              <input name="PMunicipioR" type="text" disabled={this.props.dis} maxlength="50" id="24" value={this.state.items[24]} onChange={this.handleChange} title="Municipio de residencia Padre" className="form-control" />
                               
                             </div>
                     </div> 
                     <div className="col-md-3">
                             <div className="control-group">
                               <label for="PTelefono">Teléfono de la empresa:</label>
-                              <input name="PTelefono" type="text" maxlength="10" id="25" value={this.state.items[25]} onChange={this.handleChange} title="Telefono de contacto: Padre" className="form-control" />
+                              <input name="PTelefono" type="text" disabled={this.props.dis} maxlength="10" id="25" value={this.state.items[25]} onChange={this.handleChange} title="Telefono de contacto: Padre" className="form-control" />
                               
                             </div>
                     </div>             

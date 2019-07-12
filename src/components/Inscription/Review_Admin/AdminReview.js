@@ -13,6 +13,7 @@ class Working_Info extends Component {
           this.setState({ display: 'none' });
           }
         this.setState({ checked: event.target.checked })
+        this.props.review(event.target.checked);
      }
      render() {
         return (

@@ -38,6 +38,8 @@ class AcademicInfo extends Component {
             this.setState({items:info , firstload:false, confirmar:true})
             if(info[0]===true){
                 this.setState({checked:true, display: 'block'})
+            }else{
+                info[0]=false;
             }
           }
           console.log(this.props.submit);
@@ -57,7 +59,7 @@ class AcademicInfo extends Component {
                             <div className="col-md-2">
                                 <label><input type="checkbox" id="0"
                                     checked={this.state.checked}
-                                    onChange={this.handleCheckboxChange} />¿Está cursando actualmente?</label>
+                                    onChange={this.handleCheckboxChange} disabled={this.props.dis} />¿Está cursando actualmente?</label>
                             </div>
                         </div>
 
@@ -66,7 +68,7 @@ class AcademicInfo extends Component {
                     <div className="row" >
                         <div className="col-md-4">
                             <label for="inputState">Educación Básica</label>
-                            <select id="1" value={this.state.items[1]} onChange={this.handleChange} className="form-control">
+                            <select id="1" value={this.state.items[1]} onChange={this.handleChange} className="form-control" disabled={this.props.dis}>
                                 <option selected>Escoja...</option>
                                 <option value = "1">Primero</option>
                                 <option value = "2">Segundo</option>
@@ -87,17 +89,17 @@ class AcademicInfo extends Component {
                     </div>
                     <div className="col-md-6">
                             <label for="inputInstituto">Institución académica que cursó el último año</label>
-                            <input type="text" className="form-control" id="2"  onChange={this.handleChange} value={this.state.items[2]}/>
+                            <input type="text" className="form-control" id="2"  onChange={this.handleChange} value={this.state.items[2]} disabled={this.props.dis}/>
                         </div>
                     <div className="row">
                         <div className="col-md-4">
                             <label>Fecha de terminación de estudios</label>
-                            <input type="date" className="form-control" id="3"  onChange={this.handleChange} value={this.state.items[3]}/>
+                            <input type="date" className="form-control" id="3"  onChange={this.handleChange} value={this.state.items[3]} disabled={this.props.dis}/>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label for="examinarActaCert">Adjunte Acta de Grado o Certificación</label>
-                                <input type="file" className="form-control-file" id="4" />
+                                <input type="file" className="form-control-file" id="4" disabled={this.props.dis}/>
                             </div>
                         </div>
 

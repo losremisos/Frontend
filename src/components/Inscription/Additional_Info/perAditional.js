@@ -43,7 +43,7 @@ class AdditionalInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom21">País de residencia (*):</label>
             <input type="text" className="form-control" id="1" name="paisres" placeholder="Pais de Residencia"
-              onChange={this.handleChange} value={this.state.items[1]}/>
+              onChange={this.handleChange} value={this.state.items[1]} disabled={this.props.dis}/>
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom22">Departamento de residencia (*):</label>
@@ -60,11 +60,11 @@ class AdditionalInfo extends Component {
               <div className="form-group col-md-6">
                 <label for="validationCustom24">Telefono fijo:</label>
                 <input type="number" className="form-control" id="4" name="telefonof" placeholder="Telefono Fijo"
-                  onChange={this.handleChange} value={this.state.items[4]}/>
+                  onChange={this.handleChange} value={this.state.items[4]} disabled={this.props.dis}/>
               </div>
               <div className="form-group col-md-6">
                 <label for="validationCustom25">Telefono Movil(*):</label>
-                <input type="number" disabled className="form-control" id="5"  value={this.state.items[5]}/>
+                <input type="number" disabled className="form-control" id="5" value={this.state.items[5]}/>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@ class AdditionalInfo extends Component {
           </div>
           <div className="form-group col-md-3">
             <label for="inputState10">Tipo de vivienda (*):</label>
-            <select id="inputState10" className="form-control" id="6" onChange={this.handleChange} value={this.state.items[6]}>
+            <select className="form-control" id="6" onChange={this.handleChange} value={this.state.items[6]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="1">Propia</option>
               <option value="2">Arriendo</option>
@@ -87,7 +87,7 @@ class AdditionalInfo extends Component {
           </div>
           <div className="form-group col-md-3">
             <label for="inputState11">Estrato (*):</label>
-            <select id="inputState11" className="form-control" id="7" onChange={this.handleChange} value={this.state.items[7]}>
+            <select className="form-control" id="7" onChange={this.handleChange} value={this.state.items[7]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="1">0</option>
               <option value="2">1</option>
@@ -100,7 +100,7 @@ class AdditionalInfo extends Component {
           </div>
           <div className="form-group col-md-3">
             <label for="inputState12">¿Pertenece a Red Unidos (*):</label>
-            <select id="inputState12" className="form-control" id="8" onChange={this.handleChange} value={this.state.items[8]}>
+            <select className="form-control" id="8" onChange={this.handleChange} value={this.state.items[8]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="false">No</option>
               <option value="true">Si</option>
@@ -111,7 +111,7 @@ class AdditionalInfo extends Component {
         <div className="form-row">
           <div className="form-group col-md-3">
             <label for="inputState13">Tiene sisbén (*):</label>
-            <select id="inputState13" className="form-control" id="9" onChange={this.handleChange} value={this.state.items[9]}>
+            <select className="form-control" id="9" onChange={this.handleChange} value={this.state.items[9]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="false">No</option>
               <option value="true">Si</option>
@@ -122,7 +122,7 @@ class AdditionalInfo extends Component {
         <div className="form-row">
           <div className="form-group col-md-3">
             <label for="inputState14">Esta a cargo del ICBF (*):</label>
-            <select id="inputState14" className="form-control" id="10" onChange={this.handleChange} value={this.state.items[10]}>
+            <select className="form-control" id="10" onChange={this.handleChange} value={this.state.items[10]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="false">No</option>
               <option value="true">Si</option>
@@ -136,11 +136,11 @@ class AdditionalInfo extends Component {
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label for="validationCustom26">Estatura (cm)(*):</label>
-                <input type="number" className="form-control" id="11" onChange={this.handleChange} value={this.state.items[11]} />
+                <input type="number" className="form-control" id="11" onChange={this.handleChange} value={this.state.items[11]} disabled={this.props.dis} />
               </div>
               <div className="form-group col-md-6">
                 <label for="validationCustom27">Peso (Kg)(*):</label>
-                <input type="number" className="form-control" id="12" onChange={this.handleChange} value={this.state.items[12]} />
+                <input type="number" className="form-control" id="12" onChange={this.handleChange} value={this.state.items[12]} disabled={this.props.dis}/>
               </div>
             </div>
           </div>
@@ -149,7 +149,7 @@ class AdditionalInfo extends Component {
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label for="inputState15">Grupo sanguíneo (*):</label>
-                <select id="13" className="form-control" onChange={this.handleChange} value={this.state.items[13]}>
+                <select id="13" className="form-control" onChange={this.handleChange} value={this.state.items[13]} disabled={this.props.dis}>
                   <option selected>Seleccione...</option>
                   <option value="1">A</option>
                   <option value="2">AB</option>
@@ -159,7 +159,7 @@ class AdditionalInfo extends Component {
               </div>
               <div className="form-group col-md-6">
                 <label for="inputState16">Factor RH (*):</label>
-                <select id="14" className="form-control" onChange={this.handleChange} value={this.state.items[14]}>
+                <select id="14" className="form-control" onChange={this.handleChange} value={this.state.items[14]} disabled={this.props.dis}>
                   <option selected>Seleccione...</option>
                   <option value="1">RH +</option>
                   <option value="2">RH -</option>
@@ -170,7 +170,7 @@ class AdditionalInfo extends Component {
 
           <div className="form-group col-md-3">
             <label for="inputState17">Número de hijos (*):</label>
-            <select id="15" className="form-control" onChange={this.handleChange} value={this.state.items[15]}>
+            <select id="15" className="form-control" onChange={this.handleChange} value={this.state.items[15]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="1">0</option>
               <option value="2">1</option>
@@ -186,7 +186,7 @@ class AdditionalInfo extends Component {
         <div className="form-row">
           <div className="form-group col-md-3">
             <label for="inputState18">Estado civil (*):</label>
-            <select id="16" className="form-control" onChange={this.handleChange} value={this.state.items[16]}>
+            <select id="16" className="form-control" onChange={this.handleChange} value={this.state.items[16]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="1">Soltero</option>
               <option value="2">Casado</option>

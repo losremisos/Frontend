@@ -46,7 +46,7 @@ class DependenceInfo extends Component {
                  <div className="col-md-12">
                               <div className="control-group">
                                     <label for="DependenciaEconómica">Dependencia Económica (<span className="field-required">*</span>):</label>
-                                    <select name="DependenciaEconómica" title="Dependencia Económica" id="0" className="form-control" value={this.state.items[0]} onChange={this.handleChange}>
+                                    <select disabled={this.props.dis} name="DependenciaEconómica" title="Dependencia Económica" id="0" className="form-control" value={this.state.items[0]} onChange={this.handleChange}>
                                       <option>Seleccione...</option>
                                       <option value="1">Depende del Grupo familiar (Padre y/o Madre)</option>
                                       <option value="2">Depende de un Tercero</option>

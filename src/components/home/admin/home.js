@@ -19,12 +19,24 @@ export class Home extends React.Component {
         users: res.data,
         loading: false,
       });
+      let usersrevision = []
+      var j = 0
+      for(var i = 0; i<this.state.users.length; i++){
+         if(this.state.users[i].estadoProceso === 0){
+           usersrevision[j] = this.state.users[i];
+           usersrevision[j].estadoProceso = "Revision";
+           j +=1;
+         }
+      }
+      this.setState({
+        users: usersrevision,
+      });
     }).catch((err) => console.log(err));
   };
 
   renderUsers() {
     const { users } = this.state;
-
+    console.log(users)
     return (
       <div className="user-box">
         <div className="container-fluid main-container">
@@ -47,7 +59,7 @@ export class Home extends React.Component {
                         <i  /> {user.estadoProceso}
                       </div>
 
-                      <Link to='/home'>
+                      <Link to='/inscription'>
                         <div onClick={() => {localStorage.setItem("AuxID", user.id)}}>Más información</div>
                       </Link>
                     </div>
