@@ -169,7 +169,7 @@ createinscriptioninfo(){
                 <div className="col-md-12 services-main-box">
                   <div className="row">
                     <div className="col-md-4 styleImg2">
-                      <img src={SourceImg4} alt="Escudo_Ejercito" />
+                      <img src={SourceImg4} className="img-fluid" alt="Escudo_Ejercito" />
                     </div>
                   </div>
                 </div>
