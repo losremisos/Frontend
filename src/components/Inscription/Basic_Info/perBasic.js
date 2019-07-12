@@ -46,7 +46,7 @@ class BasicInfo extends Component {
             <label>Adjunte Registro civil de nacimiento (*):</label>
             <div type="button" className="btn div_file">
               <p className="text">Agregar archivo</p>
-              <input type="file" className="btn_enviar_1" id="0" name="registrocivil" placeholder="Registro Civil" accept=".pdf"></input>
+              <input type="file" className="btn_enviar_1" id="0" name="registrocivil" placeholder="Registro Civil" accept=".pdf" disabled={this.props.dis}></input>
             </div>
           </div>
 
@@ -54,7 +54,7 @@ class BasicInfo extends Component {
             <label>Adjunte documento de identidad (*):</label>
             <div type="button" className="btn div_file">
               <p className="text">Agregar archivo</p>
-              <input type="file" className="btn_enviar_1" id="1" name="documentoidentidad" placeholder="Documento de Identidad" accept=".pdf"></input>
+              <input type="file" className="btn_enviar_1" id="1" name="documentoidentidad" placeholder="Documento de Identidad" accept=".pdf" disabled={this.props.dis}></input>
             </div>
           </div>
 
@@ -62,7 +62,7 @@ class BasicInfo extends Component {
             <label>Adjunte fotografia (*):</label>
             <div type="button" className="btn div_file">
               <p className="text">Agregar archivo</p>
-              <input type="file" className="btn_enviar_1" id="btn_enviar_03" accept=".jpg,.jpeg,.png"></input>
+              <input type="file" className="btn_enviar_1" id="btn_enviar_03" accept=".jpg,.jpeg,.png" disabled={this.props.dis}></input>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom02">Numero de tarjeta de Identidad:</label>
             <input type="number" className="form-control" name="numberTI" placeholder="Tarjeta Identidad"
-              onChange={this.handleChange} id="4" value={this.state.items[4]}/>
+              onChange={this.handleChange} id="4" value={this.state.items[4]} disabled={this.props.dis}/>
           </div>
         </div>
 
@@ -114,21 +114,21 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom07">Fecha de nacimiento (*):</label>
             <input type="date" className="form-control" name="fechanacimiento" placeholder="Fecha de Nacimiento"
-              onChange={this.handleChange} id="8" value={this.state.items[8]}/>
+              onChange={this.handleChange} id="8" value={this.state.items[8]} disabled={this.props.dis}/>
 
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom08">Pais de nacimiento (*):</label>
             <input type="text" className="form-control" name="paisnacimiento" placeholder="Pais de Nacimiento"
-              onChange={this.handleChange} id="9" value={this.state.items[9]} />
+              onChange={this.handleChange} id="9" value={this.state.items[9]} disabled={this.props.dis} />
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom09">Departamento de nacimiento (*):</label>
-            <input type="text" className="form-control" id="10" onChange={this.handleChange} value={this.state.items[10]}/>
+            <input type="text" className="form-control" id="10" onChange={this.handleChange} value={this.state.items[10]} disabled={this.props.dis}/>
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom10">Municipio de nacimiento (*):</label>
-            <input type="text" className="form-control" id="11" onChange={this.handleChange} value={this.state.items[11]} />
+            <input type="text" className="form-control" id="11" onChange={this.handleChange} value={this.state.items[11]} disabled={this.props.dis} />
           </div>
         </div>
 
@@ -136,22 +136,22 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom11">Fecha de expedicion del documento de identidad (*):</label>
             <input type="date" className="form-control" name="fechexdoc" placeholder="Fecha de Expedicion del Documento"
-              onChange={this.handleChange} id="12" value={this.state.items[12]}/>
+              onChange={this.handleChange} id="12" value={this.state.items[12]} disabled={this.props.dis}/>
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom12">Pais del expedición del documento de identidad (*):</label>
             <input type="text" className="form-control" name="paisexdoc" placeholder="Pais de Expedicion del Documento"
-              onChange={this.handleChange} id="13" value={this.state.items[13]} />
+              onChange={this.handleChange} id="13" value={this.state.items[13]} disabled={this.props.dis}/>
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom13">Departamento de expedición del documento de identidad (*):</label>
             <input type="text" className="form-control" name="depexdoc" placeholder="Departamento de Expedicion del Documento"
-              onChange={this.handleChange} id="14" value={this.state.items[14]} />
+              onChange={this.handleChange} id="14" value={this.state.items[14]} disabled={this.props.dis} />
           </div>
           <div className="form-group col-md-3">
             <label for="validationCustom14">Municipio de expedición del documento de identidad (*):</label>
             <input type="text" className="form-control" name="munexdoc" placeholder="Municipio de Expedicion del Documento"
-              onChange={this.handleChange} id="15" value={this.state.items[15]} />
+              onChange={this.handleChange} id="15" value={this.state.items[15]} disabled={this.props.dis} />
           </div>
         </div>
 
@@ -159,7 +159,7 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="inputState01">Genero (*):</label>
             <select className="form-control" name="Genero" placeholder="Genero"
-              onChange={this.handleChange} id="16" value={this.state.items[16]}>
+              onChange={this.handleChange} id="16" value={this.state.items[16]} disabled={this.props.dis}>
               <option disabled selected>Seleccione...</option>
               <option value="1">Masculino</option>
               <option value="2">Femenino</option>
@@ -169,7 +169,7 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="inputState02">Nacionalidad (*):</label>
             <select className="form-control" name="Nacionalidad" placeholder="Nacionalidad"
-              onChange={this.handleChange} id="17" value={this.state.items[17]}>
+              onChange={this.handleChange} id="17" value={this.state.items[17]} disabled={this.props.dis}>
               <option disabled selected>Seleccione...</option>
               <option value="1">Colombiano</option>
               <option value="2">Doble Nacionalidad</option>
@@ -179,7 +179,7 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom04">Ciudadano con doble nacionalidad (*):</label>
             <select className="form-control" name="2Nacionalidad" placeholder="Doble Nacionalidad"
-              onChange={this.handleChange} id="18" value={this.state.items[18]}>
+              onChange={this.handleChange} id="18" value={this.state.items[18]} disabled={this.props.dis}>
               <option disabled selected>Seleccione...</option>
               <option value="false">No</option>
               <option value="true">Si</option>
@@ -188,7 +188,7 @@ class BasicInfo extends Component {
           <div className="form-group col-md-3">
             <label for="validationCustom04">Ciudadano Colombiano retornado del exterior (*):</label>
             <select className="form-control" name="retornadoExterior" placeholder="Retornado del Exterior"
-              onChange={this.handleChange} id="19" value={this.state.items[19]}>
+              onChange={this.handleChange} id="19" value={this.state.items[19]} disabled={this.props.dis}>
               <option disabled selected>Seleccione...</option>
               <option value="false">No</option>
               <option value="true">Si</option>
@@ -199,7 +199,7 @@ class BasicInfo extends Component {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label for="validationCustom15">Correo electronico (*):</label>
-            <input type="email" className="form-control" disabled id="20" value={this.state.items[20]}/>
+            <input type="email" className="form-control" disabled id="20" value={this.state.items[20]} disabled={this.props.dis}/>
           </div>
         </div>
 
@@ -211,7 +211,7 @@ class BasicInfo extends Component {
 Una exención es un privilegio que lo exime para la prestación del servicio militar, además debe revisar el siguiente listado si cumple con alguno de los casos de aplazamiento de su proceso de definición de la situación militar, previa verificación por las autoridades competentes.
                 </p>
             <select className="form-control" name="exenciones" placeholder="Exenciones de ley y causales de aplazamiento"
-              onChange={this.handleChange} id="21" value={this.state.items[21]}>
+              onChange={this.handleChange} id="21" value={this.state.items[21]} disabled={this.props.dis}>
               <option selected>Seleccione...</option>
               <option value="0">Ninguna</option>
               <option value="1">Beneficiario de la ley 1448 Junio 10 del 2011 (Ley de victimas)</option>

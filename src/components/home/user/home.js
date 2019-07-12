@@ -97,7 +97,7 @@ createrelativefather(){
   )
   .then(response => {     
     console.log("registration res", response);
-    //this.createrelativemother();
+    this.createrelativemother();
 
   }).catch(error => {
     console.log("registration error", error);

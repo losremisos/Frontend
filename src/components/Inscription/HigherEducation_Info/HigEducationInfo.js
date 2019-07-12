@@ -37,6 +37,8 @@ handleCheckboxChange = event => {
       this.setState({items:info , firstload:false, confirmar:true})
       if(info[0]===true){
           this.setState({checked:true, display: 'block'})
+      }else{
+        info[0]=false;
       }
     }
     console.log(this.props.submit);
@@ -56,7 +58,7 @@ handleCheckboxChange = event => {
                             <div className="col-md-2">
                                 <label><input type="checkbox" id="0" 
                                     checked={this.state.checked}
-                                    onChange={this.handleCheckboxChange} />¿Cursa o ha cursado algún estudio de educación superior?</label>
+                                    onChange={this.handleCheckboxChange} disabled={this.props.dis}/>¿Cursa o ha cursado algún estudio de educación superior?</label>
                             </div>
                         </div>
 
@@ -65,7 +67,7 @@ handleCheckboxChange = event => {
             <div className="form-row">
               <div className="form-group col-md-3">
               <label for="inputState55">Modalidad académica  (*)</label>
-              <select id="1" className="form-control" value={this.state.items[1]} onChange={this.handleChange}>
+              <select id="1" className="form-control" value={this.state.items[1]} onChange={this.handleChange} disabled={this.props.dis}>
                   <option selected disabled>Seleccione...</option>
                   <option value = "1">Técnica</option>
                   <option value = "2">Tecnólogica</option>
@@ -79,13 +81,13 @@ handleCheckboxChange = event => {
               </div>
               <div className="form-group col-md-6">
                 <label for="validationCustom56">Nombre de los estudios o título obtenido (*):</label>
-                <input type="text" className="form-control" id="2" value={this.state.items[2]} onChange={this.handleChange}/>
+                <input type="text" className="form-control" id="2" value={this.state.items[2]} onChange={this.handleChange} disabled={this.props.dis}/>
               </div>
               <div className="form-group col-md-3">
                     <div className="form-row"> 
                         <div className="form-group col-md-6">
                             <label for="inputState56">Semestre (*)</label>
-                            <select id="3" className="form-control" value={this.state.items[3]} onChange={this.handleChange}>
+                            <select id="3" className="form-control" value={this.state.items[3]} onChange={this.handleChange} disabled={this.props.dis}>
                                 <option selected disabled>Seleccione...</option>
                                 <option value = "1">I</option>
                                 <option value = "2">II</option>
@@ -101,7 +103,7 @@ handleCheckboxChange = event => {
                         </div>
                         <div className="form-group col-md-6">
                             <label for="inputState56">Graduado (*)</label>
-                            <select id="4" className="form-control" value={this.state.items[4]} onChange={this.handleChange}>
+                            <select id="4" className="form-control" value={this.state.items[4]} onChange={this.handleChange} disabled={this.props.dis}>
                                 <option selected disabled>Seleccione...</option>
                                 <option value = "false">No</option>
                                 <option value = "true">Si</option>                                 </select> 
@@ -116,7 +118,7 @@ handleCheckboxChange = event => {
 
               <div className="form-group col-md-6">
                 <label for="validationCustom68">Institución educativa donde cursó el último año:</label>
-                <input type="text" className="form-control" id="5" value={this.state.items[5]} onChange={this.handleChange}/>
+                <input type="text" className="form-control" id="5" value={this.state.items[5]} onChange={this.handleChange} disabled={this.props.dis}/>
               </div>
               
               
@@ -124,7 +126,7 @@ handleCheckboxChange = event => {
                   <label>Adjunte certificado de estudios (*):</label>
                   <div type="button" className="btn div_file">
                     <p className="text">Agregar archivo</p>
-                    <input type="file" className="btn_enviar_1" id="6" accept=".pdf" ></input>
+                    <input type="file" className="btn_enviar_1" id="6" accept=".pdf" disabled={this.props.dis}></input>
                   </div>
               </div>
             </div>
