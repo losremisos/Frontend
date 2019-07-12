@@ -1,29 +1,60 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 
 class AcademicInfo extends Component {
-    state = {
-        display: 'none',
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          users: [],
+          items: [],
+          firstload : true,
+          display: 'none',
         checked: false
-    }
+        }
+        this.handleChange = this.handleChange.bind(this);
+      }
+      handleChange(event) {
+        let newitem = this.state.items;
+        newitem[parseInt(event.target.id, 10)] = event.target.value;
+        this.setState({ items:newitem });
+      }
+    
     handleCheckboxChange = event => {
         if (this.state.display === 'none') {
             this.setState({ display: 'block' });
         } else {
             this.setState({ display: 'none' });
         }
-        this.setState({ checked: event.target.checked })
+        let newitem = this.state.items;
+        newitem[parseInt(event.target.id, 10)] = event.target.checked;
+        this.setState({ checked: event.target.checked, items:newitem });
     }
     render() {
+        if(this.state.firstload===true && this.props.load===true){
+            let info = this.props.information[2]
+            this.setState({items:info , firstload:false})
+            if(info[0]===true){
+                this.setState({checked:true, display: 'block'})
+            }
+          }
+          console.log(this.props.submit);
+            
+          if (this.props.submit === "1") {
+
+            console.log(this.state.items);
+            this.props.information[2] = this.state.items;
+            this.props.getDatos(this.props.information);
+            this.setState({firstload:true})
+          }
         return (
             <div>
-                {/* <Navigation/>*/}
                 <div className="container">
-                    {/*<form>*/}
                     <div className="row">
                         <div className="row">
                             <div className="col-md-2">
-                                <label><input type="checkbox" id="TrabajaActual"
+                                <label><input type="checkbox" id="0"
                                     checked={this.state.checked}
                                     onChange={this.handleCheckboxChange} />¿Está cursando actualmente?</label>
                             </div>
@@ -34,7 +65,7 @@ class AcademicInfo extends Component {
                     <div className="row" >
                         <div className="col-md-4">
                             <label for="inputState">Educación Básica</label>
-                            <select id="inputState" className="form-control">
+                            <select id="1" value={this.state.items[1]} onChange={this.handleChange} className="form-control">
                                 <option selected>Escoja...</option>
                                 <option value = "1">Primero</option>
                                 <option value = "2">Segundo</option>
@@ -47,7 +78,6 @@ class AcademicInfo extends Component {
                                 <option value = "9">Noveno</option>
                                 <option value = "10">Decimo</option>
                                 <option value = "11">Undecimo</option>
-
                             </select>
                        
                     </div>
@@ -56,17 +86,17 @@ class AcademicInfo extends Component {
                     </div>
                     <div className="col-md-6">
                             <label for="inputInstituto">Institución académica que cursó el último año</label>
-                            <input type="text" className="form-control" id="inputInstituto" />
+                            <input type="text" className="form-control" id="2"  onChange={this.handleChange} value={this.state.items[2]}/>
                         </div>
                     <div className="row">
                         <div className="col-md-4">
                             <label>Fecha de terminación de estudios</label>
-                            <input type="date" className="form-control" id="fechaTerminacion" />
+                            <input type="date" className="form-control" id="3"  onChange={this.handleChange} value={this.state.items[3]}/>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label for="examinarActaCert">Adjunte Acta de Grado o Certificación</label>
-                                <input type="file" className="form-control-file" id="examinarActaCert" />
+                                <input type="file" className="form-control-file" id="4" />
                             </div>
                         </div>
 

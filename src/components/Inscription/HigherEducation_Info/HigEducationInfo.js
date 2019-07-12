@@ -2,26 +2,58 @@ import React, { Component } from 'react';
 
 
 class HigherEducationInfo extends Component {
-  state = {
+
+constructor(props) {
+  super(props);
+  this.state = {
+    users: [],
+    items: [],
+    firstload : true,
     display: 'none',
     checked: false
+  }
+  this.handleChange = this.handleChange.bind(this);
 }
+handleChange(event) {
+  let newitem = this.state.items;
+  newitem[parseInt(event.target.id, 10)] = event.target.value;
+  this.setState({ items:newitem });
+}
+
 handleCheckboxChange = event => {
     if (this.state.display === 'none') {
         this.setState({ display: 'block' });
     } else {
         this.setState({ display: 'none' });
     }
-    this.setState({ checked: event.target.checked })
+    let newitem = this.state.items;
+    newitem[parseInt(event.target.id, 10)] = event.target.checked;
+    this.setState({ checked: event.target.checked, items:newitem });
 }
   render() {
+    if(this.state.firstload===true && this.props.load===true){
+      let info = this.props.information[3]
+      this.setState({items:info , firstload:false})
+      if(info[0]===true){
+          this.setState({checked:true, display: 'block'})
+      }
+    }
+    console.log(this.props.submit);
+      
+    if (this.props.submit === "1") {
+
+      console.log(this.state.items);
+      this.props.information[3] = this.state.items;
+      this.props.getDatos(this.props.information);
+      this.setState({firstload:true})
+    }
     return (
       <div>
           
           <div className="row">
                         <div className="row">
                             <div className="col-md-2">
-                                <label><input type="checkbox" id="TrabajaActual"
+                                <label><input type="checkbox" id="0" 
                                     checked={this.state.checked}
                                     onChange={this.handleCheckboxChange} />¿Cursa o ha cursado algún estudio de educación superior?</label>
                             </div>
@@ -32,7 +64,7 @@ handleCheckboxChange = event => {
             <div className="form-row">
               <div className="form-group col-md-3">
               <label for="inputState55">Modalidad académica  (*)</label>
-              <select id="inputState55" className="form-control" required>
+              <select id="1" className="form-control" value={this.state.items[1]} onChange={this.handleChange}>
                   <option selected disabled>Seleccione...</option>
                   <option value = "1">Técnica</option>
                   <option value = "2">Tecnólogica</option>
@@ -46,13 +78,13 @@ handleCheckboxChange = event => {
               </div>
               <div className="form-group col-md-6">
                 <label for="validationCustom56">Nombre de los estudios o título obtenido (*):</label>
-                <input type="text" className="form-control" id="validationCustom56" required/>
+                <input type="text" className="form-control" id="2" value={this.state.items[2]} onChange={this.handleChange}/>
               </div>
               <div className="form-group col-md-3">
                     <div className="form-row"> 
                         <div className="form-group col-md-6">
                             <label for="inputState56">Semestre (*)</label>
-                            <select id="inputState56" className="form-control" required>
+                            <select id="3" className="form-control" value={this.state.items[3]} onChange={this.handleChange}>
                                 <option selected disabled>Seleccione...</option>
                                 <option value = "1">I</option>
                                 <option value = "2">II</option>
@@ -68,10 +100,10 @@ handleCheckboxChange = event => {
                         </div>
                         <div className="form-group col-md-6">
                             <label for="inputState56">Graduado (*)</label>
-                            <select id="inputState56" className="form-control" required>
+                            <select id="4" className="form-control" value={this.state.items[4]} onChange={this.handleChange}>
                                 <option selected disabled>Seleccione...</option>
-                                <option>No</option>
-                                <option>Si</option>                                 </select> 
+                                <option value = "false">No</option>
+                                <option value = "true">Si</option>                                 </select> 
                         </div>
                     </div>
                 </div>  
@@ -83,7 +115,7 @@ handleCheckboxChange = event => {
 
               <div className="form-group col-md-6">
                 <label for="validationCustom68">Institución educativa donde cursó el último año:</label>
-                <input type="text" className="form-control" id="validationCustom68" />
+                <input type="text" className="form-control" id="5" value={this.state.items[5]} onChange={this.handleChange}/>
               </div>
               
               
@@ -91,7 +123,7 @@ handleCheckboxChange = event => {
                   <label>Adjunte certificado de estudios (*):</label>
                   <div type="button" className="btn div_file">
                     <p className="text">Agregar archivo</p>
-                    <input type="file" className="btn_enviar_1" id="btn_enviar_52" accept=".pdf" required></input>
+                    <input type="file" className="btn_enviar_1" id="6" accept=".pdf" ></input>
                   </div>
               </div>
             </div>

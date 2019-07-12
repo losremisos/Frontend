@@ -163,8 +163,8 @@ class InfoPerfil extends Component{
                     <div className="list-group-item"><p>Correo Electronico</p><h6>{users.email}</h6></div>
                     <div className="list-group-item"><p>Estado</p><h6>{State}</h6></div>
                     <div className="list-group-item"><p>Documento de Identificación</p><h6>{Tipe_Doc}{users.documento}</h6></div>
-                    <div className="list-group-item"><p>Departamento de Residencia</p><h6>{extrausers.departamento}</h6></div>
-                    <div className="list-group-item"><p>Ciudad de Residencia</p><h6>{extrausers.ciudad}</h6></div>
+                    <div className="list-group-item"><p>Departamento de Residencia</p><h6>{extrausers.dpto_residencia}</h6></div>
+                    <div className="list-group-item"><p>Ciudad de Residencia</p><h6>{extrausers.municipio_residencia}</h6></div>
                     <div className="list-group-item"><p>Dirección</p><h6>{extrausers.direccion}</h6></div>
                     <div className="list-group-item"><p>Teléfono Movil</p><h6>{extrausers.telefono_movil}</h6></div>
                 </ul>
