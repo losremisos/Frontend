@@ -5,87 +5,81 @@ import { RM_SESION } from './../../JS/api';
 export class Navbar extends Component {
 
   render() {
-    let Nombre = " " + localStorage.getItem("UsrName");
-    //console.log(Nombre)
-    //console.log(localStorage)
+    let Nombre = " "+localStorage.getItem("UsrName");
+    console.log(Nombre)
+    console.log(localStorage)
     let IsLogged = localStorage.getItem("IsLogged");
-    //if(IsLogged === "true") {
-    //console.log(localStorage)
-    //}
+    if(IsLogged === "true") {
+      console.log(localStorage)
+    }
     let login = (<Link style={{ textDecoration: 'none' }} className="option" to="/login" >Iniciar sesión</Link>);
     let logout = (<Link style={{ textDecoration: 'none' }} className="option" to="/home">
       <div onClick={() => { RM_SESION() }}>Cerrar sesión</div>
     </Link>);
     let welcome = (<Link style={{ textDecoration: 'none' }} className="option" to="/home" >Bienvenido {Nombre}</Link>);
-    let registrar = (<Link style={{ textDecoration: 'none' }} className="option" to="/registry" onClick>
-      <span onClick={() => { RM_SESION() }}>Registrarse</span>
+    let registrar = (<Link style={{ textDecoration: 'none' }} className="option" to="/registry">
+      <div onClick={() => { RM_SESION() }}>Registrarse</div>
     </Link>);
     let window = "";
     console.log(IsLogged)
 
     if (IsLogged === "true") {
       window =
-        <div className="container" style={{ display: 'inherit' }}>
-          <ul className="navbar-nav">
-            <li className="nav-item" id="Inicio">
-              <a className="nav-link" href="/home">
-                <span id="inicioHome" >Inicio</span>
-              </a>
-            </li>
-            <li className="nav-item" id="Consultas">
-              <a className="nav-link" href="/Default">
-                <span id="consultasHome" >Consultas</span>
-              </a>
-            </li>
-            <li className="nav-item" id="Liquidacion">
-              <a className="nav-link" href="/Default">
-                <span id="liquidacionHome" >Soporte Liquidacion</span>
-              </a>
-            </li>
-            <li className="nav-item" id="Perfil">
-              <a className="nav-link" href="/profile">
-                <span id="perfilHome" >Mi Perfil</span>
-              </a>
-            </li>
-          </ul>
-          <ul className="navbar-nav ul-right">
-            <li className="nav-item navbar-right" id="Nombre">
-              {welcome}
-            </li>
-            <li className="nav-item navbar-right" id="Salir">
+        <ul className="nav navbar-nav2">
+          <li id="Inicio">
+            <a href="/home">
+              <span id="inicioHome" >Inicio</span>
+            </a>
+          </li>
+          <li id="Consultas">
+            <a href="/Default">
+              <span id="consultasHome" >Consultas</span>
+            </a>
+          </li>
+          <li id="Liquidacion">
+            <a href="/Default">
+              <span id="liquidacionHome" >Soporte Liquidacion</span>
+            </a>
+          </li>
+          <li id="Perfil">
+            <a href="/profile">
+              <span id="perfilHome" >Mi Perfil</span>
+            </a>
+          </li>
+
+          <li id="Nombre">
+            {welcome}
+          </li>
+          <li id="Salir">
               {logout}
-            </li>
-          </ul>
-        </div>
+          </li>
+        </ul>
     } else {
       window =
-        <div className="container" style={{ display: 'inherit' }}>
-          <ul className="navbar-nav">
-            <li className="nav-item" id="Inicio">
-              <a className="nav-link" href="/Default">
-                <span id="inicioHome" >Inicio</span>
-              </a>
-            </li>
-            <li className="nav-item" id="Consultas">
-              <a className="nav-link" href="/Default">
-                <span id="consultasHome" >Consultas</span>
-              </a>
-            </li>
-            <li className="nav-item" id="Liquidacion">
-              <a className="nav-link" href="/Default">
-                <span id="liquidacionHome" >Soporte Liquidacion</span>
-              </a>
-            </li>
-          </ul>
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item navbar-right" id="Nombre">
-              {registrar}
-            </li>
-            <li className="nav-item navbar-right" id="Salir">
+        <ul className="nav navbar-nav2">
+          <li id="Inicio">
+            <a href="/Default">
+              <span id="inicioHome" >Inicio</span>
+            </a>
+          </li>
+          <li id="Consultas">
+            <a href="/Default">
+              <span id="consultasHome" >Consultas</span>
+            </a>
+          </li>
+          <li id="Liquidacion">
+            <a href="/Default">
+              <span id="liquidacionHome" >Soporte Liquidacion</span>
+            </a>
+          </li>
+
+          <li id="Nombre">
+            {registrar}
+          </li>
+          <li id="Salir">
               {login}
-            </li>
-          </ul>
-        </div>
+          </li>
+        </ul>
     }
 
     return (
@@ -106,16 +100,12 @@ export class Navbar extends Component {
         </div>
 
         <div className="row2">
-          <div className="navbar navbar-expand-lg navbar-dark ournav">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div className="collapse navbar-collapse" id="navbarNav">
-              {window}
+          <div className="navbar ournav">
+            <div className="container ourcontainer">
+              <div className="collapse navbar-collapse ourcollapse">
+                {window}
+              </div>
             </div>
-
           </div>
         </div>
       </div>
