@@ -102,7 +102,7 @@
       min-height: 50px;
       margin-bottom: 20px;
       border: 1px solid transparent;
-      min-width: 200px;
+      min-width: 2000px;
   }
   
   .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -110,7 +110,7 @@
   }
   
   .container {
-      max-width: 750px;
+      max-width: 7500px;
       padding-right: 15px;
       padding-left: 15px;
       margin-right: auto;
