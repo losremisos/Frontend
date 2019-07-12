@@ -10,7 +10,8 @@ class BasicInfo extends Component {
     this.state = {
       users: [],
       items: [],
-      firstload : true
+      firstload : true,
+      confirmar: true
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -24,13 +25,13 @@ class BasicInfo extends Component {
   render() {
     if(this.state.firstload===true && this.props.load===true){
       let info = this.props.information[0]
-      this.setState({items:info , firstload:false})
+      this.setState({items:info , firstload:false,confirmar:true})
     }
-    if (this.props.submit === "1") {
+    if (this.props.submit === "1" && this.state.confirmar===true) {
       console.log(this.state.items);
       this.props.information[0] = this.state.items;
       this.props.getDatos(this.props.information);
-      this.setState({firstload:true})
+      this.setState({firstload:true,confirmar:false})
     }
     const { users } = this.state;
     console.log("Lo que hay en user del state");

@@ -11,7 +11,8 @@ class AcademicInfo extends Component {
           items: [],
           firstload : true,
           display: 'none',
-        checked: false
+        checked: false,
+        confirmar:true
         }
         this.handleChange = this.handleChange.bind(this);
       }
@@ -34,19 +35,19 @@ class AcademicInfo extends Component {
     render() {
         if(this.state.firstload===true && this.props.load===true){
             let info = this.props.information[2]
-            this.setState({items:info , firstload:false})
+            this.setState({items:info , firstload:false, confirmar:true})
             if(info[0]===true){
                 this.setState({checked:true, display: 'block'})
             }
           }
           console.log(this.props.submit);
             
-          if (this.props.submit === "1") {
+          if (this.props.submit === "1" && this.state.confirmar===true) {
 
             console.log(this.state.items);
             this.props.information[2] = this.state.items;
             this.props.getDatos(this.props.information);
-            this.setState({firstload:true})
+            this.setState({firstload:true, confirmar:false})
           }
         return (
             <div>

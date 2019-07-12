@@ -2,7 +2,33 @@ import React, { Component } from 'react';
 import '../Family_Info_Components/Familiar';
 
 class DependenceInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      firstload : true,
+      confirmar: true
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    let newitem = this.state.items;
+    newitem[parseInt(event.target.id, 10)] = event.target.value;
+    this.setState({ items:newitem });
+  }
   render() {
+    if(this.state.firstload===true && this.props.load===true){
+      let info = this.props.information[8]
+      this.setState({items:info , firstload:false, confirmar:true})
+    }
+    console.log(this.props.submit);
+      
+    if (this.props.submit === "1" && this.state.confirmar===true) {
+      console.log(this.state.items);
+      this.props.information[8] = this.state.items;
+      this.props.getDatos(this.props.information);
+      this.setState({firstload:true, confirmar:false})
+    }
     return (
       <div>
         
@@ -20,8 +46,8 @@ class DependenceInfo extends Component {
                  <div className="col-md-12">
                               <div className="control-group">
                                     <label for="DependenciaEconómica">Dependencia Económica (<span className="field-required">*</span>):</label>
-                                    <select name="DependenciaEconómica" title="Dependencia Económica" className="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
+                                    <select name="DependenciaEconómica" title="Dependencia Económica" id="0" className="form-control" value={this.state.items[0]} onChange={this.handleChange}>
+                                      <option>Seleccione...</option>
                                       <option value="1">Depende del Grupo familiar (Padre y/o Madre)</option>
                                       <option value="2">Depende de un Tercero</option>
                                       <option value="3">Independiente Económicamente</option>

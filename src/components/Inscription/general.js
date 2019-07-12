@@ -41,7 +41,10 @@ export class Inscription extends Component {
           submit4:"0",
           submit5:"0",
           submit6:"0",
-          load: false
+          submit7:"0",
+          submit8:"0",
+          load: false,
+          numsubmit: 0
         }
         this.nextStep = this.nextStep.bind(this)
         this.getData = this.getData.bind(this)
@@ -49,17 +52,65 @@ export class Inscription extends Component {
       
       nextStep() {
 
-        this.setState({ submit: "1" ,submit1: "1", submit2: "1" , submit3: "1", submit4: "1",submit5: "1", submit6: "1"})
-        if(this.state.percentage === 100) return 
-        this.setState({ percentage: this.state.percentage + 25 })
+        this.setState({ submit: "1" ,submit1: "1", submit2: "1" , submit3: "1", submit4: "1",submit5: "1", submit6: "1",submit7:"1",submit8:"1"})
+       
       }
       
       getData(value){
         this.setState({ 
-            information: value, submit:"0",submit1: "0" , submit2: "0", submit3: "0", submit4: "0",submit5: "0", submit6: "0",load:false
+            information: value, load:false
         })   
-        this.userbasica();   
+        console.log(this.state.numsubmit);
+        if(this.state.numsubmit===7){
+        this.userbasica();  
+        }else{
+           this.state.numsubmit = this.state.numsubmit + 1;
+           console.log(this.state.numsubmit);
+           
+        } 
 
+    }
+    fillbarra(){
+        var j = this.state.information.length;
+        var total = 0;
+        var notfill = 0;
+        var minus = [0,0,0,0,0,0,0,0,0]
+        if(this.state.information[2][0]===false){
+            minus[2] = -1;
+        }
+        if(this.state.information[3][0]===false){
+            minus[3] = -6;
+        }
+        if(this.state.information[4][0]===false){
+            minus[4] = -10;
+        }
+        if(this.state.information[5][15]===false){
+            minus[5] = -10;
+        }
+        if(this.state.information[6][15]===false){
+            minus[6] = -10;
+        }
+        if(this.state.information[7][0]===false){
+            minus[7] = -11;
+        }
+        console.log(this.state.information[8]);
+        for(var i = 0; i < j;i++){
+            var l = this.state.information[i].length + minus[i];
+            console.log(l);
+            total += l;
+            for(var k = 0; k < l ; k++){
+                if (this.state.information[i][k]==="" || this.state.information[i][k]=== null){
+                    notfill+=1;
+                    console.log(i," ",k);
+                }
+            }
+        }
+        
+        let fill = total - notfill;
+        let por = fill*100/total
+        console.log(total);
+        console.log(notfill);
+        this.setState({ percentage: por })
     }
     fatherinfo(){
         let id = localStorage.getItem("UsrID");
@@ -80,7 +131,7 @@ export class Inscription extends Component {
             estado_civil_familiar: information[5][7],
             tiene_cedula_militar_familiar: information[5][9],
             direccion_familiar: information[5][10],
-            pais_familiar: information[5][11],
+            pais_familiar: information[7][9],
             departamento_familiar: information[5][12],
             municipio_familiar: information[5][13],
             telefono_familiar: information[5][14],
@@ -103,7 +154,10 @@ export class Inscription extends Component {
         )
         .then(response => {     
           console.log("registration res", response);
-          console.log("SI HUJISAISAASS");
+          console.log("LOOOOOOOOOOOOOOL");
+          this.setState({ 
+           submit:"0",submit1: "0" , submit2: "0", submit3: "0", submit4: "0",submit5: "0", submit6: "0",submit7:"0",submit8:"0"
+        })   
           this.componentDidMount();
         }).catch(error => {
           console.log("registration error", error);
@@ -187,7 +241,10 @@ export class Inscription extends Component {
             grupo_sanguineo: information[1][13],
             factor_rh: information[1][14],
             num_hijos: information[1][15],
-            estado_civil: information[1][16]
+            estado_civil: information[1][16],
+
+            tiene_hermano: information[7][0],
+            dependencia_economica: information[8][0]
             
         }
         }, { withCredentials: true}
@@ -261,16 +318,18 @@ export class Inscription extends Component {
                         const {inscriptioninfo} = this.state;
                         const {relative} = this.state;
                         let copyinformation = this.state.information;
-                        copyinformation[0]=["","",users.tipoDocumento,users.documento,"",users.nombre,users.primerApellido,users.segundoApellido,users.fechaNacimiento,"",users.departamento,users.ciudad,extrausers.fecha_exp,extrausers.pais_exp,extrausers.dpto_exp,extrausers.ciudad_exp,extrausers.genero,extrausers.nacionalidad,extrausers.doble_nacionalidad,extrausers.retornado_de_exterior,users.email,extrausers.excepciones_de_ley];
-                        copyinformation[1]=[extrausers.direccion,extrausers.pais_residencia,extrausers.depto_residencia,extrausers.municipio_residencia,"",extrausers.telefono_movil,extrausers.tipo_vivienda,extrausers.estrato_vivienda,extrausers.pertenece_red_unidos,extrausers.sisben,extrausers.esta_cargo_icbf,extrausers.estatura,extrausers.peso,extrausers.grupo_sanguineo,extrausers.factor_rh,extrausers.num_hijos,extrausers.estado_civil]
-                        copyinformation[2]=[inscriptioninfo.cursa_educacion_basica,inscriptioninfo.nivel_educacion_basica,inscriptioninfo.institucion_educacion_basica,inscriptioninfo.terminacion_educacion_basica,""]
-                        copyinformation[3]=[inscriptioninfo.cursa_educacion_superior,"",inscriptioninfo.nombre_carrera,inscriptioninfo.semestre_educacion_superior,"",inscriptioninfo.institucion_educacion_superior]
+                        copyinformation[0]=["Registro Civil","Documento Identidad",users.tipoDocumento,users.documento,"Tarjeta Identidad",users.nombre,users.primerApellido,users.segundoApellido,users.fechaNacimiento,"Pais Nacimiento",users.departamento,users.ciudad,extrausers.fecha_exp,extrausers.pais_exp,extrausers.dpto_exp,extrausers.ciudad_exp,extrausers.genero,extrausers.nacionalidad,extrausers.doble_nacionalidad,extrausers.retornado_de_exterior,users.email,extrausers.excepciones_de_ley,"AVATAR"];
+                        copyinformation[1]=[extrausers.direccion,extrausers.pais_residencia,extrausers.depto_residencia,extrausers.municipio_residencia,"Telefono Fijo",extrausers.telefono_movil,extrausers.tipo_vivienda,extrausers.estrato_vivienda,extrausers.pertenece_red_unidos,extrausers.sisben,extrausers.esta_cargo_icbf,extrausers.estatura,extrausers.peso,extrausers.grupo_sanguineo,extrausers.factor_rh,extrausers.num_hijos,extrausers.estado_civil]
+                        copyinformation[2]=[inscriptioninfo.cursa_educacion_basica,inscriptioninfo.nivel_educacion_basica,inscriptioninfo.institucion_educacion_basica,inscriptioninfo.terminacion_educacion_basica,"Certificado Educacion Basica"]
+                        copyinformation[3]=[inscriptioninfo.cursa_educacion_superior,"Modalidad",inscriptioninfo.nombre_carrera,inscriptioninfo.semestre_educacion_superior,"Graduado",inscriptioninfo.institucion_educacion_superior,"Certificado Educacion Superior"]
                         copyinformation[4]=[inscriptioninfo.esta_trabajando,inscriptioninfo.nombre_trabajo,inscriptioninfo.empresa_trabajo,inscriptioninfo.cargo_trabajo,inscriptioninfo.tipo_trabajador,inscriptioninfo.fecha_ingreso_trabajo,inscriptioninfo.direccion_trabajo,inscriptioninfo.pais_trabajo,inscriptioninfo.departamento_trabajo,inscriptioninfo.municipio_trabajo,inscriptioninfo.telefono_trabajo]
-                        copyinformation[5]=[relative.tipo_documento_familiar,relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.esta_vivo_familiar,relative.estado_civil_familiar,"",relative.tiene_cedula_militar_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar,relative.telefono_familiar,relative.esta_trabajando_familiar,relative.nombre_trabajo_familiar,relative.empresa_trabajo_familiar,relative.cargo_trabajo_familiar,relative.tipo_trabajador_familiar,relative.fecha_ingreso_trabajo_familiar,relative.direccion_trabajo_familiar,relative.pais_trabajo_familiar,relative.departamento_trabajo_familiar,relative.municipio_trabajo_familiar,relative.telefono_trabajo_familiar]
-                        copyinformation[6]=[relative.tipo_documento_familiar,relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.esta_vivo_familiar,relative.estado_civil_familiar,"",relative.tiene_cedula_militar_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar,relative.telefono_familiar,relative.esta_trabajando_familiar,relative.nombre_trabajo_familiar,relative.empresa_trabajo_familiar,relative.cargo_trabajo_familiar,relative.tipo_trabajador_familiar,relative.fecha_ingreso_trabajo_familiar,relative.direccion_trabajo_familiar,relative.pais_trabajo_familiar,relative.departamento_trabajo_familiar,relative.municipio_trabajo_familiar,relative.telefono_trabajo_familiar]
+                        copyinformation[5]=[relative.tipo_documento_familiar,relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.esta_vivo_familiar,relative.estado_civil_familiar,"Documento Padre",relative.tiene_cedula_militar_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar,relative.telefono_familiar,relative.esta_trabajando_familiar,relative.nombre_trabajo_familiar,relative.empresa_trabajo_familiar,relative.cargo_trabajo_familiar,relative.tipo_trabajador_familiar,relative.fecha_ingreso_trabajo_familiar,relative.direccion_trabajo_familiar,relative.pais_trabajo_familiar,relative.departamento_trabajo_familiar,relative.municipio_trabajo_familiar,relative.telefono_trabajo_familiar]
+                        copyinformation[6]=[relative.tipo_documento_familiar,relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.esta_vivo_familiar,relative.estado_civil_familiar,"Documento Madre",relative.tiene_cedula_militar_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar,relative.telefono_familiar,relative.esta_trabajando_familiar,relative.nombre_trabajo_familiar,relative.empresa_trabajo_familiar,relative.cargo_trabajo_familiar,relative.tipo_trabajador_familiar,relative.fecha_ingreso_trabajo_familiar,relative.direccion_trabajo_familiar,relative.pais_trabajo_familiar,relative.departamento_trabajo_familiar,relative.municipio_trabajo_familiar,relative.telefono_trabajo_familiar]
+                        copyinformation[7]=[extrausers.tiene_hermano,relative.tipo_documento_familiar, relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.nombre_trabajo_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar];
+                        copyinformation[8]=[extrausers.dependencia_economica];
                         
                         this.setState({load:true,information:copyinformation})  
-                        
+                        this.fillbarra();
                     });
                 });
             });
@@ -289,11 +348,18 @@ export class Inscription extends Component {
         console.log("AAAAAAAAAA");
         var Admin;
         var User;
+        var AllData;
         let admin = localStorage.getItem("admin");
         if(admin === "true"){
             User = "none";
             Admin = "block";
+            AllData="none";
         }else{
+            if(this.state.percentage===100){
+                AllData="block";
+            }else{
+                AllData="none";
+            }
             User = "block";
             Admin = "none";
         }   
@@ -331,9 +397,7 @@ export class Inscription extends Component {
                                       <div style={{display:Admin}}>
                                             <AdminReview/>
                                       </div>                  
-                                      
-                                      <button onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
-                                      
+                                     
                                       
                                   </div>    
                                      
@@ -369,8 +433,7 @@ export class Inscription extends Component {
                                       <div style={{display:Admin}}>
                                           <AdminReview/>
                                       </div> 
-                                      <button onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
-      
+                                      
                                   </div>  
                               </form>
       
@@ -385,8 +448,7 @@ export class Inscription extends Component {
                                       <div style={{display:Admin}}>
                                           <AdminReview/>
                                       </div>                  
-                                      <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
-                                  </div>
+                                </div>
                                   
                               </div>
                           </form>
@@ -421,7 +483,7 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_43" role="button" aria-expanded="false" aria-controls="collapse_43">Información de los Hermanos</a>
                                       <div className="collapse" id="collapse_43">
                                           <div className="card card-body">                                  
-                                              <SiblingInfo/>
+                                              <SiblingInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit7} load={this.state.load}/>
                                           </div>
                                           <div style={{display:Admin}}>
                                               <AdminReview/>
@@ -432,7 +494,7 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_44" role="button" aria-expanded="false" aria-controls="collapse_44">Dependencia</a>
                                       <div className="collapse" id="collapse_44">
                                           <div className="card card-body">                                  
-                                              <DependenceInfo/>
+                                              <DependenceInfo getDatos={this.getData} information={this.state.information} submit={this.state.submit8} load={this.state.load}/>
                                           </div>
                                           <div style={{display:Admin}}>
                                               <AdminReview/>
@@ -442,13 +504,14 @@ export class Inscription extends Component {
       
       
       
-                                      <button onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
-                                  </div> 
+                                    </div> 
       
                               </form> 
                               
       
                           </div>
+                          <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
+                          <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:AllData}}>Enviar</button>
                           <button type="submit" className="btn btn-style-submit mt-5" style={{display:Admin}}>Enviar Correo</button>
       
                    </div>

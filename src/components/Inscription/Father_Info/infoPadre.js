@@ -13,6 +13,7 @@ class FatherInfo extends Component {
       display: 'none',
       checked: false,
       checked1: false,
+      confirmar: true
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -47,7 +48,7 @@ class FatherInfo extends Component {
   render() {
     if(this.state.firstload===true && this.props.load===true){
       let info = this.props.information[this.props.form]
-      this.setState({items:info , firstload:false})
+      this.setState({items:info , firstload:false, confirmar:true})
       if(info[15]===true){
           this.setState({checked1:true, display: 'block'})
       }
@@ -57,12 +58,12 @@ class FatherInfo extends Component {
     }
     console.log(this.props.submit);
       
-    if (this.props.submit === "1") {
+    if (this.props.submit === "1" && this.state.confirmar===true) {
 
       console.log(this.state.items);
       this.props.information[this.props.form] = this.state.items;
       this.props.getDatos(this.props.information);
-      this.setState({firstload:true})
+      this.setState({firstload:true, confirmar:false})
     }
   
     return (
@@ -83,7 +84,7 @@ class FatherInfo extends Component {
                               <div className="control-group">
                                     <label for="TipoDocumento">Tipo de documento (<span className="field-required">*</span>):</label>
                                     <select name="TipoDocumento" title="Tipo de documento de identidad" id="0" value={this.state.items[0]} onChange={this.handleChange} className="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
+                                      <option>Seleccione...</option>
                                       <option value="1">C&#233;dula de Ciudadan&#237;a</option>
                                       <option value="0">Tarjeta de Identidad</option>
                                       <option value="2">NUIP</option>

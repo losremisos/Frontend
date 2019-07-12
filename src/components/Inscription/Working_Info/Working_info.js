@@ -10,7 +10,8 @@ class Working_Info extends Component {
           items: [],
           firstload : true,
           display: 'none',
-          checked: false
+          checked: false,
+          confirmar: true
         }
         this.handleChange = this.handleChange.bind(this);
       }
@@ -33,19 +34,19 @@ class Working_Info extends Component {
      render() {
       if(this.state.firstload===true && this.props.load===true){
         let info = this.props.information[4]
-        this.setState({items:info , firstload:false})
+        this.setState({items:info , firstload:false, confirmar:true})
         if(info[0]===true){
             this.setState({checked:true, display: 'block'})
         }
       }
       console.log(this.props.submit);
         
-      if (this.props.submit === "1") {
+      if (this.props.submit === "1" && this.state.confirmar===true) {
   
         console.log(this.state.items);
         this.props.information[4] = this.state.items;
         this.props.getDatos(this.props.information);
-        this.setState({firstload:true})
+        this.setState({firstload:true, confirmar:false})
       }
         return (
         <div>
@@ -89,8 +90,8 @@ class Working_Info extends Component {
                     <div className="col-md-3">
                               <div className="control-group">
                                     <label for="PTipoTrabajador">Tipo de trabajador (<span className="field-required">*</span>):</label>
-                                    <select name="PTipoTrabajador" title="Tipo de trabajador Padre"  className="form-control" tabIndex="1" >
-                                      <option selected="selected" id="4" value={this.state.items[4]} onChange={this.handleChange}>Seleccione...</option>
+                                    <select name="PTipoTrabajador" title="Tipo de trabajador Padre"  className="form-control" id="4" value={this.state.items[4]} onChange={this.handleChange}>
+                                      <option>Seleccione...</option>
                                       <option value="1">Empleado</option>
                                       <option value="2">Independiente</option>
                                     </select>
