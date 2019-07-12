@@ -51,6 +51,7 @@ export class Inscription extends Component {
         this.nextStep = this.nextStep.bind(this)
         this.getData = this.getData.bind(this)
         this.makeaprovation = this.makeaprovation.bind(this)
+        this.changeState = this.changeState.bind(this);
       }
       
       nextStep() {
@@ -300,6 +301,28 @@ export class Inscription extends Component {
       }
 
       changeState(){
+        let admin = localStorage.getItem("admin");
+        if(admin==="true"){
+            let process = 1;
+            if(this.state.aprovaciones===9){
+                process = 3;
+            }
+            let id = localStorage.getItem("AuxID");
+            axios
+            .put("http://localhost:4200/users/"+id,
+            {
+              user: {
+                estadoProceso: process,
+            }
+            }, { withCredentials: true}
+            )
+            .then(response => {     
+              console.log("registration res", response);
+            }).catch(error => {
+              console.log("registration error", error);
+            });
+            
+        }else{
         let id = localStorage.getItem("UsrID");
         axios
         .put("http://localhost:4200/users/"+id,
@@ -314,7 +337,7 @@ export class Inscription extends Component {
         }).catch(error => {
           console.log("registration error", error);
         });
-  
+        }
       }
 
     componentDidMount(){
@@ -554,7 +577,7 @@ export class Inscription extends Component {
                           </div>
                           <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
                           <button type="submit" onClick={this.changeState} className="btn btn-style-submit mt-5" style={{display:AllData}}>Enviar</button>
-                          <button type="submit" className="btn btn-style-submit mt-5" style={{display:Admin}}>{this.state.text}</button>
+                          <button type="submit" onClick={this.changeState} className="btn btn-style-submit mt-5" style={{display:Admin}}>{this.state.text}</button>
       
                    </div>
                   </div>
