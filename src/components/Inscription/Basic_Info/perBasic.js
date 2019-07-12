@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Users from '../../../assets/defaultUser.png';
-import axios from 'axios';
+
 
 
 class BasicInfo extends Component {
@@ -20,27 +20,8 @@ class BasicInfo extends Component {
     this.setState({ items:newitem });
   }
 
-  componentDidMount() {
-   
-    let id = localStorage.getItem("UsrID");
-    console.log("Aqui esta la peticion");
-    console.log(axios({
-      method: "GET",
-      url: "http://localhost:4200/users/" + id
-    }));
-    axios({
-      method: "GET",
-      url: "http://localhost:4200/users/" + id
-    }).then((res) => {
-      this.setState({
-        users: res.data
-      })
-    });
-  }
-
+  
   render() {
-    console.log(this.state.firstload);
-    console.log(this.props.information[0]);
     if(this.state.firstload===true && this.props.load===true){
       let info = this.props.information[0]
       this.setState({items:info , firstload:false})
@@ -199,8 +180,8 @@ class BasicInfo extends Component {
             <select className="form-control" name="2Nacionalidad" placeholder="Doble Nacionalidad"
               onChange={this.handleChange} id="18" value={this.state.items[18]}>
               <option disabled selected>Seleccione...</option>
-              <option value="true">No</option>
-              <option value="false">Si</option>
+              <option value="false">No</option>
+              <option value="true">Si</option>
             </select>
           </div>
           <div className="form-group col-md-3">
@@ -208,8 +189,8 @@ class BasicInfo extends Component {
             <select className="form-control" name="retornadoExterior" placeholder="Retornado del Exterior"
               onChange={this.handleChange} id="19" value={this.state.items[19]}>
               <option disabled selected>Seleccione...</option>
-              <option value="true">No</option>
-              <option value="false">Si</option>
+              <option value="false">No</option>
+              <option value="true">Si</option>
             </select>
           </div>
         </div>
