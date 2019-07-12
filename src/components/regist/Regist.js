@@ -20,6 +20,7 @@ export class Registry extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.IniciarProceso = this.IniciarProceso.bind(this);
     this.handleChange=this.handleChange.bind(this);
     this.tipeDoc = this.tipeDoc.bind(this);
   }
@@ -64,9 +65,31 @@ export class Registry extends Component {
     }, { withCredentials: true}
     )
     .then(response => {
+      
       console.log("registration res", response);
-      window.location.href = '/login';  
+      this.IniciarProceso();
+      window.location.href = '/login'; 
+      
 
+    }).catch(error => {
+      console.log("registration error", error);
+    });
+    
+    event.preventDefault();
+    
+  }
+  IniciarProceso(event){
+    const{
+      numero_documento
+    } = this.state;
+    axios
+    .post("http://3.213.78.250:8080/engine-rest/process-definition/key/ProcesoLibretaMilitarCamunda/start",
+    {
+      "businessKey": numero_documento
+    }, { withCredentials: true}
+    )
+    .then(response => {
+      console.log("registration res", response);
     }).catch(error => {
       console.log("registration error", error);
     });
