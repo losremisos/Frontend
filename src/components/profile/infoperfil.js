@@ -153,8 +153,7 @@ class InfoPerfil extends Component{
         console.log(users);
         let img = users.avatar;
         const base64 = 'data:image/png;base64' + img
-        return(
-        console.log(edit);
+        console.log(edit)
         if (edit === "false") {
         window=
             <div className="card ">
