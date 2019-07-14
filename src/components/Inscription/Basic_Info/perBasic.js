@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Users from '../../../assets/defaultUser.png';
 import axios from 'axios';
-import Dropzone from 'react-dropzone';
 import {Button,Card} from "react-bootstrap";
 import ReactFileReader from "react-file-reader";
+import ActiveStorageProvider from 'react-activestorage-provider';
+import {DirectUpload}  from "activestorage";
+import Dropzone from 'react-dropzone';
 import defaultUser from "/home/sebastian/Documents/Proyecto_Libreta/Frontend/src/assets/defaultUser.png";
 
 
@@ -12,8 +14,11 @@ class BasicInfo extends Component {
   constructor(props){
     super(props);
     this.state = {
-        users: []
-    }
+        users: [],
+        file: null
+    };
+    this.handleFileChange = this.handleFileChange.bind(this);
+    this.handleFileSubmit = this.handleFileSubmit.bind(this);
   }
 
 componentDidMount(){
@@ -33,80 +38,63 @@ componentDidMount(){
     });
 }
 
-readFile(files) {
-  // logic validation for existence of file(s);
-  // we index at 0 here since the JSX could give us multiple files or single
-  // file; either way, we get an array and we only need the first element
-  // in the case of single file upload
-  //console.log("Esta entrando en readFile");
-  //console.log(files);
-  //console.log("Esto esta sirviendo");
-  if (files) {
-    console.log("Esto esta sirviendo");
-    let data = new FormData();
-    data.append('avatar', files[0]);
-    this.sendImageToController(data)
-  }
+handleFileChange(e){
+  this.setState({file: e.target.files[0]})
 }
 
-sendImageToController(data) {
-  let id = localStorage.getItem("UsrID");
-  fetch("http://localhost:4200/users/" + id, {
-    method: 'POST',
-    body: data,
-  })
+handleFileSubmit(){
+  const upload = new DirectUpload(this.state.file, "/rails/active_storage/direct_uploads");
 
-  // might be a good idea to put error handling here
-
-  .then(response => response.json())
-  .then(imageFromController => {
-    // optionally, you can set the state of the component to contain the image
-    // object itself that was returned from the rails controller, completing
-    // the post cycle
-    this.setState({uploads: this.state.uploads.concat(imageFromController)})
-  })
-}
-
-uploadAction() {
-  let id = localStorage.getItem("UsrID");
-  var data = new FormData();
-  var imagedata = document.querySelector('input[type="file"]').files[0];
-  data.append("avatar", imagedata);
-
-  fetch("http://localhost:4200/users/" + id, {
-    mode: 'no-cors',
-    method: "POST",
-    body: data
-  }).then(function (res) {
-    if (res.ok) {
-      alert("Perfect! ");
-    } else if (res.status == 401) {
-      alert("Oops! ");
+  upload.create((error, blob) => {
+    if(error){
+      console.log(error)
+    } else {
+      console.log(blob)
     }
-  }, function (e) {
-    alert("Error submitting form!");
-  });
+  })
 }
 
 hadleUpload = file => {
   let id = localStorage.getItem("UsrID");
-  /*
-  axios
-    .get("/comments")
+  
+  /* axios
+    .get("http://localhost:4200/users/" + id)
     .then(res => {
       console.log(res, "RESPUESTA");
     })
     .catch(e => {
       console.log(e, "error");
-    });
-  */
-  axios.post("http://localhost:4200/users/" + id, {
-      images: {
-        name: "ejemplo.asd",
-        imageable_id: id,
-        imageable_type: "user",
-        photo: file
-      }
+    }); */
+ 
+  axios.put("http://localhost:4200/users/123", {
+    "user": {
+      avatar: file
+    }
+  }).then(res => {
+      console.log(res, "respuesta");
+  }).catch(e => {
+      console.log(e, "error");
+  });
+};
+
+uploadFiles = file => {
+  let id = localStorage.getItem("UsrID");
+  
+  /* axios
+    .get("http://localhost:4200/users/" + id)
+    .then(res => {
+      console.log(res, "RESPUESTA");
+    })
+    .catch(e => {
+      console.log(e, "error");
+    }); */
+ 
+  axios.put("http://localhost:4200/documents/1", {
+    "document": {
+      nombre: "Registro Nacimiento",
+      archivo: file,
+      user_id: id
+    }
   }).then(res => {
       console.log(res, "respuesta");
   }).catch(e => {
@@ -124,12 +112,15 @@ handleFiles = files => {
   });
   this.hadleUpload(files.base64);
 };
-
-handleFileDrop = files => {
-  console.log("entro en la funcion");
+handleFilesPdf = files => {
+  console.log(files.base64, "IMAGEN.BASE.64");
+  console.log(files.fileList, "IMAGEN.FILELIST");
+  
   this.setState({
-    avatar: files[0],
+      files: files.fileList[0],
+      loadImage: true
   });
+  this.uploadFiles(files.base64);
 };
 
   render() {
@@ -139,66 +130,33 @@ handleFileDrop = files => {
     return (
       <div>
             <div class="form-row">
-
-              <div class=" mt-5  form-group col-md-3">                         
-                <label>Adjunte Registro civil de nacimiento (*):</label>
-                  <div type="button" class="btn div_file">
-                    <p class="text">Agregar archivo</p>
-                    <input type="file" class="btn_enviar_1" id="btn_enviar_01" accept=".pdf" required></input>
-                  </div>                
+              <div>
+                <ReactFileReader
+                  fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]}
+                  base64 = {true}
+                  multipleFiles ={ false}
+                  handleFiles = {this.handleFilesPdf}
+                >
+                  <Button type="submit" variant="primary">
+                      {'Subir Archivo'}
+                  </Button>
+                </ReactFileReader>
               </div>
 
               <div class=" mt-5 form-group col-md-3">                         
-                <label>Adjunte documento de identidad (*):</label>
-                  <div type="button" class="btn div_file">
-                    <p class="text">Agregar archivo</p>
-                    <input type="file" class="btn_enviar_1" id="btn_enviar_02" accept=".pdf" required></input>
-                  </div>                
+                <ReactFileReader
+                    fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]}
+                    base64 = {true}
+                    multipleFiles ={ false}
+                    handleFiles = {this.handleFilesPdf}
+                  >
+                    <Button type="submit" variant="primary">
+                        {'Subir Archivo'}
+                    </Button>
+                  </ReactFileReader>             
               </div>
-              
-              {/* <div class=" mt-5 form-group col-md-3">                         
-                <label>Adjunte fotografia (*):</label>
-                  <div type="button" class="btn div_file">
-                    <p class="text">Agregar archivo</p>
-                    <input type="file" class="btn_enviar_1" id="btn_enviar_03" accept=".jpg,.jpeg,.png" required></input>
-                  </div>                
-              </div> */}
-
-              {/* <div>
-                <Dropzone onDrop={this.readFile} style={{position: "relative", width: 200, height: 100, border:"1px dashed grey"}}>
-                  <center>Drop your profile photo here</center>
-                </Dropzone>
-              {this.state.avatar ?
-                <div>
-                  <h2>Uploading {this.state.avatar.length} files...</h2>
-                  <img width="100px" src={this.state.avatar.preview} alt="profile"/>
-                </div>
-                : null}              
-              </div> */} 
-            {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-              {({getRootProps}) => (
-                <div {...getRootProps()}>
-                  <p>Drop files here, or click to select files</p>
-                </div>
-              )}
-            </Dropzone> */}
-            {/* <div>
-              <input type='file' onClick={this.uploadAction.bind(this)}/>
-            </div> */} 
-            {/* <div>
-              <input type='file' onClick={this.readFile} accept=".jpg,.jpeg,.png" style={{position: "relative", width: 100, height: 100, border:"1px dashed grey"}}/>
-              {this.state.avatar ?
-                <div>
-                  <h2>Uploading {this.state.avatar.length} files...</h2>
-                  <img width="100px" src={this.state.avatar.preview} alt="profile"/>
-                </div>
-              : null}
-            </div> */}
-                
-            {/* <div class="form-group col-md-3">
-              <img src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} className="img-fluid" alt="logo"/>  
-            </div>     */}  
-
+            
+            {/* Base 64 */}
             <div>
               <Card style={{ width: '18rem' }}>
                   <Card.Img variant="top" src={this.state.loadImage ? URL.createObjectURL(this.state.files):defaultUser} />
@@ -215,7 +173,7 @@ handleFileDrop = files => {
                       </ReactFileReader>
                   </Card.Body>
               </Card>
-            </div>    
+            </div> 
 
             <div class="form-row">
               <div class="form-group col-md-3">

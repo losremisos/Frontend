@@ -32,14 +32,11 @@ class InfoPerfil extends Component{
         const {users} = this.state;
         console.log("Lo que hay en user del state");
         console.log(users);
-        let avatarUrl = null
-        if (this.props.user) {
-            avatarUrl = this.props.user.avatar.url
-        }
-        console.log(avatarUrl);
+        let img = users.avatar;
+        const base64 = 'data:image/png;base64' + img
         return(
             <div className="card ">
-                <img className="card-img-top" src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} alt="algo"/>
+                <img className="card-img-top" src={base64} alt="algo"/> 
                 <div className="card-body">
                     <h5 className="card-title">{users.nombre} {users.primerApellido} {users.segundoApellido}</h5>
                     <p className="card-text">{users.correo}</p>
