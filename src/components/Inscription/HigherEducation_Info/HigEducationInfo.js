@@ -2,106 +2,136 @@ import React, { Component } from 'react';
 
 
 class HigherEducationInfo extends Component {
+
+constructor(props) {
+  super(props);
+  this.state = {
+    users: [],
+    items: [],
+    firstload : true,
+    display: 'none',
+    checked: false,
+    confirmar: true
+  }
+  this.handleChange = this.handleChange.bind(this);
+}
+handleChange(event) {
+  let newitem = this.state.items;
+  newitem[parseInt(event.target.id, 10)] = event.target.value;
+  this.setState({ items:newitem });
+}
+
+handleCheckboxChange = event => {
+    if (this.state.display === 'none') {
+        this.setState({ display: 'block' });
+    } else {
+        this.setState({ display: 'none' });
+    }
+    let newitem = this.state.items;
+    newitem[parseInt(event.target.id, 10)] = event.target.checked;
+    this.setState({ checked: event.target.checked, items:newitem });
+}
   render() {
+    if(this.state.firstload===true && this.props.load===true){
+      let info = this.props.information[3]
+      this.setState({items:info , firstload:false, confirmar:true})
+      if(info[0]===true){
+          this.setState({checked:true, display: 'block'})
+      }else{
+        info[0]=false;
+      }
+    }
+    console.log(this.props.submit);
+      
+    if (this.props.submit === "1" && this.state.confirmar===true) {
+
+      console.log(this.state.items);
+      this.props.information[3] = this.state.items;
+      this.props.getDatos(this.props.information);
+      this.setState({firstload:true, confirmar:false})
+    }
     return (
       <div>
           
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label>Para incluir uno o varios estudios de educación superior, usted debe ingresar la informacion solicitada en los campos que aparecen a continuación; luego de esto, oprima el botón Agregar Información y la información será agregada a la lista de estudios de educación superior. </label>                                
-              </div>              
-            </div>
+          <div className="row">
+                        <div className="row">
+                            <div className="col-md-2">
+                                <label><input type="checkbox" id="0" 
+                                    checked={this.state.checked}
+                                    onChange={this.handleCheckboxChange} disabled={this.props.dis}/>¿Cursa o ha cursado algún estudio de educación superior?</label>
+                            </div>
+                        </div>
 
-
-            <div class="form-row">
-              <div class="form-group col-md-3">
+                    </div>
+<div style={{display:this.state.display}}>
+            <div className="form-row">
+              <div className="form-group col-md-3">
               <label for="inputState55">Modalidad académica  (*)</label>
-              <select id="inputState55" class="form-control" required>
+              <select id="1" className="form-control" value={this.state.items[1]} onChange={this.handleChange} disabled={this.props.dis}>
                   <option selected disabled>Seleccione...</option>
-                  <option>Técnica</option>
-                  <option>Tecnólogica</option>
-                  <option>Profesional Universitario</option>
-                  <option>Especialización</option>
-                  <option>Magister</option>
-                  <option>Doctorado</option>
-                  <option>Otros Estudios</option>                  
+                  <option value = "1">Técnica</option>
+                  <option value = "2">Tecnólogica</option>
+                  <option value = "3">Profesional Universitario</option>
+                  <option value = "4">Especialización</option>
+                  <option value = "5">Magister</option>
+                  <option value = "6">Doctorado</option>
+                  <option value = "7">Otros Estudios</option>                  
                 </select>
 
               </div>
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label for="validationCustom56">Nombre de los estudios o título obtenido (*):</label>
-                <input type="text" class="form-control" id="validationCustom56" required/>
+                <input type="text" className="form-control" id="2" value={this.state.items[2]} onChange={this.handleChange} disabled={this.props.dis}/>
               </div>
-              <div class="form-group col-md-3">
-                    <div class="form-row"> 
-                        <div class="form-group col-md-6">
+              <div className="form-group col-md-3">
+                    <div className="form-row"> 
+                        <div className="form-group col-md-6">
                             <label for="inputState56">Semestre (*)</label>
-                            <select id="inputState56" class="form-control" required>
+                            <select id="3" className="form-control" value={this.state.items[3]} onChange={this.handleChange} disabled={this.props.dis}>
                                 <option selected disabled>Seleccione...</option>
-                                <option>I</option>
-                                <option>II</option>
-                                <option>III</option>
-                                <option>IV</option>
-                                <option>V</option>
-                                <option>VI</option>
-                                <option>VII</option>
-                                <option>VIII</option> 
-                                <option>IX</option> 
-                                <option>X</option>                   
+                                <option value = "1">I</option>
+                                <option value = "2">II</option>
+                                <option value = "3">III</option>
+                                <option value = "4">IV</option>
+                                <option value = "5">V</option>
+                                <option value = "6">VI</option>
+                                <option value = "7">VII</option>
+                                <option value = "8">VIII</option> 
+                                <option value = "9">IX</option> 
+                                <option value = "10">X</option>                   
                             </select>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div className="form-group col-md-6">
                             <label for="inputState56">Graduado (*)</label>
-                            <select id="inputState56" class="form-control" required>
+                            <select id="4" className="form-control" value={this.state.items[4]} onChange={this.handleChange} disabled={this.props.dis}>
                                 <option selected disabled>Seleccione...</option>
-                                <option>No</option>
-                                <option>Si</option>                                 </select> 
+                                <option value = "false">No</option>
+                                <option value = "true">Si</option>                                 </select> 
                         </div>
                     </div>
                 </div>  
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-3">
                 
               </div>
 
-              <div class="form-group col-md-6">
+              <div className="form-group col-md-6">
                 <label for="validationCustom68">Institución educativa donde cursó el último año:</label>
-                <input type="text" class="form-control" id="validationCustom68" />
+                <input type="text" className="form-control" id="5" value={this.state.items[5]} onChange={this.handleChange} disabled={this.props.dis}/>
               </div>
               
               
-              <div class="form-group col-md-3">
+              <div className="form-group col-md-3">
                   <label>Adjunte certificado de estudios (*):</label>
-                  <div type="button" class="btn div_file">
-                    <p class="text">Agregar archivo</p>
-                    <input type="file" class="btn_enviar_1" id="btn_enviar_52" accept=".pdf" required></input>
+                  <div type="button" className="btn div_file">
+                    <p className="text">Agregar archivo</p>
+                    <input type="file" className="btn_enviar_1" id="6" accept=".pdf" disabled={this.props.dis}></input>
                   </div>
               </div>
             </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-12">                
-                <input type="text" class="form-control" id="validationCustom20"  required placeholder="Lista de titulos obtenidos"/>
-              </div>              
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-7">
-
-                </div>
-                <div class="form-group col-md-5">
-                    <div class="form-row"> 
-                        <div class="form-group col-md-3">
-                            <button type="submit" className="btn btn-style-submit2 ">Cancelar</button>
-                        </div>
-                        <div class="form-group col-md-9">
-                            <button type="submit" className="btn btn-style-submit2 ">Guardar Informacion</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+</div>
+            
             
 
 

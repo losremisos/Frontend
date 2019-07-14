@@ -1,76 +1,120 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 
 class AcademicInfo extends Component {
 
-    render(){
-        return(
-          <div>
-             {/* <Navigation/>*/} 
-              <div className="container">
-                    {/*<form>*/} 
-                        <div className="row">
-                            <div className="col-md-4 form-check">
-                                    <label>¿Está cursando actualmente?</label>
-                                    <div className="form-check">
-                                        <input class="form-check-input" type="radio" id="selCursando1" value="si" checked/>
-                                        <label class="form-check-label" for="selCursando1">Sí</label>
-                                    </div>
-                                    <div className="form-check">
-                                        <input class="form-check-input" type="radio" id="selCursando2" value="no" checked/>
-                                        <label class="form-check-label" for="selCursando2">No</label>
-                                    </div>
-                            </div>
-                            
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4">
-                                    <label for="inputState">Educación Básica</label>
-                                    <select id="inputState" className="form-control">
-                                        <option selected>Escoja...</option>
-                                        <option>Primero</option>
-                                        <option >Segundo</option>
-                                        <option >Tercero</option>
-                                        <option >Cuarto</option>
-                                        <option >Quinto</option>
-                                        <option >Sexto</option>
-                                        <option >Septimo</option>
-                                        <option >Octavo</option>
-                                        <option >Noveno</option>
-                                        <option >Decimo</option>
-                                        <option >Undecimo</option>
+    constructor(props) {
+        super(props);
+        this.state = {
+          users: [],
+          items: [],
+          firstload : true,
+          display: 'none',
+        checked: false,
+        confirmar:true
+        }
+        this.handleChange = this.handleChange.bind(this);
+      }
+      handleChange(event) {
+        let newitem = this.state.items;
+        newitem[parseInt(event.target.id, 10)] = event.target.value;
+        this.setState({ items:newitem });
+      }
+    
+    handleCheckboxChange = event => {
+        if (this.state.display === 'none') {
+            this.setState({ display: 'block' });
+        } else {
+            this.setState({ display: 'none' });
+        }
+        let newitem = this.state.items;
+        newitem[parseInt(event.target.id, 10)] = event.target.checked;
+        this.setState({ checked: event.target.checked, items:newitem });
+    }
+    render() {
+        if(this.state.firstload===true && this.props.load===true){
+            let info = this.props.information[2]
+            this.setState({items:info , firstload:false, confirmar:true})
+            if(info[0]===true){
+                this.setState({checked:true, display: 'block'})
+            }else{
+                info[0]=false;
+            }
+          }
+          console.log(this.props.submit);
+            
+          if (this.props.submit === "1" && this.state.confirmar===true) {
 
-                                    </select>
-                            </div>
-                            <div className="col-md-6">
-                                <label for="inputInstituto">Institución académica que cursó el último año</label>
-                                <input type="text" className="form-control" id="inputInstituto"/>
+            console.log(this.state.items);
+            this.props.information[2] = this.state.items;
+            this.props.getDatos(this.props.information);
+            this.setState({firstload:true, confirmar:false})
+          }
+        return (
+            <div>
+                <div className="container">
+                    <div className="row">
+                        <div className="row">
+                            <div className="col-md-2">
+                                <label><input type="checkbox" id="0"
+                                    checked={this.state.checked}
+                                    onChange={this.handleCheckboxChange} disabled={this.props.dis} />¿Está cursando actualmente?</label>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-md-4">
-                                <label>Fecha de terminación de estudios</label>
-                                <input type="text" className="form-control" id="fechaTerminacion"/> 
-                            </div>
-                            <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label for="examinarActaCert">Adjunte Acta de Grado o Certificación</label>
-                                        <input type="file" className="form-control-file" id="examinarActaCert"/>
-                                    </div>
-                            </div>
+
+                    </div>
+                    <div style={{display:this.state.display}}>
+                    <div className="row" >
+                        <div className="col-md-4">
+                            <label for="inputState">Educación Básica</label>
+                            <select id="1" value={this.state.items[1]} onChange={this.handleChange} className="form-control" disabled={this.props.dis}>
+                                <option selected>Escoja...</option>
+                                <option value = "1">Primero</option>
+                                <option value = "2">Segundo</option>
+                                <option value = "3">Tercero</option>
+                                <option value = "4">Cuarto</option>
+                                <option value = "5">Quinto</option>
+                                <option value = "6">Sexto</option>
+                                <option value = "7">Septimo</option>
+                                <option value = "8">Octavo</option>
+                                <option value = "9">Noveno</option>
+                                <option value = "10">Decimo</option>
+                                <option value = "11">Undecimo</option>
+                            </select>
+                       
+                    </div>
+                    </div>
                         
-                    </div> 
+                    </div>
+                    <div className="col-md-6">
+                            <label for="inputInstituto">Institución académica que cursó el último año</label>
+                            <input type="text" className="form-control" id="2"  onChange={this.handleChange} value={this.state.items[2]} disabled={this.props.dis}/>
+                        </div>
+                    <div className="row">
+                        <div className="col-md-4">
+                            <label>Fecha de terminación de estudios</label>
+                            <input type="date" className="form-control" id="3"  onChange={this.handleChange} value={this.state.items[3]} disabled={this.props.dis}/>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label for="examinarActaCert">Adjunte Acta de Grado o Certificación</label>
+                                <input type="file" className="form-control-file" id="4" disabled={this.props.dis}/>
+                            </div>
+                        </div>
+
+                    </div>
                     {/*
                         <br/>
                     <button type="submit" className="btn btn-style">Guardar Información Académica</button>
                     </form>
-                    */}   
-                    
+                    */}
+
                 </div>
             </div>
         )
-      }
-
     }
-    
-    export default AcademicInfo;
+
+}
+
+export default AcademicInfo;

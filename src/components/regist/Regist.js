@@ -21,12 +21,21 @@ export class Registry extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange=this.handleChange.bind(this);
+    this.tipeDoc = this.tipeDoc.bind(this);
+  }
+  tipeDoc(){
+    this.setState({
+      tipo_documento:document.querySelector('#Document').value
+    })
   }
   handleChange(event){
     this.setState({
       [event.target.name]:event.target.value
     })
+    console.log(this.tipo_documento);
+    console.log(this.state.primer_nombre);
   }
+  
   handleSubmit(event){
     const{
       tipo_documento,
@@ -47,18 +56,18 @@ export class Registry extends Component {
         segundoApellido: segundo_apellido,
         email: correo,
         password: contrasena,
-        tipoDocumento: 0,
-        telefono: "234234432",
+        tipoDocumento: tipo_documento,
+        estadoProceso: 1,
         documento: numero_documento,
-        tipoUsuario: 1 ,
-        district_id: 1
+        tipoUsuario: 0 ,
+        district_id: 1,
+        first_session: "true"
       }
     }, { withCredentials: true}
     )
-    .then(response => {
+    .then(response => {     
       console.log("registration res", response);
       window.location.href = '/login';  
-
     }).catch(error => {
       console.log("registration error", error);
     });
@@ -94,11 +103,11 @@ export class Registry extends Component {
                       <div className="col-md-6">
                               <div className="control-group">
                                     <label>Tipo de documento (<span className="field-required">*</span>):</label>
-                                    <select name="tipo_documento"  className="form-control" tabIndex="1">
+                                    <select id="Document" name="tipo_documento"  className="form-control" tabIndex="1" onChange={this.tipeDoc}>
                                       <option value={this.state.tipo_documento}>Seleccione...</option>
-                                      <option value="100000001">C&#233;dula de Ciudadan&#237;a</option>
-                                      <option value="100000000">Tarjeta de Identidad</option>
-                                      <option value="100000002">NUIP</option>
+                                      <option value="1">C&#233;dula de Ciudadan&#237;a</option>
+                                      <option value="0">Tarjeta de Identidad</option>
+                                      <option value="2">NUIP</option>
                                     </select>
                                     <span  className="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
                               </div>

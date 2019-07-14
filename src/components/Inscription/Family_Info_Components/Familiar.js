@@ -20,14 +20,14 @@ class Formulario extends Component {
         <Boton title="Información de la Madre" pantalla = {InfoPadre} value="Guardar Información del Madre"/>
         <Boton title="Información de los Hermanos" pantalla = {SiblingInfo} value="Guardar Información de los Hermanos"/>
         <Boton title="Dependencia Economica" pantalla = {DependenceInfo} value="Guardar Información de Dependencia Enconómica"/>
-        <div class="row"> 
-        <div class="col-md-9" >  
+        <div className="row"> 
+        <div className="col-md-9" >  
         </div>
-        <div class="col-md-" >      
-						    <input type="button" value= "Cancelar"  class="btn btn-style" />
+        <div className="col-md-" >      
+						    <input type="button" value= "Cancelar"  className="btn btn-style" />
         </div>
-        <div class="col-md-1" >      
-        		    <input type="button" value= "Validar"  class="btn btn-style" />
+        <div className="col-md-1" >      
+        		    <input type="button" value= "Validar"  className="btn btn-style" />
         </div>
         </div>
         </div>

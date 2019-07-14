@@ -3,9 +3,24 @@ import React, { Component } from 'react';
 import '../Family_Info_Components/Familiar';
 
 class SiblingInfo extends Component {
-  state = {
-    display: 'none',
-    checked: false
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      items: [],
+      firstload : true,
+      display: 'none',
+      checked: false,
+      confirmar: true
+      
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    let newitem = this.state.items;
+    newitem[parseInt(event.target.id, 10)] = event.target.value;
+    this.setState({ items:newitem });
   }
   onChange = () => {
     if(this.state.display==='none' ){
@@ -15,109 +30,114 @@ class SiblingInfo extends Component {
     }
  }
   handleCheckboxChange = event =>{
-    this.setState({ checked: event.target.checked })
+    if(this.state.display==='none' ){
+      this.setState({ display: 'block' });
+    }else{
+    this.setState({ display: 'none' });
+    }
+    let newitem = this.state.items;
+    newitem[parseInt(event.target.id, 10)] = event.target.checked;
+    this.setState({ checked: event.target.checked, items:newitem });
   }
   render() {
+    if(this.state.firstload===true && this.props.load===true){
+      let info = this.props.information[7]
+      this.setState({items:info , firstload:false, confirmar:true})
+      if(info[0]===true){
+          this.setState({checked:true, display: 'block'})
+      }else{
+        info[0]=false;
+      }
+      
+    }
+    console.log(this.props.submit);
+      
+    if (this.props.submit === "1" && this.state.confirmar===true) {
+      console.log(this.state.items);
+      this.props.information[7] = this.state.items;
+      this.props.getDatos(this.props.information);
+      this.setState({firstload:true, confirmar:false})
+    }
     return (
       <div>
-        
-        
         <div className="App-head App">
-        <div class="container">
-        <div class="Informacion2"> 
-        <div class="Pantalla">
-            <div class="Informacion2"> 
-            <div class="Pantalla">
+        <div className="container">
+        <div className="row">
+                            <div className="col-md-2">
+                                <label><input type="checkbox" id="TrabajaActual"
+                                    checked={this.state.checked}
+                                    onChange={this.handleCheckboxChange} id ="0"/>¿Tiene hermanos?</label>
+                            </div>
+                        </div>
+        <div style={{display:this.state.display}}> 
+        <div className="Pantalla">
+            <div className="Informacion2"> 
+            <div className="Pantalla">
             <div style={{textAlign: "left" }}>
               <h4>Información Básica</h4>
              </div>
-             <p>Seleccione el tipo de identificación, luego ingrese el número de identificación y oprima buscar. Posteriormente ingrese 
-                los datos solicitados. Seguido de esto agregue la información a la lista de hermanos. Cuando desee grabar la información,
-                presione el botón Grabar Informacion de los Hermanos.</p>
-                  <div className="row" >
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="TipoDocumento">Tipo de documento (<span class="field-required">*</span>):</label>
-                                    <select name="TipoDocumento" title="Tipo de documento de identidad" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">C&#233;dula de Ciudadan&#237;a</option>
-                                      <option value="100000000">Tarjeta de Identidad</option>
-                                      <option value="100000002">NUIP</option>
+                <div className="row" >
+                      <div className="col-md-3">
+                              <div className="control-group">
+                                    <label for="TipoDocumento">Tipo de documento (<span className="field-required">*</span>):</label>
+                                    <select name="TipoDocumento" disabled={this.props.dis} title="Tipo de documento de identidad" className="form-control" id="1" value={this.state.items[1]} onChange={this.handleChange}>
+                                      <option>Seleccione...</option>
+                                      <option value="1">C&#233;dula de Ciudadan&#237;a</option>
+                                      <option value="0">Tarjeta de Identidad</option>
+                                      <option value="2">NUIP</option>
                                     </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
+                                    
                               </div>
                       </div>
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                <label for="NumeroDocumento">Número de documento (<span class="field-required">*</span>):</label>
-                                <input name="NumeroDocumento" type="text" maxlength="11" id="DocumentNumber" title="Número de documento de identidad" class="form-control" tabIndex="2" />  
-                                <span id="ctl00_MainContent_reqDocumentNumber" class="field-validation-error" >&nbsp;&nbsp;&nbsp;</span>
+                      <div className="col-md-3">
+                              <div className="control-group">
+                                <label for="NumeroDocumento">Número de documento (<span className="field-required">*</span>):</label>
+                                <input name="NumeroDocumento" disabled={this.props.dis} type="text" id="2" value={this.state.items[2]} onChange={this.handleChange} title="Número de documento de identidad" className="form-control" tabIndex="2" />  
+                                
                               </div>
                       </div>
-                      <div class="col-md-2">
-                            <input type="button" onClick={this.onChange} class="btn btn1-style" value="Buscar" />
-                      </div>
-                      <div class="col-md-1">      
-						                <input type="button" onClick={this.onChange} value="Limpiar"  class="btn btn1-style" />
-                        </div>
                       
                   </div>
-                  <div style={{display:this.state.display}}>
+                  <div >
                   <div className="row">
-                    <div class="col-md-3">
-                            <div class="control-group">
-                             <label for="Nombre" >Nombre (<span class="field-required">*</span>):</label>
-                             <input name="Nombre" type="text" maxlength="50" id="txtName" title="Primer nombre" class="form-control" />
-                             <span >&nbsp;&nbsp;&nbsp;</span>
+                    <div className="col-md-3">
+                            <div className="control-group">
+                             <label for="Nombre" >Nombre (<span className="field-required">*</span>):</label>
+                             <input name="Nombre" disabled={this.props.dis} type="text" maxlength="50" id="3" value={this.state.items[3]} onChange={this.handleChange} title="Primer nombre" className="form-control" />
+                             
                             </div>
                     </div>
-                    <div class="col-md-3">
-                            <div class="control-group">
-                             <label for="NombreSeg" >Segundo Nombre:</label>
-                             <input name="NombreSeg" type="text" maxlength="50" id="secTxtName" title="Segundo nombre" class="form-control" />
-                             <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
-                    </div>
-                    <div class="col-md-3">
-                            <div class="control-group">
-                              <label for="Apellido">Apellidos (<span class="field-required">*</span>):</label>
-                              <input name="Apellido" type="text" maxlength="50" id="txtLastName" title="Primer apellido" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                    
+                    <div className="col-md-3">
+                            <div className="control-group">
+                              <label for="Apellido">Apellidos (<span className="field-required">*</span>):</label>
+                              <input name="Apellido" disabled={this.props.dis} type="text" maxlength="50" id="4" value={this.state.items[4]} onChange={this.handleChange} title="Primer apellido" className="form-control" />
+                              
                             </div>
                     </div>  
-                    <div class="col-md-3">
-                            <div class="control-group">
+                    <div className="col-md-3">
+                            <div className="control-group">
                               <label for="ApellidoSeg">Segundo Apellido:</label>
-                              <input name="ApellidoSeg" type="text" maxlength="50" id="SecTxtLastName" title="Segundo apellido" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                              <input name="ApellidoSeg" disabled={this.props.dis} type="text" maxlength="50" id="5" value={this.state.items[5]} onChange={this.handleChange} title="Segundo apellido" className="form-control" />
+                              
                             </div>
                     </div>
                   </div>
                   
                   <div className="row">
-                    <div class="col-md-3">
-                            <div class="control-group">
-                              <label for="FechaNacimiento">Fecha de Nacimiento (<span class="field-required">*</span>):</label>
-                              <input name="FechaNacimiento" type="date" maxlength="50" id="txtPDateN" title="Fecha Nacimiento" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                    <div className="col-md-3">
+                            <div className="control-group">
+                              <label for="FechaNacimiento">Fecha de Nacimiento (<span className="field-required">*</span>):</label>
+                              <input name="FechaNacimiento" disabled={this.props.dis} type="date" maxlength="50" id="6" value={this.state.items[6]} onChange={this.handleChange} title="Fecha Nacimiento" className="form-control" />
+                              
                             </div>
                     </div>  
-                    <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="Hgenero">Genero (<span class="field-required">*</span>):</label>
-                                    <select name="Hgenero" title="Hermano Genero" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000000">Femenino</option>
-                                      <option value="100000001">Masculino</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                    </div> 
-                    <div class="col-md-6">
-                              <div class="control-group">
+                     
+                    <div className="col-md-6">
+                              <div className="control-group">
                                     <label for="HProfesion">Profesión, ocupación u oficio:</label>
-                                    <input name="HProfesion" type="text" maxlength="50" id="HProfesion" title="Hermano Profesion" class="form-control" />
-                                    <span >&nbsp;&nbsp;&nbsp;</span>
+                                    <input name="HProfesion" disabled={this.props.dis} type="text" maxlength="50" id="7" value={this.state.items[7]} onChange={this.handleChange} title="Hermano Profesion" className="form-control" />
+                                    
                                 </div>
                     </div> 
                              
@@ -125,169 +145,40 @@ class SiblingInfo extends Component {
                 </div>
                 </div>
                 </div>
-            <div style={{display:this.state.display}}>
-            <div class="Informacion2"> 
-            <div class="Pantalla">
+            <div >
+            <div className="Informacion2"> 
+            <div className="Pantalla">
             <div style={{textAlign: "left" }}>
               <h4>Información de Residencia</h4>
              </div>
-                <div className="row" >
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PTipoVia">Tipo de vía:</label>
-                                    <select name="PTipoVia" title="Tipo de Via Residencia Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Autopista</option>
-                                      <option value="100000002">Avenida</option>
-                                      <option value="100000003">Av. Calle</option>
-                                      <option value="100000004">Av.Carrera</option>
-                                      <option value="100000005">Barrio</option>
-                                      <option value="100000006">Calle</option>
-                                      <option value="100000007">Callejón</option>
-                                      <option value="100000008">Carrera</option>
-                                      <option value="100000009">Circular</option>
-                                      <option value="100000010">Diagonal</option>
-                                      <option value="100000011">Kilómetro</option>
-                                      <option value="100000012">Pasaje</option>
-                                      <option value="100000013">Paso</option>
-                                      <option value="100000014">Ramal</option>
-                                      <option value="100000015">Subramal</option>
-                                      <option value="100000016">Tramo</option>
-                                      <option value="100000017">Transversal</option>
-                                      <option value="100000018">Vereda</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                <label for="PNombreVia1">Nombre o número de vía:</label>
-                                <input name="PNombreVia1" type="text" maxlength="50" id="PNombreVia1" title="Nombre o número de vía1 Padre" class="form-control" tabIndex="2" />  
-                                <span id="ctl00_MainContent_reqDocumentNumber" class="field-validation-error" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PComplementoVia1">Complemento vía principal:</label>
-                                    <select name="PComplementoVia1" title="Complemento vía principal Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Este</option>
-                                      <option value="100000002">Manzana</option>
-                                      <option value="100000003">Noreste</option>
-                                      <option value="100000004">Noroccidente</option>
-                                      <option value="100000005">Noroeste</option>
-                                      <option value="100000006">Norte</option>
-                                      <option value="100000007">Occidente</option>
-                                      <option value="100000008">Oeste</option>
-                                      <option value="100000009">Oriente</option>
-                                      <option value="100000010">Sur</option>
-                                      <option value="100000011">Sureste</option>
-                                      <option value="100000012">Suroccidente</option>
-                                      <option value="100000013">Suroeste</option>
-                                      <option value="100000014">Suroriente</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                      <div class="col-md-3">
-                              <div class="control-group">
-                                <label for="PNombreVia2">Número de vía:</label>
-                                <input name="PNombreVia2" type="text" maxlength="50" id="PNombreVia2" title="Nombre o número de vía2 Padre" class="form-control" tabIndex="2" />  
-                                <span id="ctl00_MainContent_reqDocumentNumber" class="field-validation-error" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                  </div>
-                  
+                
                   <div className="row">
-                  <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PComplementoVia2">Complemento vía secundaria:</label>
-                                    <select name="PComplementoVia2" title="Complemento vía secundaria Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Este</option>
-                                      <option value="100000002">Manzana</option>
-                                      <option value="100000003">Noreste</option>
-                                      <option value="100000004">Noroccidente</option>
-                                      <option value="100000005">Noroeste</option>
-                                      <option value="100000006">Norte</option>
-                                      <option value="100000007">Occidente</option>
-                                      <option value="100000008">Oeste</option>
-                                      <option value="100000009">Oriente</option>
-                                      <option value="100000010">Sur</option>
-                                      <option value="100000011">Sureste</option>
-                                      <option value="100000012">Suroccidente</option>
-                                      <option value="100000013">Suroeste</option>
-                                      <option value="100000014">Suroriente</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div>
-                    <div class="col-md-3">
-                            <div class="control-group">
-                             <label for="PNumeroCasa" >Número de casa:</label>
-                             <input name="PNumeroCasa" type="text" maxlength="50" id="secTxtName" title="Numero de casa Padre" class="form-control" />
-                             <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
-                    </div>
-                    <div class="col-md-3">
-                              <div class="control-group">
-                                    <label for="PComplemento">Complemento:</label>
-                                    <select name="PComplemento" title="Complemento Padre" class="form-control" tabIndex="1">
-                                      <option selected="selected" value="-1">Seleccione...</option>
-                                      <option value="100000001">Este</option>
-                                      <option value="100000002">Manzana</option>
-                                      <option value="100000003">Noreste</option>
-                                      <option value="100000004">Noroccidente</option>
-                                      <option value="100000005">Noroeste</option>
-                                      <option value="100000006">Norte</option>
-                                      <option value="100000007">Occidente</option>
-                                      <option value="100000008">Oeste</option>
-                                      <option value="100000009">Oriente</option>
-                                      <option value="100000010">Sur</option>
-                                      <option value="100000011">Sureste</option>
-                                      <option value="100000012">Suroccidente</option>
-                                      <option value="100000013">Suroeste</option>
-                                      <option value="100000014">Suroriente</option>
-                                    </select>
-                                    <span  class="field-validation-error" data-toggle="tooltip" data-placement="top" >&nbsp;&nbsp;&nbsp;</span>
-                              </div>
-                      </div> 
-                    <div class="col-md-3">
-                            <div class="control-group">
-                              <label for="PBarrio">Barrio o Vereda:</label>
-                              <input name="PBarrio" type="text" maxlength="50" id="PBarrio" title="Barrio o vereda Padre" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
-                            </div>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div class="col-md-12">
-                            <div class="control-group">
+                    <div className="col-md-12">
+                            <div className="control-group">
                               <label for="PDirecciónR">Dirección de Residencia:</label>
-                              <input name="PDirecciónR" readonly="readonly" type="text" maxlength="50" id="txtPDateN" title="Dirección de Residencia Padre" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                              <input type="text" disabled={this.props.dis} className="form-control" id="8" value={this.state.items[8]} onChange={this.handleChange} />
                             </div>
                     </div> 
                   </div>
                   <div className="row">
-                    <div class="col-md-4">
-                            <div class="control-group">
+                    <div className="col-md-4">
+                            <div className="control-group">
                               <label for="PPaisR">País de residencia:</label>
-                              <input name="PPaisR" type="text" maxlength="50" id="txtPDateN" title="Pais de residencia Padre" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                              <input name="PPaisR" disabled={this.props.dis} type="text" maxlength="50" id="9" value={this.state.items[9]} onChange={this.handleChange} title="Pais de residencia Padre" className="form-control" />
+                              
                             </div>
                     </div>  
-                    <div class="col-md-4">
-                            <div class="control-group">
+                    <div className="col-md-4">
+                            <div className="control-group">
                               <label for="PDepartamentoR">Departamento de residencia:</label>
-                              <input name="PDepartamentoR" type="text" maxlength="50" id="txtPDateN" title="Departamento de residencia Padre" class="form-control" />
-                              <span >&nbsp;&nbsp;&nbsp;</span>
+                              <input name="PDepartamentoR" disabled={this.props.dis} type="text" maxlength="50" id="10" value={this.state.items[10]} onChange={this.handleChange} title="Departamento de residencia Padre" className="form-control" />
+                              
                             </div>
                     </div>  
-                    <div class="col-md-4">
-                            <div class="control-group">
+                    <div className="col-md-4">
+                            <div className="control-group">
                               <label for="PMunicipioR">Municipio de residencia:</label>
-                              <input name="PMunicipioR" type="text" maxlength="50" id="txtPDateN" title="Municipio de residencia Padre" class="form-control" />
+                              <input name="PMunicipioR"  disabled={this.props.dis} type="text" maxlength="50" id="11" value={this.state.items[11]} onChange={this.handleChange} title="Municipio de residencia Padre" className="form-control" />
                               <span >&nbsp;&nbsp;&nbsp;</span>
                             </div>
                     </div> 
@@ -296,18 +187,10 @@ class SiblingInfo extends Component {
                 </div>
                 </div>
                 
-                <div class="col-md-12">      
-						    <input type="button" value= "Agregar Información"  class="btn btn2-style" />
-                </div>
-                <div class="Informacion2">
-                    <div style={{textAlign: "left" }}>
-                         <h4>Lista de Hermanos</h4>
-                    </div>
                 
-                </div>
                 {/*
-                <div class="col-md-12">      
-						    <input type="button" value= {this.props.value}  class="btn btn2-style" />
+                <div className="col-md-12">      
+                <input type="button" value= {this.props.value}  className="btn btn2-style" />
                 </div>
                 */}
 

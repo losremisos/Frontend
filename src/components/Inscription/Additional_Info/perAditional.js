@@ -2,293 +2,200 @@ import React, { Component } from 'react';
 
 
 class AdditionalInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      items: [],
+      firstload : true,
+      confirmar: true
+
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    let newitem = this.state.items;
+    newitem[parseInt(event.target.id, 10)] = event.target.value;
+    this.setState({ items:newitem });
+  }
   render() {
+    if(this.state.firstload===true && this.props.load===true){
+      let info = this.props.information[1]
+      this.setState({items:info , firstload:false, confirmar:true})
+    }
+    if (this.props.submit === "1" && this.state.confirmar===true) {
+      console.log(this.state.items);
+      this.props.information[1] = this.state.items;
+      this.props.getDatos(this.props.information);
+      this.setState({firstload:true, confirmar:false})
+    }
     return (
       <div>
-          
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label><strong>Datos de la Residencia</strong> (Diligencie los siguientes campos para formar la dirección de la residencia) </label>                                
-              </div>              
+        <div className="form-row">
+          <div className="form-group col-md-12">
+            <label for="validationCustom20">Direccion de residencia (*):</label>
+            <input type="text" className="form-control" id="0"  disabled name="direccionres" placeholder="Direccion de Residencia"
+              onChange={this.handleChange} value={this.state.items[0]} />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-3">
+            <label for="validationCustom21">País de residencia (*):</label>
+            <input type="text" className="form-control" id="1" name="paisres" placeholder="Pais de Residencia"
+              onChange={this.handleChange} value={this.state.items[1]} disabled={this.props.dis}/>
+          </div>
+          <div className="form-group col-md-3">
+            <label for="validationCustom22">Departamento de residencia (*):</label>
+            <input type="text" className="form-control" id="2" disabled name="departamentores" placeholder="Departamento de Residencia"
+              onChange={this.handleChange} value={this.state.items[2]}/>
+          </div>
+          <div className="form-group col-md-3">
+            <label for="validationCustom23">Municipio de residencia (*):</label>
+            <input type="text" className="form-control" id="3" disabled name="municipiores" placeholder="Municipio de Residencia"
+              onChange={this.handleChange} value={this.state.items[3]}/>
+          </div>
+          <div className="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label for="validationCustom24">Telefono fijo:</label>
+                <input type="number" className="form-control" id="4" name="telefonof" placeholder="Telefono Fijo"
+                  onChange={this.handleChange} value={this.state.items[4]} disabled={this.props.dis}/>
+              </div>
+              <div className="form-group col-md-6">
+                <label for="validationCustom25">Telefono Movil(*):</label>
+                <input type="number" disabled className="form-control" id="5" value={this.state.items[5]}/>
+              </div>
             </div>
+          </div>
+        </div>
 
+        <div className="dropdown-divider"></div>
 
-            <div class="form-row">
-              <div class="form-group col-md-3">
-              <label for="inputState06">Tipo de vía (*)</label>
-              <select id="inputState06" class="form-control" required>
+        <div className="form-row">
+          <div className="form-group col-md-12">
+            <label><strong>Otros Datos Personales</strong></label>
+          </div>
+          <div className="form-group col-md-3">
+            <label for="inputState10">Tipo de vivienda (*):</label>
+            <select className="form-control" id="6" onChange={this.handleChange} value={this.state.items[6]} disabled={this.props.dis}>
+              <option selected>Seleccione...</option>
+              <option value="1">Propia</option>
+              <option value="2">Arriendo</option>
+              <option value="3">Familiar</option>
+            </select>
+          </div>
+          <div className="form-group col-md-3">
+            <label for="inputState11">Estrato (*):</label>
+            <select className="form-control" id="7" onChange={this.handleChange} value={this.state.items[7]} disabled={this.props.dis}>
+              <option selected>Seleccione...</option>
+              <option value="1">0</option>
+              <option value="2">1</option>
+              <option value="3">2</option>
+              <option value="4">3</option>
+              <option value="5">4</option>
+              <option value="6">5</option>
+              <option value="7">6</option>
+            </select>
+          </div>
+          <div className="form-group col-md-3">
+            <label for="inputState12">¿Pertenece a Red Unidos (*):</label>
+            <select className="form-control" id="8" onChange={this.handleChange} value={this.state.items[8]} disabled={this.props.dis}>
+              <option selected>Seleccione...</option>
+              <option value="false">No</option>
+              <option value="true">Si</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-3">
+            <label for="inputState13">Tiene sisbén (*):</label>
+            <select className="form-control" id="9" onChange={this.handleChange} value={this.state.items[9]} disabled={this.props.dis}>
+              <option selected>Seleccione...</option>
+              <option value="false">No</option>
+              <option value="true">Si</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-3">
+            <label for="inputState14">Esta a cargo del ICBF (*):</label>
+            <select className="form-control" id="10" onChange={this.handleChange} value={this.state.items[10]} disabled={this.props.dis}>
+              <option selected>Seleccione...</option>
+              <option value="false">No</option>
+              <option value="true">Si</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+
+          <div className="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label for="validationCustom26">Estatura (cm)(*):</label>
+                <input type="number" className="form-control" id="11" onChange={this.handleChange} value={this.state.items[11]} disabled={this.props.dis} />
+              </div>
+              <div className="form-group col-md-6">
+                <label for="validationCustom27">Peso (Kg)(*):</label>
+                <input type="number" className="form-control" id="12" onChange={this.handleChange} value={this.state.items[12]} disabled={this.props.dis}/>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group col-md-3">
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label for="inputState15">Grupo sanguíneo (*):</label>
+                <select id="13" className="form-control" onChange={this.handleChange} value={this.state.items[13]} disabled={this.props.dis}>
                   <option selected>Seleccione...</option>
-                  <option>Autopista</option>
-                  <option>Avenida</option>
-                  <option>Av. Calle</option>
-                  <option>Av. Carrera</option>
-                  <option>Barrio</option>
-                  <option>Calle</option>
-                  <option>Callejón</option>
-                  <option>Carrera</option>
-                  <option>Circular</option>
-                  <option>Diagonal</option>
-                  <option>Kilómetro</option>
-                  <option>Pasaje</option>
-                  <option>Paso</option>
-                  <option>Ramal</option>
-                  <option>SubRamal</option>
-                  <option>Tramo</option>
-                  <option>Transversal</option>
-                  <option>Vereda</option>
-                </select>
-
-              </div>
-              <div class="form-group col-md-3">
-                <label for="validationCustom16">Nombre o número de via (*):</label>
-                <input type="text" class="form-control" id="validationCustom16" required/>
-              </div>
-              <div class="form-group col-md-3">
-               <label for="inputState07">Complemento vía principal:</label>
-               <select id="inputState07" class="form-control">
-                    <option selected>Seleccione...</option>
-                    <option>Este</option>
-                    <option>Manzana</option>
-                    <option>Noreste</option>
-                    <option>Noroccidente</option>
-                    <option>Noroeste</option>
-                    <option>Norte</option>
-                    <option>Occidente</option>
-                    <option>Oeste</option>
-                    <option>Oriente</option>
-                    <option>Sur</option>
-                    <option>Sureste</option>
-                    <option>Suroccidente</option>
-                    <option>Suroeste</option>
-                    <option>Suroriente</option>                  
+                  <option value="1">A</option>
+                  <option value="2">AB</option>
+                  <option value="3">B</option>
+                  <option value="4">O</option>
                 </select>
               </div>
-              <div class="form-group col-md-3">
-                <label for="validationCustom17">Numero de vía secundaria: </label>
-                <input type="text" class="form-control" id="validationCustom17" />
+              <div className="form-group col-md-6">
+                <label for="inputState16">Factor RH (*):</label>
+                <select id="14" className="form-control" onChange={this.handleChange} value={this.state.items[14]} disabled={this.props.dis}>
+                  <option selected>Seleccione...</option>
+                  <option value="1">RH +</option>
+                  <option value="2">RH -</option>
+                </select>
               </div>
             </div>
+          </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-3">
-                <label for="inputState08">Complemento vía secundaria:</label>
-                <select id="inputState08" class="form-control">
-                        <option selected>Seleccione...</option>
-                        <option>Este</option>
-                        <option>Manzana</option>
-                        <option>Noreste</option>
-                        <option>Noroccidente</option>
-                        <option>Noroeste</option>
-                        <option>Norte</option>
-                        <option>Occidente</option>
-                        <option>Oeste</option>
-                        <option>Oriente</option>
-                        <option>Sur</option>
-                        <option>Sureste</option>
-                        <option>Suroccidente</option>
-                        <option>Suroeste</option>
-                        <option>Suroriente</option>                  
-                    </select>
-              </div>
+          <div className="form-group col-md-3">
+            <label for="inputState17">Número de hijos (*):</label>
+            <select id="15" className="form-control" onChange={this.handleChange} value={this.state.items[15]} disabled={this.props.dis}>
+              <option selected>Seleccione...</option>
+              <option value="1">0</option>
+              <option value="2">1</option>
+              <option value="3">2</option>
+              <option value="4">3</option>
+              <option value="5">4</option>
+              <option value="6">5</option>
+              <option value="7">6 ó mas</option>
+            </select>
+          </div>
+        </div>
 
-              <div class="form-group col-md-3">
-                <label for="validationCustom18">Número de casa:</label>
-                <input type="text" class="form-control" id="validationCustom18" />
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="inputState09">Complemento:</label>
-                <select id="inputState09" class="form-control">
-                        <option selected>Seleccione...</option>
-                        <option>Este</option>
-                        <option>Manzana</option>
-                        <option>Noreste</option>
-                        <option>Noroccidente</option>
-                        <option>Noroeste</option>
-                        <option>Norte</option>
-                        <option>Occidente</option>
-                        <option>Oeste</option>
-                        <option>Oriente</option>
-                        <option>Sur</option>
-                        <option>Sureste</option>
-                        <option>Suroccidente</option>
-                        <option>Suroeste</option>
-                        <option>Suroriente</option>                  
-                    </select>
-              </div>
-              
-              <div class="form-group col-md-3">
-                <label for="validationCustom19">Barrio o Vereda (*):</label>
-                <input type="text" class="form-control" id="validationCustom19"  required/>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="validationCustom20">Direccion de residencia:</label>
-                <input type="text" class="form-control" id="validationCustom20"  required/>
-              </div>              
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-3">
-                <label for="validationCustom21">País de residencia (*):</label>
-                <input type="text" class="form-control" id="validationCustom21"  required/>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="validationCustom22">Departamento de residencia (*):</label>
-                <input type="text" class="form-control" id="validationCustom22"  required/>
-              </div> 
-              <div class="form-group col-md-3">
-                <label for="validationCustom23">Municipio de residencia (*):</label>
-                <input type="text" class="form-control" id="validationCustom23"  required/>
-              </div>
-              <div class="form-group col-md-3">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="validationCustom24">Telefono fijo:</label>
-                        <input type="number" class="form-control" id="validationCustom24"/>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="validationCustom25">Telefono Movil(*):</label>
-                        <input type="number" class="form-control" id="validationCustom25" required/>
-                    </div>
-                 </div>     
-               </div>
-            </div>
-
-            <div class="dropdown-divider"></div>
-
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label><strong>Otros Datos Personales</strong></label>
-              </div>    
-              <div class="form-group col-md-3">
-              <label for="inputState10">Tipo de vivienda (*):</label>
-                <select id="inputState10" class="form-control" required>
-                        <option selected>Seleccione...</option>
-                        <option>Propia</option>
-                        <option>Arriendo</option>
-                        <option>Familiar</option>                                         
-                    </select>
-              </div>   
-              <div class="form-group col-md-3">
-              <label for="inputState11">Estrato (*):</label>
-                <select id="inputState11" class="form-control" required>
-                        <option selected>Seleccione...</option>
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>        
-                        <option>3</option>
-                        <option>4</option>   
-                        <option>5</option>   
-                        <option>6</option>                                    
-                    </select>
-              </div> 
-              <div class="form-group col-md-3">
-              <label for="inputState12">¿Pertenece a Red Unidos (*):</label>
-                <select id="inputState12" class="form-control" required>
-                        <option selected>Seleccione...</option>
-                        <option>No</option>
-                        <option>Si</option>                                                           
-                    </select>
-              </div>                  
-            </div>
-
-            <div class="form-row">                 
-              <div class="form-group col-md-3">
-              <label for="inputState13">Tiene sisbén (*):</label>
-                <select id="inputState13" class="form-control" required>
-                        <option selected>Seleccione...</option>
-                        <option>No</option>
-                        <option>Si</option>
-                    </select>
-              </div>                                                
-            </div>
-
-            <div class="form-row">                 
-              <div class="form-group col-md-3">
-              <label for="inputState14">Esta a cargo del ICBF (*):</label>
-                <select id="inputState14" class="form-control" required>
-                        <option selected>Seleccione...</option>
-                        <option>No</option>
-                        <option>Si</option>
-                    </select>
-              </div>                                                
-            </div>
-
-            <div class="form-row"> 
-
-                <div class="form-group col-md-3">
-                    <div class="form-row"> 
-                        <div class="form-group col-md-6">
-                            <label for="validationCustom26">Estatura (cm)(*):</label>
-                            <input type="number" class="form-control" id="validationCustom26" required/>
-                        </div>
-                        <div class="form-group col-md-6">
-                             <label for="validationCustom27">Peso (Kg)(*):</label>
-                            <input type="number" class="form-control" id="validationCustom27" required/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <div class="form-row"> 
-                        <div class="form-group col-md-6">
-                            <label for="inputState15">Grupo sanguíneo (*):</label>
-                            <select id="inputState15" class="form-control" required>
-                                <option selected>Seleccione...</option>
-                                <option>A</option>
-                                <option>AB</option>
-                                <option>B</option>
-                                <option>O</option>                                
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                        <label for="inputState16">Factor RH (*):</label>
-                            <select id="inputState16" class="form-control" required>
-                                <option selected>Seleccione...</option>
-                                <option>RH +</option>
-                                <option>RH -</option>                                                              
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-              <div class="form-group col-md-3">
-              <label for="inputState17">Número de hijos (*):</label>
-                <select id="inputState17" class="form-control" required>
-                        <option selected>Seleccione...</option>
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6 ó mas</option>
-                    </select>
-              </div>                                                
-            </div>
-
-            <div class="form-row">                 
-              <div class="form-group col-md-3">
-              <label for="inputState18">Estado civil (*):</label>
-                <select id="inputState18" class="form-control" required>
-                        <option selected>Seleccione...</option>
-                        <option>Soltero</option>
-                        <option>Casado</option>
-                        <option>Divorciado</option>                        
-                        <option>Viudo</option>
-                        <option>Union Libre</option>
-                    </select>
-              </div>                                                
-            </div>
-
-
-
-
-                     
-          
+        <div className="form-row">
+          <div className="form-group col-md-3">
+            <label for="inputState18">Estado civil (*):</label>
+            <select id="16" className="form-control" onChange={this.handleChange} value={this.state.items[16]} disabled={this.props.dis}>
+              <option selected>Seleccione...</option>
+              <option value="1">Soltero</option>
+              <option value="2">Casado</option>
+              <option value="3">Divorciado</option>
+              <option value="4">Viudo</option>
+              <option value="5">Union Libre</option>
+            </select>
+          </div>
+        </div>
       </div>
     );
   }
