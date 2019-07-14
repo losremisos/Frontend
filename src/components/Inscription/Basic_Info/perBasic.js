@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Users from '../../../assets/defaultUser.png';
-<<<<<<< HEAD
 import axios from 'axios';
 import {Button,Card} from "react-bootstrap";
 import ReactFileReader from "react-file-reader";
@@ -8,9 +7,6 @@ import ActiveStorageProvider from 'react-activestorage-provider';
 import {DirectUpload}  from "activestorage";
 import Dropzone from 'react-dropzone';
 import defaultUser from "/home/sebastian/Documents/Proyecto_Libreta/Frontend/src/assets/defaultUser.png";
-=======
-
->>>>>>> 2af5d906936cb095f981ff872d7855d9631391eb
 
 
 class BasicInfo extends Component {
