@@ -125,7 +125,7 @@ class InfoPerfil extends Component{
     
 
 
-    render(){
+    render() { 
         const {users} = this.state;
         const {extrausers} = this.state;
         let {edit} = this.state;
@@ -151,11 +151,13 @@ class InfoPerfil extends Component{
         
         console.log("Lo que hay en user del state");
         console.log(users);
-        console.log(edit);
+        let img = users.avatar;
+        const base64 = 'data:image/png;base64' + img
+        console.log(edit)
         if (edit === "false") {
         window=
             <div className="card ">
-                <img className="card-img-top" src={foto} alt="algo"/>
+                <img className="card-img-top" src={base64} alt="algo"/> 
                 <div className="card-body">
                     <h5 className="card-title">{users.nombre} {users.primerApellido} {users.segundoApellido}</h5>
                 </div>
