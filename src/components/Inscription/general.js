@@ -10,7 +10,7 @@ import WorkingInfo from './Working_Info/Working_info';
 import AdminReview from './Review_Admin/AdminReview';
 import './general.css';
 import axios from 'axios';
-import { relative } from 'path';
+
 
 const ProgressBar = (props) => {
     return (
@@ -36,6 +36,9 @@ export class Inscription extends Component {
           extrausers:[],
           users:[],
           inscriptioninfo: [],
+          relativem:[],
+          relativef:[],
+          relativeb:[],
           submit: "0",
           submit1:"0",
           submit2:"0",
@@ -55,9 +58,7 @@ export class Inscription extends Component {
       }
       
       nextStep() {
-
         this.setState({ submit: "1" ,submit1: "1", submit2: "1" , submit3: "1", submit4: "1",submit5: "1", submit6: "1",submit7:"1",submit8:"1"})
-       
       }
       
       getData(value){
@@ -111,11 +112,15 @@ export class Inscription extends Component {
         if(this.state.information[7][0]===false){
             minus[7] = -11;
         }
-        console.log(this.state.information[8]);
+        console.log(this.state.information[5]);
+        console.log(this.state.information[6]);
+        console.log(this.state.information[7]);
+        
         for(var i = 0; i < j;i++){
             var l = this.state.information[i].length + minus[i];
             console.log(l);
             total += l;
+            console.log("FILA",i);
             for(var k = 0; k < l ; k++){
                 if (this.state.information[i][k]==="" || this.state.information[i][k]=== null){
                     notfill+=1;
@@ -123,6 +128,11 @@ export class Inscription extends Component {
                 }
             }
         }
+        if(this.state.information[2][0]===false){
+          if (this.state.information[2][4]!="" || this.state.information[2][4]!= null){
+            notfill-=1;
+        }
+      }
         
         let fill = total - notfill;
         let por = fill*100/total
@@ -130,13 +140,95 @@ export class Inscription extends Component {
         console.log(notfill);
         this.setState({ percentage: por })
     }
+    broinfo(){
+      let id = localStorage.getItem("UsrID");
+      const{
+          information,
+      } = this.state;
+      axios
+      .put("http://localhost:4200/relatives/"+id+"/2",
+      {
+        relative: {
+          tipo_documento_familiar: information[7][1],
+          documento_familiar: information[7][2],
+          primer_nombre_familiar: information[7][3],
+          primer_apellido_familiar: information[7][4],
+          segundo_apellido_familiar: information[7][5],
+          fecha_nacimiento_familiar: information[7][6],
+          direccion_familiar: information[7][8],
+          pais_familiar: information[7][9],
+          departamento_familiar: information[7][10],
+          municipio_familiar: information[7][11],
+          nombre_trabajo_familiar: information[7][7],
+                        
+                        
+      }
+      }, { withCredentials: true}
+      )
+      .then(response => {     
+        console.log("registration res", response);
+        console.log("SI HUJISAISAASS");
+        this.fatherinfo();
+      }).catch(error => {
+        console.log("registration error", error);
+      });
+
+    }
+
+    motherinfo(){
+      let id = localStorage.getItem("UsrID");
+      const{
+          information,
+      } = this.state;
+      axios
+      .put("http://localhost:4200/relatives/"+id+"/1",
+      {
+        relative: {
+          tipo_documento_familiar: information[6][0],
+          documento_familiar: information[6][1],
+          primer_nombre_familiar: information[6][2],
+          primer_apellido_familiar: information[6][3],
+          segundo_apellido_familiar: information[6][4],
+          fecha_nacimiento_familiar: information[6][5],
+          esta_vivo_familiar: information[6][6],
+          estado_civil_familiar: information[6][7],
+          tiene_cedula_militar_familiar: information[6][9],
+          direccion_familiar: information[6][10],
+          pais_familiar: information[6][11],
+          departamento_familiar: information[6][12],
+          municipio_familiar: information[6][13],
+          telefono_familiar: information[6][14],
+          esta_trabajando_familiar: information[6][15],
+          nombre_trabajo_familiar: information[6][16],
+          empresa_trabajo_familiar: information[6][17],
+          cargo_trabajo_familiar: information[6][18],
+          tipo_trabajador_familiar: information[6][19],
+          fecha_ingreso_trabajo_familiar: information[6][20],
+          direccion_trabajo_familiar: information[6][21],
+          pais_trabajo_familiar: information[6][22],
+          departamento_trabajo_familiar: information[6][23],
+          municipio_trabajo_familiar: information[6][24],
+          telefono_trabajo_familiar: information[6][25]
+      }
+      }, { withCredentials: true}
+      )
+      .then(response => {     
+        console.log("registration res", response);
+        console.log("SI HUJISAISAASS");
+        this.broinfo();
+      }).catch(error => {
+        console.log("registration error", error);
+      });
+
+    }
+
     fatherinfo(){
         let id = localStorage.getItem("UsrID");
         const{
             information,
         } = this.state;
         axios
-        .put("http://localhost:4200/relative/"+id,
+        .put("http://localhost:4200/relatives/"+id+"/0",
         {
           relative: {
             tipo_documento_familiar: information[5][0],
@@ -149,7 +241,7 @@ export class Inscription extends Component {
             estado_civil_familiar: information[5][7],
             tiene_cedula_militar_familiar: information[5][9],
             direccion_familiar: information[5][10],
-            pais_familiar: information[7][9],
+            pais_familiar: information[5][11],
             departamento_familiar: information[5][12],
             municipio_familiar: information[5][13],
             telefono_familiar: information[5][14],
@@ -163,10 +255,7 @@ export class Inscription extends Component {
             pais_trabajo_familiar: information[5][22],
             departamento_trabajo_familiar: information[5][23],
             municipio_trabajo_familiar: information[5][24],
-
-            telefono_trabajo_familiar: information[6][25]//acuerdeme q cambie esto
-            
-
+            telefono_trabajo_familiar: information[5][25]
         }
         }, { withCredentials: true}
         )
@@ -220,7 +309,7 @@ export class Inscription extends Component {
         .then(response => {     
           console.log("registration res", response);
           console.log("SI HUJISAISAASS");
-          this.fatherinfo();
+          this.motherinfo();
         }).catch(error => {
           console.log("registration error", error);
         });
@@ -369,28 +458,48 @@ export class Inscription extends Component {
                     })
                     axios({
                         method: "GET",
-                        url: "http://localhost:4200/relative/"+id
+                        url: "http://localhost:4200/relatives/"+id+"/0"
                     }).then((res) => {
                         this.setState({
-                            relative: res.data.data,
+                            relativef: res.data.data[0],
                         })
-                        const {users} = this.state;
-                        const {extrausers} = this.state;
-                        const {inscriptioninfo} = this.state;
-                        const {relative} = this.state;
-                        let copyinformation = this.state.information;
-                        copyinformation[0]=["Registro Civil","Documento Identidad",users.tipoDocumento,users.documento,"Tarjeta Identidad",users.nombre,users.primerApellido,users.segundoApellido,users.fechaNacimiento,"Pais Nacimiento",users.departamento,users.ciudad,extrausers.fecha_exp,extrausers.pais_exp,extrausers.dpto_exp,extrausers.ciudad_exp,extrausers.genero,extrausers.nacionalidad,extrausers.doble_nacionalidad,extrausers.retornado_de_exterior,users.email,extrausers.excepciones_de_ley,"AVATAR"];
-                        copyinformation[1]=[extrausers.direccion,extrausers.pais_residencia,extrausers.depto_residencia,extrausers.municipio_residencia,"Telefono Fijo",extrausers.telefono_movil,extrausers.tipo_vivienda,extrausers.estrato_vivienda,extrausers.pertenece_red_unidos,extrausers.sisben,extrausers.esta_cargo_icbf,extrausers.estatura,extrausers.peso,extrausers.grupo_sanguineo,extrausers.factor_rh,extrausers.num_hijos,extrausers.estado_civil]
-                        copyinformation[2]=[inscriptioninfo.cursa_educacion_basica,inscriptioninfo.nivel_educacion_basica,inscriptioninfo.institucion_educacion_basica,inscriptioninfo.terminacion_educacion_basica,"Certificado Educacion Basica"]
-                        copyinformation[3]=[inscriptioninfo.cursa_educacion_superior,"Modalidad",inscriptioninfo.nombre_carrera,inscriptioninfo.semestre_educacion_superior,"Graduado",inscriptioninfo.institucion_educacion_superior,"Certificado Educacion Superior"]
-                        copyinformation[4]=[inscriptioninfo.esta_trabajando,inscriptioninfo.nombre_trabajo,inscriptioninfo.empresa_trabajo,inscriptioninfo.cargo_trabajo,inscriptioninfo.tipo_trabajador,inscriptioninfo.fecha_ingreso_trabajo,inscriptioninfo.direccion_trabajo,inscriptioninfo.pais_trabajo,inscriptioninfo.departamento_trabajo,inscriptioninfo.municipio_trabajo,inscriptioninfo.telefono_trabajo]
-                        copyinformation[5]=[relative.tipo_documento_familiar,relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.esta_vivo_familiar,relative.estado_civil_familiar,"Documento Padre",relative.tiene_cedula_militar_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar,relative.telefono_familiar,relative.esta_trabajando_familiar,relative.nombre_trabajo_familiar,relative.empresa_trabajo_familiar,relative.cargo_trabajo_familiar,relative.tipo_trabajador_familiar,relative.fecha_ingreso_trabajo_familiar,relative.direccion_trabajo_familiar,relative.pais_trabajo_familiar,relative.departamento_trabajo_familiar,relative.municipio_trabajo_familiar,relative.telefono_trabajo_familiar]
-                        copyinformation[6]=[relative.tipo_documento_familiar,relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.esta_vivo_familiar,relative.estado_civil_familiar,"Documento Madre",relative.tiene_cedula_militar_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar,relative.telefono_familiar,relative.esta_trabajando_familiar,relative.nombre_trabajo_familiar,relative.empresa_trabajo_familiar,relative.cargo_trabajo_familiar,relative.tipo_trabajador_familiar,relative.fecha_ingreso_trabajo_familiar,relative.direccion_trabajo_familiar,relative.pais_trabajo_familiar,relative.departamento_trabajo_familiar,relative.municipio_trabajo_familiar,relative.telefono_trabajo_familiar]
-                        copyinformation[7]=[extrausers.tiene_hermano,relative.tipo_documento_familiar, relative.documento_familiar,relative.primer_nombre_familiar,relative.primer_apellido_familiar,relative.segundo_apellido_familiar,relative.fecha_nacimiento_familiar,relative.nombre_trabajo_familiar,relative.direccion_familiar,relative.pais_familiar,relative.departamento_familiar,relative.municipio_familiar];
-                        copyinformation[8]=[extrausers.dependencia_economica];
-                        
-                        this.setState({load:true,information:copyinformation})  
-                        this.fillbarra();
+                        axios({
+                          method: "GET",
+                          url: "http://localhost:4200/relatives/"+id+"/1"
+                      }).then((res) => {
+                          this.setState({
+                              relativem: res.data.data[0],
+                          })
+                          axios({
+                            method: "GET",
+                            url: "http://localhost:4200/relatives/"+id+"/2"
+                        }).then((res) => {
+                            this.setState({
+                                relativeb: res.data.data[0],
+                            })
+                            const {users} = this.state;
+                            const {extrausers} = this.state;
+                            const {inscriptioninfo} = this.state;
+                            const {relativef} = this.state;
+                            const {relativem} = this.state;
+                            const {relativeb} = this.state;
+                            let copyinformation = this.state.information;
+                            copyinformation[0]=["Registro Civil","Documento Identidad",users.tipoDocumento,users.documento,"Tarjeta Identidad",users.nombre,users.primerApellido,users.segundoApellido,users.fechaNacimiento,"Pais Nacimiento",users.departamento,users.ciudad,extrausers.fecha_exp,extrausers.pais_exp,extrausers.dpto_exp,extrausers.ciudad_exp,extrausers.genero,extrausers.nacionalidad,extrausers.doble_nacionalidad,extrausers.retornado_de_exterior,users.email,extrausers.excepciones_de_ley,"AVATAR"];
+                            copyinformation[1]=[extrausers.direccion,extrausers.pais_residencia,extrausers.depto_residencia,extrausers.municipio_residencia,"Telefono Fijo",extrausers.telefono_movil,extrausers.tipo_vivienda,extrausers.estrato_vivienda,extrausers.pertenece_red_unidos,extrausers.sisben,extrausers.esta_cargo_icbf,extrausers.estatura,extrausers.peso,extrausers.grupo_sanguineo,extrausers.factor_rh,extrausers.num_hijos,extrausers.estado_civil]
+                            copyinformation[2]=[inscriptioninfo.cursa_educacion_basica,inscriptioninfo.nivel_educacion_basica,inscriptioninfo.institucion_educacion_basica,inscriptioninfo.terminacion_educacion_basica,"Certificado Educacion Basica"]
+                            copyinformation[3]=[inscriptioninfo.cursa_educacion_superior,"Modalidad",inscriptioninfo.nombre_carrera,inscriptioninfo.semestre_educacion_superior,"Graduado",inscriptioninfo.institucion_educacion_superior,"Certificado Educacion Superior"]
+                            copyinformation[4]=[inscriptioninfo.esta_trabajando,inscriptioninfo.nombre_trabajo,inscriptioninfo.empresa_trabajo,inscriptioninfo.cargo_trabajo,inscriptioninfo.tipo_trabajador,inscriptioninfo.fecha_ingreso_trabajo,inscriptioninfo.direccion_trabajo,inscriptioninfo.pais_trabajo,inscriptioninfo.departamento_trabajo,inscriptioninfo.municipio_trabajo,inscriptioninfo.telefono_trabajo]
+                            copyinformation[5]=[relativef.tipo_documento_familiar,relativef.documento_familiar,relativef.primer_nombre_familiar,relativef.primer_apellido_familiar,relativef.segundo_apellido_familiar,relativef.fecha_nacimiento_familiar,relativef.esta_vivo_familiar,relativef.estado_civil_familiar,"Documento Padre",relativef.tiene_cedula_militar_familiar,relativef.direccion_familiar,relativef.pais_familiar,relativef.departamento_familiar,relativef.municipio_familiar,relativef.telefono_familiar,relativef.esta_trabajando_familiar,relativef.nombre_trabajo_familiar,relativef.empresa_trabajo_familiar,relativef.cargo_trabajo_familiar,relativef.tipo_trabajador_familiar,relativef.fecha_ingreso_trabajo_familiar,relativef.direccion_trabajo_familiar,relativef.pais_trabajo_familiar,relativef.departamento_trabajo_familiar,relativef.municipio_trabajo_familiar,relativef.telefono_trabajo_familiar]
+                            copyinformation[6]=[relativef.tipo_documento_familiar,relativef.documento_familiar,relativef.primer_nombre_familiar,relativef.primer_apellido_familiar,relativef.segundo_apellido_familiar,relativef.fecha_nacimiento_familiar,relativef.esta_vivo_familiar,relativef.estado_civil_familiar,"Documento Padre",relativef.tiene_cedula_militar_familiar,relativef.direccion_familiar,relativef.pais_familiar,relativef.departamento_familiar,relativef.municipio_familiar,relativef.telefono_familiar,relativef.esta_trabajando_familiar,relativef.nombre_trabajo_familiar,relativef.empresa_trabajo_familiar,relativef.cargo_trabajo_familiar,relativef.tipo_trabajador_familiar,relativef.fecha_ingreso_trabajo_familiar,relativef.direccion_trabajo_familiar,relativef.pais_trabajo_familiar,relativef.departamento_trabajo_familiar,relativef.municipio_trabajo_familiar,relativef.telefono_trabajo_familiar]
+                            copyinformation[7]=[extrausers.tiene_hermano,relativef.tipo_documento_familiar,relativef.documento_familiar,relativef.primer_nombre_familiar,relativef.primer_apellido_familiar,relativef.segundo_apellido_familiar,relativef.fecha_nacimiento_familiar,relativef.nombre_trabajo_familiar,relativef.direccion_familiar,relativef.pais_familiar,relativef.departamento_familiar,relativef.municipio_familiar]
+                            //copyinformation[6]=[relativem.tipo_documento_familiar,relativem.documento_familiar,relativem.primer_nombre_familiar,relativem.primer_apellido_familiar,relativem.segundo_apellido_familiar,relativem.fecha_nacimiento_familiar,relativem.esta_vivo_familiar,relativem.estado_civil_familiar,"Documento Madre",relativem.tiene_cedula_militar_familiar,relativem.direccion_familiar,relativem.pais_familiar,relativem.departamento_familiar,relativem.municipio_familiar,relativem.telefono_familiar,relativem.esta_trabajando_familiar,relativem.nombre_trabajo_familiar,relativem.empresa_trabajo_familiar,relativem.cargo_trabajo_familiar,relativem.tipo_trabajador_familiar,relativem.fecha_ingreso_trabajo_familiar,relativem.direccion_trabajo_familiar,relativem.pais_trabajo_familiar,relativem.departamento_trabajo_familiar,relativem.municipio_trabajo_familiar,relativem.telefono_trabajo_familiar]
+                            //copyinformation[7]=[extrausers.tiene_hermano,relativeb.tipo_documento_familiar, relativeb.documento_familiar,relativeb.primer_nombre_familiar,relativeb.primer_apellido_familiar,relativeb.segundo_apellido_familiar,relativeb.fecha_nacimiento_familiar,relativeb.nombre_trabajo_familiar,relativeb.direccion_familiar,relativeb.pais_familiar,relativeb.departamento_familiar,relativeb.municipio_familiar];
+                            copyinformation[8]=[extrausers.dependencia_economica];
+                            
+                            this.setState({load:true,information:copyinformation})  
+                            this.fillbarra();
+                        });
+                      });
                     });
                 });
             });

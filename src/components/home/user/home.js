@@ -21,6 +21,7 @@ export class Home extends React.Component {
     this.createextrainfo = this.createextrainfo.bind(this);
     this.createrelativefather = this.createrelativefather.bind(this);
     this.createrelativemother = this.createrelativemother.bind(this);
+    this.createrelativebro = this.createrelativebro.bind(this);
 }
   componentDidMount(){
     let id = localStorage.getItem("UsrID");
@@ -87,7 +88,7 @@ createrelativefather(){
     id_user
   } = this.state;
   axios
-  .post("http://localhost:4200/relative",
+  .post("http://localhost:4200/relatives",
   {
     relative: {
       user_id: id_user,
@@ -110,11 +111,33 @@ createrelativemother(){
     id_user
   } = this.state;
   axios
-  .post("http://localhost:4200/relative",
+  .post("http://localhost:4200/relatives",
   {
     relative: {
       user_id: id_user,
       tipo_familiar: "1"
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    this.createrelativebro();
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+  
+}
+createrelativebro(){
+  console.log("Bro");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post("http://localhost:4200/relatives",
+  {
+    relative: {
+      user_id: id_user,
+      tipo_familiar: "2"
     }
   }, { withCredentials: true}
   )
@@ -126,6 +149,7 @@ createrelativemother(){
   });
   
 }
+
 createinscriptioninfo(){
   console.log("Inscription");
   const{
