@@ -14,7 +14,7 @@ export class Home extends React.Component {
   }
 
   componentDidMount() {
-    GET('/users').then((res) => {
+    GET('/users',false).then((res) => {
       this.setState({
         users: res.data,
         loading: false,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { GET, serverLink } from './../../JS/api.js';
 import foto from './../../assets/pesona.png'
 
 class InfoPerfil extends Component{
@@ -35,24 +36,13 @@ class InfoPerfil extends Component{
 
     componentDidMount(){
         let id = localStorage.getItem("UsrID");
-        console.log("Aqui esta la peticion");
-        console.log(axios({
-            method: "GET",
-            url: "http://localhost:4200/users/"+id
-        }));
-        axios({
-            method: "GET",
-            url: "http://localhost:4200/users/"+id
-        }).then((res) => {
+        GET("/users/"+id, false).then((res) => {
             this.setState({
                 users: res.data,
                 correo: res.data.email,
             })
         });
-        axios({
-            method: "GET",
-            url: "http://localhost:4200/user_extra_info/"+id
-        }).then((res) => {
+        GET("/user_extra_info/"+id,false).then((res) => {
             this.setState({
                 extrausers: res.data.data,
                 profile_direccion: res.data.data.direccion,
@@ -78,7 +68,7 @@ class InfoPerfil extends Component{
           profile_ciudad
         } = this.state;
         axios
-        .put("http://localhost:4200/user_extra_info/"+id,
+        .put(serverLink+"/user_extra_info/"+id,
         {
           params: {
             direccion: profile_direccion,
@@ -105,7 +95,7 @@ class InfoPerfil extends Component{
           correo,
         } = this.state;
         axios
-        .put("http://localhost:4200/users/"+id,
+        .put(serverLink+"/users/"+id,
         {
           user: {
             email: correo,

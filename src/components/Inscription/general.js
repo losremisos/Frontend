@@ -8,6 +8,7 @@ import SiblingInfo from './Sibling_Info/infoHermanos';
 import DependenceInfo from './Dependence_info/infoDependencia';
 import WorkingInfo from './Working_Info/Working_info';
 import AdminReview from './Review_Admin/AdminReview';
+import { serverLink } from './../../JS/api.js';
 import './general.css';
 import axios from 'axios';
 
@@ -64,13 +65,11 @@ export class Inscription extends Component {
       getData(value){
         this.setState({ 
             information: value, load:false
-        })   
-        console.log(this.state.numsubmit);
+        })
         if(this.state.numsubmit===7){
         this.userbasica();  
         }else{
            this.state.numsubmit = this.state.numsubmit + 1;
-           console.log(this.state.numsubmit);
            
         } 
 
@@ -146,7 +145,7 @@ export class Inscription extends Component {
           information,
       } = this.state;
       axios
-      .put("http://localhost:4200/relatives/"+id+"/2",
+      .put(serverLink+"/relatives/"+id+"/2",
       {
         relative: {
           tipo_documento_familiar: information[7][1],
@@ -181,7 +180,7 @@ export class Inscription extends Component {
           information,
       } = this.state;
       axios
-      .put("http://localhost:4200/relatives/"+id+"/1",
+      .put(serverLink+"/relatives/"+id+"/1",
       {
         relative: {
           tipo_documento_familiar: information[6][0],
@@ -228,7 +227,7 @@ export class Inscription extends Component {
             information,
         } = this.state;
         axios
-        .put("http://localhost:4200/relatives/"+id+"/0",
+        .put(serverLink+"/relatives/"+id+"/0",
         {
           relative: {
             tipo_documento_familiar: information[5][0],
@@ -277,7 +276,7 @@ export class Inscription extends Component {
             information,
         } = this.state;
         axios
-        .put("http://localhost:4200/inscription_information/"+id,
+        .put(serverLink+"/inscription_information/"+id,
         {
           information: {
             cursa_educacion_basica: information[2][0],
@@ -321,7 +320,7 @@ export class Inscription extends Component {
             information,
         } = this.state;
         axios
-        .put("http://localhost:4200/user_extra_info/"+id,
+        .put(serverLink+"/user_extra_info/"+id,
         {
           params: {
             fecha_exp: information[0][12],
@@ -371,7 +370,7 @@ export class Inscription extends Component {
             information,
         } = this.state;
         axios
-        .put("http://localhost:4200/users/"+id,
+        .put(serverLink+"/users/"+id,
         {
           user: {
             fechaNacimiento: information[0][8],
@@ -398,7 +397,7 @@ export class Inscription extends Component {
             }
             let id = localStorage.getItem("AuxID");
             axios
-            .put("http://localhost:4200/users/"+id,
+            .put(serverLink+"/users/"+id,
             {
               user: {
                 estadoProceso: process,
@@ -414,7 +413,7 @@ export class Inscription extends Component {
         }else{
         let id = localStorage.getItem("UsrID");
         axios
-        .put("http://localhost:4200/users/"+id,
+        .put(serverLink+"/users/"+id,
         {
           user: {
             estadoProceso: 0,
@@ -437,42 +436,42 @@ export class Inscription extends Component {
         }
         axios({
             method: "GET",
-            url: "http://localhost:4200/users/"+id
+            url: serverLink+"/users/"+id
         }).then((res) => {
             this.setState({
                 users: res.data,
             })
             axios({
                 method: "GET",
-                url: "http://localhost:4200/user_extra_info/"+id
+                url: serverLink+"/user_extra_info/"+id
             }).then((res) => {
                 this.setState({
                     extrausers: res.data.data,
                  })
                 axios({
                     method: "GET",
-                    url: "http://localhost:4200/inscription_information/"+id
+                    url: serverLink+"/inscription_information/"+id
                 }).then((res) => {
                     this.setState({
                         inscriptioninfo: res.data.data,
                     })
                     axios({
                         method: "GET",
-                        url: "http://localhost:4200/relatives/"+id+"/0"
+                        url: serverLink+"/relatives/"+id+"/0"
                     }).then((res) => {
                         this.setState({
                             relativef: res.data.data[0],
                         })
                         axios({
                           method: "GET",
-                          url: "http://localhost:4200/relatives/"+id+"/1"
+                          url: serverLink+"/relatives/"+id+"/1"
                       }).then((res) => {
                           this.setState({
                               relativem: res.data.data[0],
                           })
                           axios({
                             method: "GET",
-                            url: "http://localhost:4200/relatives/"+id+"/2"
+                            url: serverLink+"/relatives/"+id+"/2"
                         }).then((res) => {
                             this.setState({
                                 relativeb: res.data.data[0],
