@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar } from './../navBar/navBar';
 import { Login } from './login/login';
 import { Home } from './../app/home/home';
-import { Home } from './../home/home';
 import { Inscription } from './../Inscription/general';
 import { Profile } from './../profile/pagina';
 import { Registry } from './../regist/Regist';
@@ -25,6 +24,7 @@ export class App extends React.Component {
   }
 
   render() {
+    console.log(localStorage);
     return (
       <BrowserRouter>
         <div>
