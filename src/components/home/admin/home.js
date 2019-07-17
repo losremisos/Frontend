@@ -23,9 +23,11 @@ export class Home extends React.Component {
       var j = 0
       for(var i = 0; i<this.state.users.length; i++){
          if(this.state.users[i].estadoProceso === 0){
+          if(this.state.users[i].tipoUsuario === 0){
            usersrevision[j] = this.state.users[i];
            usersrevision[j].estadoProceso = "Revision";
            j +=1;
+          }
          }
       }
       this.setState({

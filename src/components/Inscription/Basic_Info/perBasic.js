@@ -4,7 +4,7 @@ import axios from 'axios';
 import {Button,Card} from "react-bootstrap";
 import ReactFileReader from "react-file-reader";
 import defaultUser from '../../../assets/defaultUser.png';
-
+import noFile from '../../../assets/nofile.png';
 
 class BasicInfo extends Component {
 
@@ -58,33 +58,53 @@ handleFiles = files => {
     let base64 = 'data:image/png;base64' + img;
     if(img=="" || img==null){
       base64 = defaultUser;
-    }       
+    }
+    let img1 = this.state.items[0];
+    let base641 = 'data:image/png;base64' + img1;
+    if(img1=="" || img1==null){
+      base641 = noFile;
+    } 
+    let img2 = this.state.items[1];
+    let base642 = 'data:image/png;base64' + img2;
+    if(img2=="" || img2==null){
+      base642 = noFile;
+    }          
    
     return (
       <div>
        <div className="form-row">
 
-<div className=" mt-5  form-group col-md-3">
+<div className=" mt-5  form-group col-md-4">
+  <div className="card ">
+  <img className="card-img-top" src={base641} alt="algo"/> 
+  <div className="card-body">
   <label>Adjunte Registro civil de nacimiento (*):</label>
-  <ReactFileReader id = "0" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
+  <ReactFileReader id = "0" fileTypes = {[".jpeg", ".png", ".jpg"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
     <Button disabled={this.props.dis} id = "0" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
 </div>
-
-<div className=" mt-5 form-group col-md-3">
-  <label>Adjunte documento de identidad (*):</label>
-  <ReactFileReader id = "1" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
-    <Button disabled={this.props.dis} id = "1" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
+</div>
 </div>
 
-<div className=" mt-5 form-group col-md-3">
+<div className=" mt-5 form-group col-md-4">
+  <div className="card ">
+  <img className="card-img-top" src={base642} alt="algo"/> 
+  <div className="card-body">
+  <label>Adjunte documento de identidad (*):</label>
+  <ReactFileReader id = "1" fileTypes = {[".jpeg", ".png", ".jpg"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
+    <Button disabled={this.props.dis} id = "1" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
+</div>
+</div>
+</div>
+
+<div className=" mt-5 form-group col-md-4">
+  <div className="card ">
+  <img className="card-img-top" src={base64} alt="algo"/> 
+  <div className="card-body">
   <label>Adjunte fotografia (*):</label>
   <ReactFileReader id = "22" fileTypes = {[".jpeg", ".png", ".jpg"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles} value={defaultUser}>
     <Button disabled={this.props.dis} id = "22" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
 </div>
-
-
-<div className="form-group col-md-3">
-  <img src={base64} className="img-fluid" alt="logo" />
+</div>
 </div>
 </div>
 
@@ -107,6 +127,7 @@ handleFiles = files => {
             <input type="number" className="form-control" name="numberTI" placeholder="Tarjeta Identidad"
               onChange={this.handleChange} id="4" value={this.state.items[4]} disabled={this.props.dis}/>
           </div>
+          
         </div>
 
         <div className="form-row">
@@ -212,7 +233,7 @@ handleFiles = files => {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label for="validationCustom15">Correo electronico (*):</label>
-            <input type="email" className="form-control" disabled id="20" value={this.state.items[20]} disabled={this.props.dis}/>
+            <input type="email" className="form-control" disabled id="20" value={this.state.items[20]}/>
           </div>
         </div>
 

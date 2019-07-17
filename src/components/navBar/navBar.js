@@ -6,6 +6,11 @@ export class Navbar extends Component {
 
   render() {
     let Nombre = " "+localStorage.getItem("UsrName");
+    let admin = localStorage.getItem("admin");
+    var Admin = "block";
+    if(admin==="true"){
+      Admin = "none";
+    }
     console.log(Nombre)
     console.log(localStorage)
     let IsLogged = localStorage.getItem("IsLogged");
@@ -31,22 +36,11 @@ export class Navbar extends Component {
               <span id="inicioHome" >Inicio</span>
             </a>
           </li>
-          <li id="Consultas">
-            <a href="/Default">
-              <span id="consultasHome" >Consultas</span>
-            </a>
-          </li>
-          <li id="Liquidacion">
-            <a href="/Default">
-              <span id="liquidacionHome" >Soporte Liquidacion</span>
-            </a>
-          </li>
-          <li id="Perfil">
+          <li id="Perfil" style={{display:Admin}}>
             <a href="/profile">
               <span id="perfilHome" >Mi Perfil</span>
             </a>
           </li>
-
           <li id="Nombre">
             {welcome}
           </li>
@@ -62,17 +56,6 @@ export class Navbar extends Component {
               <span id="inicioHome" >Inicio</span>
             </a>
           </li>
-          <li id="Consultas">
-            <a href="/Default">
-              <span id="consultasHome" >Consultas</span>
-            </a>
-          </li>
-          <li id="Liquidacion">
-            <a href="/Default">
-              <span id="liquidacionHome" >Soporte Liquidacion</span>
-            </a>
-          </li>
-
           <li id="Nombre">
             {registrar}
           </li>
@@ -99,11 +82,13 @@ export class Navbar extends Component {
           </div>
         </div>
 
-        <div className="row2">
+        <div className="row">
+        <div className="col-md-7 col-sm-7 padding-h">
           <div className="navbar ournav">
             <div className="container ourcontainer">
               <div className="collapse navbar-collapse ourcollapse">
                 {window}
+              </div>
               </div>
             </div>
           </div>

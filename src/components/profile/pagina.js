@@ -13,10 +13,10 @@ export class Profile extends Component {
               
               <div className="container-fluid">
                 <div className="row">
-                  <div className="carta col-sm-2">
+                  <div className="carta col-sm-3">
                     <InfoPerfil/>
                   </div>
-                  <div className="col-sm-8 ">
+                  <div className="col-sm-7 ">
                     <Perfil/>
                   </div>
       
