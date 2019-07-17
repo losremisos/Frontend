@@ -6,13 +6,13 @@ export function GET(path, auth) {
 	if (auth) {
 		return axios({
 			method: "GET",
-			url: "http://localhost:4200/" + path,
+			url: serverLink + path,
 			headers: {
 				Authorization: localStorage.getItem("jwt")
 			}
 		});
 	} else {
-		return axios.get('http://localhost:4200/' + path)
+		return axios.get(serverLink + path)
 	}
 }
 
@@ -20,14 +20,14 @@ export function POST(path, auth, headers, data){
     if (auth) {
 		return axios({
 			method: "POST",
-			url: "http://localhost:4200/" + path,
+			url: serverLink + path,
             headers: {
                 Authorization: localStorage.getItem("jwt")
             },
             data: data
 		});
 	} else {
-		return axios.post('http://localhost:4200/' + path)
+		return axios.post(serverLink + path)
 	}
 }
 

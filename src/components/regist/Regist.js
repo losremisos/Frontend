@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Regist.css';
 import axios from 'axios';
-
+import { serverLink } from './../../JS/api.js';
 export class Registry extends Component {
 
   constructor(props){
@@ -48,7 +48,7 @@ export class Registry extends Component {
       contrasena,
     } = this.state;
     axios
-    .post("http://localhost:4200/users",
+    .post(serverLink+"users",
     {
       user: {
         nombre: primer_nombre,

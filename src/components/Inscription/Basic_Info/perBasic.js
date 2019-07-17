@@ -3,10 +3,7 @@ import Users from '../../../assets/defaultUser.png';
 import axios from 'axios';
 import {Button,Card} from "react-bootstrap";
 import ReactFileReader from "react-file-reader";
-import ActiveStorageProvider from 'react-activestorage-provider';
-import {DirectUpload}  from "activestorage";
-import Dropzone from 'react-dropzone';
-import defaultUser from "/home/sebastian/Documents/Proyecto_Libreta/Frontend/src/assets/defaultUser.png";
+import defaultUser from '../../../assets/defaultUser.png';
 
 
 class BasicInfo extends Component {
@@ -15,205 +12,81 @@ class BasicInfo extends Component {
     super(props);
     this.state = {
         users: [],
-        file: null
+        file: null,
+        items: [],
+        firstload : true,
+        confirmar: true,
+        idfile: ""
     };
-    this.handleFileChange = this.handleFileChange.bind(this);
-    this.handleFileSubmit = this.handleFileSubmit.bind(this);
+    this.getId = this.getId.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
   }
 
-componentDidMount(){
-    let id = localStorage.getItem("UsrID");
-    console.log("Aqui esta la peticion");
-    console.log(axios({
-        method: "GET",
-        url: "http://localhost:4200/users/" + id
-    }));
-    axios({
-        method: "GET",
-        url: "http://localhost:4200/users/" + id
-    }).then((res) => {
-        this.setState({
-            users: res.data
-        })
-    });
+getId(event){
+  this.state.idfile = event.target.id;
+  console.log(event.target);
 }
-
-handleFileChange(e){
-  this.setState({file: e.target.files[0]})
+handleChange(event) {
+  let newitem = this.state.items;
+  newitem[parseInt(event.target.id, 10)] = event.target.value;
+  this.setState({ items:newitem });
 }
-
-handleFileSubmit(){
-  const upload = new DirectUpload(this.state.file, "/rails/active_storage/direct_uploads");
-
-  upload.create((error, blob) => {
-    if(error){
-      console.log(error)
-    } else {
-      console.log(blob)
-    }
-  })
-}
-
-hadleUpload = file => {
-  let id = localStorage.getItem("UsrID");
-  
-  /* axios
-    .get("http://localhost:4200/users/" + id)
-    .then(res => {
-      console.log(res, "RESPUESTA");
-    })
-    .catch(e => {
-      console.log(e, "error");
-    }); */
- 
-  axios.put("http://localhost:4200/users/123", {
-    "user": {
-      avatar: file
-    }
-  }).then(res => {
-      console.log(res, "respuesta");
-  }).catch(e => {
-      console.log(e, "error");
-  });
-};
-
-uploadFiles = file => {
-  let id = localStorage.getItem("UsrID");
-  
-  /* axios
-    .get("http://localhost:4200/users/" + id)
-    .then(res => {
-      console.log(res, "RESPUESTA");
-    })
-    .catch(e => {
-      console.log(e, "error");
-    }); */
- 
-  axios.put("http://localhost:4200/documents/1", {
-    "document": {
-      nombre: "Registro Nacimiento",
-      archivo: file,
-      user_id: id
-    }
-  }).then(res => {
-      console.log(res, "respuesta");
-  }).catch(e => {
-      console.log(e, "error");
-  });
-};
-
 handleFiles = files => {
-  console.log(files.base64, "IMAGEN.BASE.64");
-  console.log(files.fileList, "IMAGEN.FILELIST");
-  
-  this.setState({
-      files: files.fileList[0],
-      loadImage: true
-  });
-  this.hadleUpload(files.base64);
-};
-handleFilesPdf = files => {
-  console.log(files.base64, "IMAGEN.BASE.64");
-  console.log(files.fileList, "IMAGEN.FILELIST");
-  
-  this.setState({
-      files: files.fileList[0],
-      loadImage: true
-  });
-  this.uploadFiles(files.base64);
+  let newitem = this.state.items;
+  newitem[parseInt(this.state.idfile, 10)] = files.base64;
+  this.setState({ items:newitem });
 };
 
   render() {
+    console.log("DDDDDDDDDDDDD");
+    if(this.state.firstload===true && this.props.load===true){
+      let info = this.props.information[0]
+      this.setState({items:info , firstload:false,confirmar:true})
+    }
+    if (this.props.submit === "1" && this.state.confirmar===true) {
+      console.log(this.state.items);
+      this.props.information[0] = this.state.items;
+      this.props.getDatos(this.props.information);
+      this.setState({firstload:true,confirmar:false})
+    }
+    console.log(this.state.items);
     const {users} = this.state;
     console.log("Lo que hay en user del state");
     console.log(users);
+    let img = this.state.items[22];
+    let base64 = 'data:image/png;base64' + img;
+    if(img=="" || img==null){
+      base64 = defaultUser;
+    }       
+   
     return (
       <div>
-        <div class="form-row">
-          <div>
-            <ReactFileReader
-              fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]}
-              base64 = {true}
-              multipleFiles ={ false}
-              handleFiles = {this.handleFilesPdf}
-            >
-              <Button type="submit" variant="primary">
-                  {'Subir Archivo'}
-              </Button>
-            </ReactFileReader>
-          </div>
+       <div className="form-row">
 
-          <div class=" mt-5 form-group col-md-3">                         
-            <ReactFileReader
-                fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]}
-                base64 = {true}
-                multipleFiles ={ false}
-                handleFiles = {this.handleFilesPdf}
-              >
-                <Button type="submit" variant="primary">
-                    {'Subir Archivo'}
-                </Button>
-              </ReactFileReader>             
-          </div>
-            
-          {/* Base 64 */}
-          <div>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={this.state.loadImage ? URL.createObjectURL(this.state.files):defaultUser} />
-                <Card.Body>
-                    <ReactFileReader
-                        fileTypes = {[".jpeg", ".png", ".jpg"]}
-                        base64 = {true}
-                        multipleFiles ={ false}
-                        handleFiles = {this.handleFiles}
-                    >
-                        <Button type="submit" variant="primary">
-                            {'Subir imagen'}
-                        </Button>
-                    </ReactFileReader>
-                </Card.Body>
-            </Card>
-          </div> 
+<div className=" mt-5  form-group col-md-3">
+  <label>Adjunte Registro civil de nacimiento (*):</label>
+  <ReactFileReader id = "0" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
+    <Button disabled={this.props.dis} id = "0" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
+</div>
 
-          <div class="form-row">
-            <div class="form-group col-md-3">
-              <label for="inputState">Tipo de identificación (*):</label>
-              <select id="inputState" class="form-control" disabled value={users.tipoDocumento}>
-                <option disabled>Seleccione...</option>
-                <option value="1">Cedula de Ciudadania</option>
-                <option value="2">Tarjeta de Identidad</option>
-              </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="validationCustom01">Numero de identificación (*):</label>
-            <input type="number" class="form-control" id="validationCustom01" disabled placeholder={users.documento} required/>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="validationCustom02">Numero de tarjeta de Identidad:</label>
-            <input type="number" class="form-control" id="validationCustom02" />
-          </div>
-        </div>
-          <div className=" mt-5 form-group col-md-3">
-            <label>Adjunte documento de identidad (*):</label>
-            <div type="button" className="btn div_file">
-              <p className="text">Agregar archivo</p>
-              <input type="file" className="btn_enviar_1" id="1" name="documentoidentidad" placeholder="Documento de Identidad" accept=".pdf" disabled={this.props.dis}></input>
-            </div>
-          </div>
+<div className=" mt-5 form-group col-md-3">
+  <label>Adjunte documento de identidad (*):</label>
+  <ReactFileReader id = "1" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
+    <Button disabled={this.props.dis} id = "1" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
+</div>
 
-          <div className=" mt-5 form-group col-md-3">
-            <label>Adjunte fotografia (*):</label>
-            <div type="button" className="btn div_file">
-              <p className="text">Agregar archivo</p>
-              <input type="file" className="btn_enviar_1" id="btn_enviar_03" accept=".jpg,.jpeg,.png" disabled={this.props.dis}></input>
-            </div>
-          </div>
+<div className=" mt-5 form-group col-md-3">
+  <label>Adjunte fotografia (*):</label>
+  <ReactFileReader id = "22" fileTypes = {[".jpeg", ".png", ".jpg"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles} value={defaultUser}>
+    <Button disabled={this.props.dis} id = "22" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
+</div>
 
 
-          <div className="form-group col-md-3">
-            <img src={Users} className="img-fluid" alt="logo" />
-          </div>
-        </div>
+<div className="form-group col-md-3">
+  <img src={base64} className="img-fluid" alt="logo" />
+</div>
+</div>
 
         <div className="form-row">
           <div className="form-group col-md-3">

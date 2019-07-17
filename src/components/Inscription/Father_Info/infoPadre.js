@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../Family_Info_Components/Familiar';
 import  InfoTrabajo  from '../Family_Info_Components/infoTrabajo';
+import {Button,Card} from "react-bootstrap";
+import ReactFileReader from "react-file-reader";
 
 class FatherInfo extends Component {
 
@@ -13,15 +15,27 @@ class FatherInfo extends Component {
       display: 'none',
       checked: false,
       checked1: false,
-      confirmar: true
+      confirmar: true,
+      idfile: "",
+      file: null
     }
     this.handleChange = this.handleChange.bind(this);
+    this.getId = this.getId.bind(this);
+  }
+  getId(event){
+    this.state.idfile = event.target.id;
+    console.log(event.target);
   }
   handleChange(event) {
     let newitem = this.state.items;
     newitem[parseInt(event.target.id, 10)] = event.target.value;
     this.setState({ items:newitem });
   }
+  handleFiles = files => {
+    let newitem = this.state.items;
+    newitem[parseInt(this.state.idfile, 10)] = files.base64;
+    this.setState({ items:newitem });
+  };
 
   onChange = () => {
     if(this.state.display==='none' ){
@@ -167,8 +181,9 @@ class FatherInfo extends Component {
                     <div className="col-md-3">
                               <div className="control-group">
                                     <label for="PadreArchivo">Adjunte el documento de identidad(<span className="field-required">*</span>):</label>
-                                    <input name="PadreArchivo" type="button" id="8" disabled={this.props.dis} value={this.state.items[8]} onChange={this.handleChange} title="Padre Archivo CC" value="Seleccione un archivo" className="btn btn-style" />
-                                    
+                                    <ReactFileReader id = "8" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
+                                  <Button disabled={this.props.dis} id = "8" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
+
                                     </div>
                     </div>             
                   </div>

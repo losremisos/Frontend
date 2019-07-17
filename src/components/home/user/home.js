@@ -1,6 +1,7 @@
 import React from 'react';
 import './home.css';
 import axios from 'axios';
+import { serverLink } from './../../../JS/api.js';
 
 import SourceImg from './../../../assets/home/tabPic.png'
 import SourceImg2 from './../../../assets/home/tabPic6.png'
@@ -27,11 +28,11 @@ export class Home extends React.Component {
     console.log("Aqui esta la peticion");
     console.log(axios({
         method: "GET",
-        url: "http://localhost:4200/users/"+id
+        url: serverLink+"users/"+id
     }));
     axios({
         method: "GET",
-        url: "http://localhost:4200/users/"+id
+        url: serverLink+"users/"+id
     }).then((res) => {
         this.setState({
             users: res.data,
@@ -45,7 +46,7 @@ notfirstsession(){
           
         } = this.state;
         axios
-        .put("http://localhost:4200/users/"+id,
+        .put(serverLink+"users/"+id,
         {
           user: {
             first_session: false
@@ -67,7 +68,7 @@ createextrainfo(){
     id_user
   } = this.state;
   axios
-  .post("http://localhost:4200/user_extra_info",
+  .post(serverLink+"user_extra_info",
   {
     params: {
       user_id: id_user
@@ -87,7 +88,7 @@ createrelativefather(){
     id_user
   } = this.state;
   axios
-  .post("http://localhost:4200/relative",
+  .post(serverLink+"relatives",
   {
     relative: {
       user_id: id_user,
@@ -110,11 +111,33 @@ createrelativemother(){
     id_user
   } = this.state;
   axios
-  .post("http://localhost:4200/relative",
+  .post(serverLink+"relatives",
   {
     relative: {
       user_id: id_user,
       tipo_familiar: "1"
+    }
+  }, { withCredentials: true}
+  )
+  .then(response => {     
+    console.log("registration res", response);
+    this.createrelativebro();
+  }).catch(error => {
+    console.log("registration error", error);
+  });
+  
+}
+createrelativebro(){
+  console.log("Bro");
+  const{
+    id_user
+  } = this.state;
+  axios
+  .post(serverLink+"relatives",
+  {
+    relative: {
+      user_id: id_user,
+      tipo_familiar: "2"
     }
   }, { withCredentials: true}
   )
@@ -126,13 +149,14 @@ createrelativemother(){
   });
   
 }
+
 createinscriptioninfo(){
   console.log("Inscription");
   const{
     id_user
   } = this.state;
   axios
-  .post("http://localhost:4200/inscription_information",
+  .post(serverLink+"inscription_information",
   {
     information: {
       user_id: id_user

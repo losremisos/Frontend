@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import foto from './../../assets/pesona.png'
+import defaultUser from '../../assets/defaultUser.png';
+import { serverLink } from './../../JS/api.js';
+
 
 class InfoPerfil extends Component{
     constructor(props){
@@ -38,11 +41,11 @@ class InfoPerfil extends Component{
         console.log("Aqui esta la peticion");
         console.log(axios({
             method: "GET",
-            url: "http://localhost:4200/users/"+id
+            url: serverLink+"users/"+id
         }));
         axios({
             method: "GET",
-            url: "http://localhost:4200/users/"+id
+            url: serverLink+"users/"+id
         }).then((res) => {
             this.setState({
                 users: res.data,
@@ -51,7 +54,7 @@ class InfoPerfil extends Component{
         });
         axios({
             method: "GET",
-            url: "http://localhost:4200/user_extra_info/"+id
+            url: serverLink+"user_extra_info/"+id
         }).then((res) => {
             this.setState({
                 extrausers: res.data.data,
@@ -78,7 +81,7 @@ class InfoPerfil extends Component{
           profile_ciudad
         } = this.state;
         axios
-        .put("http://localhost:4200/user_extra_info/"+id,
+        .put(serverLink+"user_extra_info/"+id,
         {
           params: {
             direccion: profile_direccion,
@@ -105,7 +108,7 @@ class InfoPerfil extends Component{
           correo,
         } = this.state;
         axios
-        .put("http://localhost:4200/users/"+id,
+        .put(serverLink+"users/"+id,
         {
           user: {
             email: correo,
@@ -152,7 +155,10 @@ class InfoPerfil extends Component{
         console.log("Lo que hay en user del state");
         console.log(users);
         let img = users.avatar;
-        const base64 = 'data:image/png;base64' + img
+        let base64 = 'data:image/png;base64' + img;
+        if(img=="" || img==null){
+            base64 = defaultUser;
+        }
         console.log(edit)
         if (edit === "false") {
         window=

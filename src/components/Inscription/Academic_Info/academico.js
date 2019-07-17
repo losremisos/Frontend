@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import {Button,Card} from "react-bootstrap";
+import ReactFileReader from "react-file-reader";
 
 
 class AcademicInfo extends Component {
@@ -12,15 +14,27 @@ class AcademicInfo extends Component {
           firstload : true,
           display: 'none',
         checked: false,
-        confirmar:true
+        confirmar:true,
+        idfile: "",
+        file: null
         }
         this.handleChange = this.handleChange.bind(this);
+        this.getId = this.getId.bind(this);
+      }
+      getId(event){
+        this.state.idfile = event.target.id;
+        console.log(event.target);
       }
       handleChange(event) {
         let newitem = this.state.items;
         newitem[parseInt(event.target.id, 10)] = event.target.value;
         this.setState({ items:newitem });
       }
+      handleFiles = files => {
+        let newitem = this.state.items;
+        newitem[parseInt(this.state.idfile, 10)] = files.base64;
+        this.setState({ items:newitem });
+      };
     
     handleCheckboxChange = event => {
         if (this.state.display === 'none') {
@@ -99,7 +113,9 @@ class AcademicInfo extends Component {
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label for="examinarActaCert">Adjunte Acta de Grado o Certificación</label>
-                                <input type="file" className="form-control-file" id="4" disabled={this.props.dis}/>
+                                <ReactFileReader id = "4" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
+                                <Button disabled={this.props.dis} id = "4" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
+
                             </div>
                         </div>
 
