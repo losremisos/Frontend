@@ -51,12 +51,14 @@ export class Inscription extends Component {
           submit7:"0",
           submit8:"0",
           load: false,
-          numsubmit: 0
+          numsubmit: 0,
+          msg: ""
         }
         this.nextStep = this.nextStep.bind(this)
         this.getData = this.getData.bind(this)
         this.makeaprovation = this.makeaprovation.bind(this)
         this.changeState = this.changeState.bind(this);
+        this.changetext = this.changetext.bind(this);
       }
       
       nextStep() {
@@ -118,7 +120,7 @@ export class Inscription extends Component {
         if(this.state.information[7][0]===false){
             minus[7] = -11;
         }
-        console.log(this.state.information[5]);
+        console.log(this.state.information[1]);
         console.log(this.state.information[6]);
         console.log(this.state.information[7]);
         
@@ -134,8 +136,9 @@ export class Inscription extends Component {
                 }
             }
         }
+        console.log(notfill);
         if(this.state.information[2][0]===false){
-          if (this.state.information[2][4]!="" || this.state.information[2][4]!= null){
+          if (this.state.information[2][4]!="" && this.state.information[2][4]!= null){
             notfill-=1;
         }
       }
@@ -246,7 +249,7 @@ export class Inscription extends Component {
             fecha_nacimiento_familiar: information[5][5],
             esta_vivo_familiar: information[5][6],
             estado_civil_familiar: information[5][7],
-            documento_identidad: information[6][8],
+            documento_identidad: information[5][8],
             tiene_cedula_militar_familiar: information[5][9],
             direccion_familiar: information[5][10],
             pais_familiar: information[5][11],
@@ -274,6 +277,7 @@ export class Inscription extends Component {
            submit:"0",submit1: "0" , submit2: "0", submit3: "0", submit4: "0",submit5: "0", submit6: "0",submit7:"0",submit8:"0"
         })   
           this.componentDidMount();
+          alert("Se Guardaron los datos exitosamente");
         }).catch(error => {
           console.log("registration error", error);
         });
@@ -347,7 +351,7 @@ export class Inscription extends Component {
             excepciones_de_ley: information[0][21],
            
             pais_residencia: information[1][1],
-            depto_residencia: information[1][2],
+            dpto_residencia: information[1][2],
             municipio_residencia: information[1][3],
             telefono_fijo: information[1][4],
             tipo_vivienda: information[1][6],
@@ -362,7 +366,7 @@ export class Inscription extends Component {
             num_hijos: information[1][15],
             estado_civil: information[1][16],
 
-            educacion_basica: information[2][4],
+            eduacion_basica: information[2][4],
 
             modalidad: information[3][1],
             graduado: information[3][4],
@@ -409,6 +413,11 @@ export class Inscription extends Component {
   
       }
 
+      changetext(event){
+        let men = event.target.value;
+        this.setState({msg:men});
+      }
+
       changeState(){
         let admin = localStorage.getItem("admin");
         if(admin==="true"){
@@ -422,11 +431,13 @@ export class Inscription extends Component {
             {
               user: {
                 estadoProceso: process,
+                comentario: this.state.msg
             }
             }, { withCredentials: true}
             )
             .then(response => {     
               console.log("registration res", response);
+              window.location.href = '/home';  
             }).catch(error => {
               console.log("registration error", error);
             });
@@ -438,11 +449,13 @@ export class Inscription extends Component {
         {
           user: {
             estadoProceso: 0,
+            comentario: ""
         }
         }, { withCredentials: true}
         )
         .then(response => {     
           console.log("registration res", response);
+          window.location.href = '/profile';  
         }).catch(error => {
           console.log("registration error", error);
         });
@@ -505,8 +518,8 @@ export class Inscription extends Component {
                             const {relativeb} = this.state;
                             let copyinformation = this.state.information;
                             copyinformation[0]=[extrausers.registro_civil,extrausers.documento_identidad,users.tipoDocumento,users.documento,extrausers.numero_ti,users.nombre,users.primerApellido,users.segundoApellido,users.fechaNacimiento,extrausers.pais_nacimiento,users.departamento,users.ciudad,extrausers.fecha_exp,extrausers.pais_exp,extrausers.dpto_exp,extrausers.ciudad_exp,extrausers.genero,extrausers.nacionalidad,extrausers.doble_nacionalidad,extrausers.retornado_de_exterior,users.email,extrausers.excepciones_de_ley,users.avatar];
-                            copyinformation[1]=[extrausers.direccion,extrausers.pais_residencia,extrausers.depto_residencia,extrausers.municipio_residencia,extrausers.telefono_fijo,extrausers.telefono_movil,extrausers.tipo_vivienda,extrausers.estrato_vivienda,extrausers.pertenece_red_unidos,extrausers.sisben,extrausers.esta_cargo_icbf,extrausers.estatura,extrausers.peso,extrausers.grupo_sanguineo,extrausers.factor_rh,extrausers.num_hijos,extrausers.estado_civil]
-                            copyinformation[2]=[inscriptioninfo.cursa_educacion_basica,inscriptioninfo.nivel_educacion_basica,inscriptioninfo.institucion_educacion_basica,inscriptioninfo.terminacion_educacion_basica,extrausers.educacion_basica]
+                            copyinformation[1]=[extrausers.direccion,extrausers.pais_residencia,extrausers.dpto_residencia,extrausers.municipio_residencia,extrausers.telefono_fijo,extrausers.telefono_movil,extrausers.tipo_vivienda,extrausers.estrato_vivienda,extrausers.pertenece_red_unidos,extrausers.sisben,extrausers.esta_cargo_icbf,extrausers.estatura,extrausers.peso,extrausers.grupo_sanguineo,extrausers.factor_rh,extrausers.num_hijos,extrausers.estado_civil]
+                            copyinformation[2]=[inscriptioninfo.cursa_educacion_basica,inscriptioninfo.nivel_educacion_basica,inscriptioninfo.institucion_educacion_basica,inscriptioninfo.terminacion_educacion_basica,extrausers.eduacion_basica]
                             copyinformation[3]=[inscriptioninfo.cursa_educacion_superior,extrausers.modalidad,inscriptioninfo.nombre_carrera,inscriptioninfo.semestre_educacion_superior,extrausers.graduado,inscriptioninfo.institucion_educacion_superior,extrausers.educacion_superior]
                             copyinformation[4]=[inscriptioninfo.esta_trabajando,inscriptioninfo.nombre_trabajo,inscriptioninfo.empresa_trabajo,inscriptioninfo.cargo_trabajo,inscriptioninfo.tipo_trabajador,inscriptioninfo.fecha_ingreso_trabajo,inscriptioninfo.direccion_trabajo,inscriptioninfo.pais_trabajo,inscriptioninfo.departamento_trabajo,inscriptioninfo.municipio_trabajo,inscriptioninfo.telefono_trabajo]
                             copyinformation[5]=[relativef.tipo_documento_familiar,relativef.documento_familiar,relativef.primer_nombre_familiar,relativef.primer_apellido_familiar,relativef.segundo_apellido_familiar,relativef.fecha_nacimiento_familiar,relativef.esta_vivo_familiar,relativef.estado_civil_familiar,relativef.documento_identidad,relativef.tiene_cedula_militar_familiar,relativef.direccion_familiar,relativef.pais_familiar,relativef.departamento_familiar,relativef.municipio_familiar,relativef.telefono_familiar,relativef.esta_trabajando_familiar,relativef.nombre_trabajo_familiar,relativef.empresa_trabajo_familiar,relativef.cargo_trabajo_familiar,relativef.tipo_trabajador_familiar,relativef.fecha_ingreso_trabajo_familiar,relativef.direccion_trabajo_familiar,relativef.pais_trabajo_familiar,relativef.departamento_trabajo_familiar,relativef.municipio_trabajo_familiar,relativef.telefono_trabajo_familiar]
@@ -659,7 +672,7 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_41" role="button" aria-expanded="false" aria-controls="collapse_41">Información de la Madre</a>
                                       <div className="collapse" id="collapse_41">
                                           <div className="card card-body">                                  
-                                              <FatherInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit5} load={this.state.load} form={5}/>
+                                              <FatherInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit5} load={this.state.load} form={6}/>
                                           </div>
                                           <div style={{display:Admin}}>
                                           <AdminReview review={this.makeaprovation}/>
@@ -670,7 +683,7 @@ export class Inscription extends Component {
                                       <a className="btn  mt-1 text-left btn-style btn-block" data-toggle="collapse" href="#collapse_42" role="button" aria-expanded="false" aria-controls="collapse_42">Información del Padre</a>
                                       <div className="collapse" id="collapse_42">
                                           <div className="card card-body">                                  
-                                              <FatherInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit6} load={this.state.load} form={6}/>
+                                              <FatherInfo  dis={disabled} getDatos={this.getData} information={this.state.information} submit={this.state.submit6} load={this.state.load} form={5}/>
                                           </div>
                                           <div style={{display:Admin}}>
                                           <AdminReview review={this.makeaprovation}/>
@@ -706,6 +719,10 @@ export class Inscription extends Component {
                               </form> 
                               
       
+                          </div>
+                          <div style={{display:Admin}}>
+                          <label for="AdminReview">Comentarios</label>
+                          <textarea onChange={this.changetext} name="AdminReview" type="text" className="form-control" />
                           </div>
                           <button type="submit" onClick={this.nextStep} className="btn btn-style-submit mt-5" style={{display:User}}>Guardar</button>
                           <button type="submit" onClick={this.changeState} className="btn btn-style-submit mt-5" style={{display:AllData}}>Enviar</button>

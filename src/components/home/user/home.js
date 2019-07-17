@@ -177,6 +177,13 @@ createinscriptioninfo(){
     if(users.first_session === true){
       this.notfirstsession();
     }
+    let IsLogged = localStorage.getItem("IsLogged");
+    if(IsLogged === "true") {
+      if(users.comentario != "" && users.comentario != null){
+        alert("Tiene una notificacion. Dirijase a Mi Perfil");
+      }
+    }
+    
     return (
       <div>
         <div className="container">

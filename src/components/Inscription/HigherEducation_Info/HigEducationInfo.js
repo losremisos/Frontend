@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button,Card} from "react-bootstrap";
 import ReactFileReader from "react-file-reader";
+import noFile from '../../../assets/nofile.png';
 
 class HigherEducationInfo extends Component {
 
@@ -62,6 +63,11 @@ handleCheckboxChange = event => {
       this.props.information[3] = this.state.items;
       this.props.getDatos(this.props.information);
       this.setState({firstload:true, confirmar:false})
+    }
+    let img = this.state.items[6];
+    let base64 = 'data:image/png;base64' + img;
+    if(img=="" || img==null){
+      base64 = noFile;
     }
     return (
       <div>
@@ -136,11 +142,16 @@ handleCheckboxChange = event => {
               
               
               <div className="form-group col-md-3">
+              <div className="card ">
+              <img className="card-img-top" src={base64} alt="algo"/> 
+  <div className="card-body">
                   <label>Adjunte certificado de estudios (*):</label>
                   <ReactFileReader id = "6" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
                   <Button disabled={this.props.dis} id = "6" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
 
               </div>
+              </div>
+</div>
             </div>
 </div>
             

@@ -22,10 +22,6 @@ class Working_Info extends Component {
             <label><input type="checkbox" id="CedulaMilitar" checked={this.state.checked}
             onChange={this.handleCheckboxChange}value="0"/>Validar Informacion</label>
             </div>
-            <div style={{display:this.state.display}}>
-            <label for="AdminReview">Comentarios</label>
-                <textarea name="AdminReview" type="text" className="form-control" />
-            </div>  
         </div>
         );
     }

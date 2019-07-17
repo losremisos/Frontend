@@ -3,6 +3,7 @@ import '../Family_Info_Components/Familiar';
 import  InfoTrabajo  from '../Family_Info_Components/infoTrabajo';
 import {Button,Card} from "react-bootstrap";
 import ReactFileReader from "react-file-reader";
+import noFile from '../../../assets/nofile.png';
 
 class FatherInfo extends Component {
 
@@ -83,7 +84,11 @@ class FatherInfo extends Component {
       this.props.getDatos(this.props.information);
       this.setState({firstload:true, confirmar:false})
     }
-  
+    let img = this.state.items[8];
+    let base64 = 'data:image/png;base64' + img;
+    if(img=="" || img==null){
+      base64 = noFile;
+    }
     return (
       <div>
         
@@ -180,10 +185,14 @@ class FatherInfo extends Component {
                     </div> 
                     <div className="col-md-3">
                               <div className="control-group">
+                              <div className="card ">
+  <img className="card-img-top" src={base64} alt="algo"/> 
+  <div className="card-body">
                                     <label for="PadreArchivo">Adjunte el documento de identidad(<span className="field-required">*</span>):</label>
                                     <ReactFileReader id = "8" fileTypes = {[".jpeg", ".png", ".jpg", ".pdf"]} base64 = {true} multipleFiles ={ false} handleFiles = {this.handleFiles}>
                                   <Button disabled={this.props.dis} id = "8" onClick={this.getId} variant="primary">{'Agregar Archivo'}</Button></ReactFileReader>
-
+                                  </div>
+</div>
                                     </div>
                     </div>             
                   </div>

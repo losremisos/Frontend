@@ -130,7 +130,7 @@ export class Registry extends Component {
                   <div className="row">
                     <div className="col-md-6">
                             <div className="control-group">
-                              <label>Nombre 1(<span className="field-required">*</span>):</label>
+                              <label>Nombre(<span className="field-required">*</span>):</label>
                               <input type="text" 
                               name="primer_nombre" 
                               placeholder="Primer Nombre" 
@@ -145,7 +145,7 @@ export class Registry extends Component {
                   <div className="row">
                     <div className="col-md-6">
                             <div className="control-group">
-                             <label>Apellido 1(<span className="field-required">*</span>):</label>
+                             <label>Primer Apellido (<span className="field-required">*</span>):</label>
                              <input type="text" 
                              name="primer_apellido" 
                              placeholder="Primer apellido" 
@@ -156,7 +156,7 @@ export class Registry extends Component {
                     </div>  
                     <div className="col-md-6">
                             <div className="control-group">
-                             <label>Apellido 2(<span className="field-required">*</span>):</label>
+                             <label>Segundo Apellido (<span className="field-required">*</span>):</label>
                              <input type="text" 
                              name="segundo_apellido" 
                              placeholder="segundo apellido" 
